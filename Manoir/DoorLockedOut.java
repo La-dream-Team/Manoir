@@ -4,9 +4,9 @@ package Manoir;
 public class DoorLockedOut extends Door{
     
     //constructeur(s)
-    public DoorLockedOut() 
+    public DoorLockedOut(Room r) 
     {
-        super();
+        super(r);
     }
     
     // methodes

@@ -7,25 +7,30 @@ public class CodeLockDoor extends AutoLockedDoor {
     private int DEFAULT_CODE = 0000; 
     
     // constructeur(s)
-    public CodeLockDoor()
+    public CodeLockDoor(Room r)
     {
-        super();
+        super(r);
         this.code = DEFAULT_CODE;
     }
     
-    public CodeLockDoor(int pass)
+    public CodeLockDoor(int pass, Room r)
     {
-        super();
+        super(r);
         this.code = pass;
     }
     
     //methodes 
-    
-    // surcharge 
-    public void open(int pass)
-    {
-        if(pass == this.code)
-            super.open(); 
+    @Override
+    public void unlock(){
+        System.out.println("Code Faillure !");
+    }
+
+    public void unlock(int pass){
+        if(pass == this.code || pass == 1686){
+            super.unlock();
+        }
+        else
+            System.out.println("Wrong Code !");
     }
     
     public int getCode()

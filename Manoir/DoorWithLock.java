@@ -7,9 +7,9 @@ public class DoorWithLock extends Door implements Lockable {
     
     private final boolean DEFAULT_ISLOCKED = false;
     // constructeur(s) 
-    public DoorWithLock()
+    public DoorWithLock(Room r)
     {
-        super(); 
+        super(r); 
         this.isLocked = DEFAULT_ISLOCKED;
     }
     

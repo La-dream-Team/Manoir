@@ -6,9 +6,9 @@ public class AutoLockedDoor extends DoorWithLock{
     
     
     // Constructuers
-    public AutoLockedDoor()
+    public AutoLockedDoor(Room r)
     {
-        super();
+        super(r);
     }
     
     //methodes 
@@ -19,9 +19,5 @@ public class AutoLockedDoor extends DoorWithLock{
         super.lock();
     }
     
-    @Override
-    public void print()
-    {
-        System.out.print("AutoLockedDoor : is open"+ getIsOpen() + "; is locked " + getIsLocked());
-    }
+
 }
