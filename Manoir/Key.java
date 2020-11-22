@@ -8,7 +8,7 @@ public class Key extends Object{
     //Constructor
     public Key(String KeyName, int ID, int RemainingUses, Room CurrentRoom, Door UnlockableDoor)
     {
-        super(CollectableName, ID, 1, CurrentRoom); //Une cle on peut l'utiliser qu'une seule fois
+        super(KeyName, ID, 1, CurrentRoom); //Une cle on peut l'utiliser qu'une seule fois
         this.unlockableDoor = UnlockableDoor;
     } 
 

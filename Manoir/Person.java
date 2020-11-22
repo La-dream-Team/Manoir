@@ -68,7 +68,7 @@ public abstract class Person{
 
     public void removeObject(int ID)
     {
-        this.bag.remove(ID));
+        this.bag.remove(ID);
         this.bagSize -= 1;
     }
 
@@ -114,7 +114,7 @@ public abstract class Person{
     public void reloadWeapon() {
         if(this.equippedItem instanceof Weapon)
         {
-            if(this.findObject(this.equipedItem.getName()) instanceof Ammunition)//Si on a de la munition pour notre arme
+            if(this.findObject(this.equippedItem.getName()) instanceof Ammunition)//Si on a de la munition pour notre arme
             {
                 this.equippedItem.reload();
                 Ammunition ammo = this.findObject(this.equipedItem.getName());
@@ -162,7 +162,7 @@ public abstract class Person{
 
     public void heal(int receivedHealth)
     {
-        if(this.isAlive() = true)
+        if(this.isAlive() == true)
         {
             if(this.hp + receivedHealth >= this.DEFAULT_HP)
             {
