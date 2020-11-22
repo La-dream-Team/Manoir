@@ -25,7 +25,7 @@ public class Room{
         }
         return ret;
     }
-
+    
     public void addDoor(Door d){
         if(!this.isOnDoors(d)){
             this.doors.add(d);
@@ -37,4 +37,6 @@ public class Room{
     public void removeDoor(Door d){
         this.doors.remove(d);
     }
+
+    //Get door on room
 }
