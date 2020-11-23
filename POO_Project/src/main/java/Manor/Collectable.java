@@ -1,4 +1,4 @@
-package Manoir;
+package Manor;
 
 public class Collectable extends Object{
     

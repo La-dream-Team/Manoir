@@ -1,5 +1,5 @@
 
-package Manoir;
+package Manor;
 
 public class Command{
     

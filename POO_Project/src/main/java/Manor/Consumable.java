@@ -1,4 +1,4 @@
-package Manoir;
+package Manor;
 
 public class Consumable extends Object{
 

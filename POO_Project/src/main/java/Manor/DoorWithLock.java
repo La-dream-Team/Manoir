@@ -1,5 +1,5 @@
 
-package Manoir;
+package Manor;
 
 public class DoorWithLock extends Door implements Lockable {
     // attributs 
