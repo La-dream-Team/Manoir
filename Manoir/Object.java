@@ -4,7 +4,7 @@ package Manoir;
 public abstract class Object{
     
     // Attributs
-    private String name;
+    private final String name;
     private int id;
     private int remainingUses;
     private Room currentRoom;
@@ -37,7 +37,7 @@ public abstract class Object{
         return this.name;
     }
 
-    public String getId()
+    public int getId()
     {
         return this.id;
     }
@@ -52,7 +52,7 @@ public abstract class Object{
         return this.remainingUses;
     }
 
-    public int getCurrentRoom()
+    public Room getCurrentRoom()
     {
         return this.currentRoom;
     }

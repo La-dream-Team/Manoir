@@ -10,10 +10,13 @@ public class Weapon extends Object{
     private final int DELFAULT_AMMOCAPACITY;
 
     //Constructor
-    public Weapon(String WeaponName, int ID, int RemainingUses, Room CurrentRoom) //Pour creer une arme qui n'a pas besoin de munition
+    public Weapon(String WeaponName, int ID, int RemainingUses, Room CurrentRoom, int WeaponDamage) //Pour creer une arme qui n'a pas besoin de munition
     {
         super(WeaponName, ID, RemainingUses,  CurrentRoom);
         this.needBullets = false;
+        this.weaponDamage = WeaponDamage;
+        this.currentBullets = 0;
+        this.DELFAULT_AMMOCAPACITY = 0;
     }   
 
     public Weapon(String WeaponName, int ID, int RemainingUses, Room CurrentRoom, int WeaponDamage, int CurrentBullets) //Pour creer une arme qui a besoin de munition

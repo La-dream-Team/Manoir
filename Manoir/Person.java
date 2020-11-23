@@ -6,13 +6,14 @@ import java.util.ArrayList;
 public abstract class Person{
     
     // Attributes
-    private String name;
+    private final String name;
     private int hp; 
-    private int bagSize;
+    private final int DEFAULT_HP;
+    private int bagSize = 0;
     private ArrayList<Object> bag = new ArrayList<>();
     private Object equippedItem;
     private Room currentRoom;
-    private final int DEFAULT_HP;
+    
 
     //Constructors
     public Person(Room CurrentRoom) //Par defaut on creera un deadBody
@@ -20,19 +21,20 @@ public abstract class Person{
         this.name = "Corpse";
         this.hp = 0;
         this.DEFAULT_HP = 0;
-        this.bagSize = 0;
         this.bag = null;
         this.equippedItem = null;
         this.currentRoom = CurrentRoom;
     }
 
-    public Person(String Name, Room CurrentRoom) //Pour ceer un deadBody a partir d'une personne
+    public Person(Person new_corpse) //Pour ceer un deadBody a partir d'une personne
     {
-        this.name = Name;
+        this.name = new_corpse.name;
         this.hp = 0;
         this.DEFAULT_HP = 0;
+        this.bagSize = new_corpse.bagSize;
+        this.bag = new_corpse.bag;
         this.equippedItem = null;
-        this.currentRoom = CurrentRoom;
+        this.currentRoom = new_corpse.currentRoom;
     }
 
     public Person(String Name, int Health, Room CurrentRoom) //Pour creer un personnage, par defaut il n'aura pas d'objet equipe
@@ -54,7 +56,12 @@ public abstract class Person{
     {
         return this.currentRoom;
     }
-
+    
+    public void setRoom(Room Room) 
+    {
+        this.currentRoom = Room;
+    }
+    
     public void addObject(Object item)
     {
         this.bag.add(item);
@@ -76,7 +83,7 @@ public abstract class Person{
     {
         for(Object object : this.bag)
         {
-            if(object.getName() == name)
+            if(object.getName().equals(name))
             {
                 return true;
             }
@@ -84,22 +91,24 @@ public abstract class Person{
         return false;
     }
 
-    public Object findObject(String name)
+    public int findObject(String name)
     {
         for(Object object : this.bag)
         {
-            if(object.getName() == name)
+            if(object.getName().equals(name))
             {
-                return object;
+                return object.getId();
             }
         }
+        return -1;
     }
 
     public void equipObject(String name)
     {
-        if(this.hasObject(name))
+        if(this.hasObject(name) == true)
         {
-            this.equippedItem = this.findObject(name);
+            int item_id = this.findObject(name);
+            this.equippedItem = this.bag.get(item_id);
         }
     }
 
@@ -114,11 +123,11 @@ public abstract class Person{
     public void reloadWeapon() {
         if(this.equippedItem instanceof Weapon)
         {
-            if(this.findObject(this.equippedItem.getName()) instanceof Ammunition)//Si on a de la munition pour notre arme
+            if(this.hasObject("Ammo" + this.equippedItem.getName()) == true)//Si on a de la munition pour notre arme
             {
-                this.equippedItem.reload();
-                Ammunition ammo = this.findObject(this.equipedItem.getName());
-                this.removeObject(ammo.getId());
+                /*this.equippedItem.reload();*/
+                int item_id = this.findObject("Ammo" + this.equippedItem.getName());
+                this.removeObject(item_id);
             }
             else
             {

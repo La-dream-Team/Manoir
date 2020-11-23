@@ -14,9 +14,9 @@ public class Key extends Object{
 
     //Method
     @Override
-    public void useObject()
+    public void useObject(Person objective)
     {   
-        if(this.CurrentRoom.isOnDoors(this.unlockableDoor) == true)
+        if(this.getCurrentRoom().isOnDoors(this.unlockableDoor) == true)
         {
             /*this.CurrentRoom.getDoor(this.unlockableDoor).unlock(); //On ouvre la porte de la piece associe a la cle
             this.use();*/

@@ -14,7 +14,7 @@ public class Collectable extends Object{
 
     //Method
     @Override
-    public void useObject()
+    public void useObject(Person objective)
     {   
         System.out.println(this.content);
         this.use();
