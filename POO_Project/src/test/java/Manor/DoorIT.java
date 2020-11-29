@@ -1,132 +1,43 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Manor;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import java.awt.Color;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- *
- * @author thibault
- */
+
 public class DoorIT {
     
-    public DoorIT() {
-    }
+    private Room room1;
+    private Room room2; 
+    private Room room3; 
+    private Door door1;
+    private Door door2;
+    private Door door3;
     
-    @BeforeAll
+    @Before
     public static void setUpClass() {
+        room1 = new Room("couloir");
+        room2 = new Room("cuisine");
+        room3 = new Room("salon");
+        s
+        door1 = new Door();
+        door2 = new Door();
+        door3 = new Door();
     }
     
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
+    @After
     public void tearDown() {
     }
-
-    /**
-     * Test of addRoom method, of class Door.
-     */
-    @Test
-    public void testAddRoom() {
-        System.out.println("addRoom");
-        Room r = null;
-        Door instance = null;
-        instance.addRoom(r);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    @test
+    public void testgetID() {
+        assertSame(door1.getID(), 0);
+        assertSame(door2.getID(), 1);
+        assertSame(door3.getID(), 2);
     }
-
-    /**
-     * Test of open method, of class Door.
-     */
-    @Test
-    public void testOpen() {
-        System.out.println("open");
-        Door instance = null;
-        instance.open();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of close method, of class Door.
-     */
-    @Test
-    public void testClose() {
-        System.out.println("close");
-        Door instance = null;
-        instance.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of print method, of class Door.
-     */
-    @Test
-    public void testPrint() {
-        System.out.println("print");
-        Door instance = null;
-        instance.print();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getIsOpen method, of class Door.
-     */
-    @Test
-    public void testGetIsOpen() {
-        System.out.println("getIsOpen");
-        Door instance = null;
-        boolean expResult = false;
-        boolean result = instance.getIsOpen();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getNumber method, of class Door.
-     */
-    @Test
-    public void testGetNumber() {
-        System.out.println("getNumber");
-        Door instance = null;
-        int expResult = 0;
-        int result = instance.getNumber();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of isOnRooms method, of class Door.
-     */
-    @Test
-    public void testIsOnRooms() {
-        System.out.println("isOnRooms");
-        Room r = null;
-        Door instance = null;
-        boolean expResult = false;
-        boolean result = instance.isOnRooms(r);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
     
 }

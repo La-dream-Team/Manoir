@@ -10,9 +10,18 @@ public class Room{
     private ArrayList<Door> doors = new ArrayList<>();
     private ArrayList<Object> objects = new ArrayList<>();
     private ArrayList<Person> persons = new ArrayList<>(); 
+    // l'id de la porte 
+    private final int id;
     
-
-
+    
+    private static int current = 0;
+    // constructeurs 
+    public Room(String n){
+        this.name = n; 
+        
+        this.id = current; 
+        current ++;
+    }
 
     // methodes
     public boolean isOnDoors(Door d){
@@ -32,6 +41,12 @@ public class Room{
             if(!d.isOnRooms(this))
                 d.addRoom(this);
         }
+    }
+    
+    public void addDoor(){
+        Door current = new Door();
+        this.doors.add(current);
+        current.addRoom(this);
     }
 
     public void removeDoor(Door d){
