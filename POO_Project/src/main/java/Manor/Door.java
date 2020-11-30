@@ -15,21 +15,21 @@ public class Door implements Closeable {
     // car les portes peuvent avoir deux faces differents
     private Door connected;
 
-    private static int current = 0;
+    private static int currentid = 0;
     private final boolean DEFAULT_ISOPEN = false ; 
     
     // constructeur(s)
     public Door(Room r){
         this.isOpen = this.DEFAULT_ISOPEN;
         this.rooms.add(r);
-        this.id = current;
-        current ++;
+        this.id = currentid;
+        currentid += 1;
     }
     
     public Door(){
         this.isOpen = this.DEFAULT_ISOPEN;
-        this.id = current;
-        current ++;
+        this.id = currentid;
+        currentid += 1;
     }
     
     public Door(Room r, Door d){
@@ -47,6 +47,9 @@ public class Door implements Closeable {
         return this.isOpen; 
     }
     
+    public Door getconnected(){
+        return this.connected;
+    }
     
     public void open(){
         this.isOpen = true;
@@ -71,11 +74,14 @@ public class Door implements Closeable {
     // on vide les atributs des deux portes
     public void removeConnected(){ 
         if(this.connected != null){
-            this.connected = null;
-            this.connected.removeConnected();
+            Door current = this.connected;
+            if(current.connected != null){
+                this.connected = null;
+                current.removeConnected();
+            }   
+            else 
+                this.connected = null;
         }
-        else 
-            this.connected = null;
     }
     
     public void addRoom(Room r){
