@@ -1,9 +1,9 @@
 package Manor;
 
-public class Ammunition extends Object{
+public class Charger extends Object{
 
     //Constructor
-    public Ammunition(String AmmoName)
+    public Charger(String AmmoName)
     {
         super(AmmoName, 1);
     }   

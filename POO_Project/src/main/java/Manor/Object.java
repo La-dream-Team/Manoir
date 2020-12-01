@@ -7,14 +7,28 @@ public abstract class Object{
     private final String name;
     private final int id;
     private int remainingUses;
+    private String description;
+    
     private static int currentId = 0;
 
+    
+    
     //Constructor
-    public Object(String Name, int RemainingUses)
+    public Object(String Name, int RemainingUses, String desc )
     {
         this.name = Name;
         this.id = currentId;
         this.remainingUses = RemainingUses;
+        this.description = desc;
+        currentId++;
+    }
+    
+    public Object(String Name, int RemainingUses )
+    {
+        this.name = Name;
+        this.id = currentId;
+        this.remainingUses = RemainingUses;
+        this.description = null;
         currentId++;
     }
 
@@ -47,10 +61,6 @@ public abstract class Object{
         return currentId;
     }
     
-    /*public void setCurrentId(int newId)
-    {
-        currentId = newId;
-    }*/
     
     public int getRemainingUses()
     {
@@ -69,8 +79,9 @@ public abstract class Object{
         }
     }
     
-    public void show(String Description)
+    public void look()
     {
-        System.out.println(Description);
+        if( this.description != null)
+            System.out.println(this.description); 
     }
 }
