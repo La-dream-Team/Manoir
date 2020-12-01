@@ -16,7 +16,7 @@ public class KeyLockedDoor extends DoorWithLock{
     // attributs 
     public KeyLockedDoor(Room r, int uses){
         super(r);
-        this.currentKey = new Key(uses, ("key number" + this.getID()), this );
+        this.currentKey = new Key(("key number" + this.getID()), uses, this);
     }
     
     @Override

@@ -3,8 +3,8 @@ package Manor;
 public class Ammunition extends Object{
 
     //Constructor
-    public Ammunition(String AmmoType, int ID, Room CurrentRoom)
+    public Ammunition(String AmmoName)
     {
-        super(AmmoType, ID, 1, CurrentRoom);
+        super(AmmoName, 1);
     }   
 }

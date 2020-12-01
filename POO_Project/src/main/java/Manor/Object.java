@@ -5,21 +5,21 @@ public abstract class Object{
     
     // Attributs
     private final String name;
-    private int id;
+    private final int id;
     private int remainingUses;
-    private Room currentRoom;
+    private static int currentId = 0;
 
     //Constructor
-    public Object(String Name, int ID, int RemainingUses, Room CurrentRoom)
+    public Object(String Name, int RemainingUses)
     {
         this.name = Name;
-        this.id = ID;
+        this.id = currentId;
         this.remainingUses = RemainingUses;
-        this.currentRoom = CurrentRoom;
+        currentId++;
     }
 
     //Methods
-    public boolean use() //Si on peut utiliser un objet, on l'utilise et on retourne vrai, sinon false
+    public boolean canUse() //Si on peut utiliser un objet, on l'utilise et on retourne vrai, sinon false
     {
         if(this.remainingUses > 0)
         {
@@ -41,28 +41,36 @@ public abstract class Object{
     {
         return this.id;
     }
-
-    public void setId(int ID)
+    
+    public int getCurrentId()
     {
-        this.id = ID;
+        return currentId;
     }
-
+    
+    /*public void setCurrentId(int newId)
+    {
+        currentId = newId;
+    }*/
+    
     public int getRemainingUses()
     {
         return this.remainingUses;
     }
 
-    public Room getCurrentRoom()
+    public void use(Person Objective)
     {
-        return this.currentRoom;
+        if(this.canUse() == true)
+        {
+            this.canUse();
+        }
+        else
+        {
+            System.out.println("YOU HAVE ALREADY USED THIS OBJECT TOO MANY TIMES");
+        }
     }
-
-    public void setCurrentRoom(Room Room) {
-        this.currentRoom = Room;
-    }
-
-    public void useObject(Person Objective)
+    
+    public void show(String Description)
     {
-
+        System.out.println(Description);
     }
 }

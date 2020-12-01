@@ -6,17 +6,31 @@ public class Collectable extends Object{
     String content;
 
     //Constructor
-    public Collectable(String CollectableName, int ID, int RemainingUses, Room CurrentRoom, String Content)
+    public Collectable(String CollectableName, int RemainingUses, String Content)
     {
-        super(CollectableName, ID, RemainingUses, CurrentRoom);
+        super(CollectableName, RemainingUses);
         this.content = Content;
     } 
 
     //Method
     @Override
-    public void useObject(Person objective)
+    public void use(Person Objective)
     {   
-        System.out.println(this.content);
-        this.use();
+        if(this.canUse() == true)
+        {
+            if(Objective == null)
+            {
+                System.out.println(this.content);
+                this.canUse();
+            }
+            else
+            {
+                System.out.println("THIS IS NOT A WEAPON, IT CAN GIVE KNOWLEDGE ONLY TO YOU SO BE GRATEFUL");
+            }
+        }
+        else
+        {
+            System.out.println("YOU HAVE ALREADY USED THIS COLLECTABLE TOO MANY TIMES");
+        }
     }
 }

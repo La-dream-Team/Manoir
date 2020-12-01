@@ -8,7 +8,7 @@ public abstract class Person{
     // Attributes
     private final String name;
     private int hp; 
-    private final int DEFAULT_HP;
+    private final int total_hp;
     private int bagSize = 0;
     private ArrayList<Object> bag = new ArrayList<>();
     private Object equippedItem;
@@ -20,7 +20,7 @@ public abstract class Person{
     {
         this.name = "Corpse";
         this.hp = 0;
-        this.DEFAULT_HP = 0;
+        this.total_hp = 0;
         this.bag = null;
         this.equippedItem = null;
         this.currentRoom = CurrentRoom;
@@ -30,7 +30,7 @@ public abstract class Person{
     {
         this.name = new_corpse.name;
         this.hp = 0;
-        this.DEFAULT_HP = 0;
+        this.total_hp = 0;
         this.bagSize = new_corpse.bagSize;
         this.bag = new_corpse.bag;
         this.equippedItem = null;
@@ -41,7 +41,7 @@ public abstract class Person{
     {
         this.name = Name;
         this.hp = Health;
-        this.DEFAULT_HP = Health;
+        this.total_hp = Health;
         this.equippedItem = null;
         this.currentRoom = CurrentRoom;
     }
@@ -112,36 +112,14 @@ public abstract class Person{
         }
     }
 
-    public void unequipObject(String name)
+    public void unequipObject()
     {
-        if(this.hasObject(name) == true)
-        {
-            this.equippedItem = null;
-        }
+        this.equippedItem = null; 
     }
 
-    public void reloadWeapon() {
-        if(this.equippedItem instanceof Weapon)
-        {
-            if(this.hasObject("Ammo" + this.equippedItem.getName()) == true)//Si on a de la munition pour notre arme
-            {
-                /*this.equippedItem.reload();*/
-                int item_id = this.findObject("Ammo" + this.equippedItem.getName());
-                this.removeObject(item_id);
-            }
-            else
-            {
-                System.out.println("YOU DONT HAVE THE AMMO NEEDED TO RELOAD, IM SORRY");
-            }
-        }
-        else
-        {
-            System.out.println("YOU CANT RELOAD THIS ITEM, I MEAN YOU CAN TRY BUT I DONT THINK YOU WILL SUCCED");
-        }
-    }
-
-    public void useObject(Person objective)
+    public void useObject(Object Item, String Objective)
     {
+        //serach for the person we want to interact to
         this.equippedItem.useObject(objective);
     }
 
@@ -173,9 +151,9 @@ public abstract class Person{
     {
         if(this.isAlive() == true)
         {
-            if(this.hp + receivedHealth >= this.DEFAULT_HP)
+            if(this.hp + receivedHealth >= this.total_hp)
             {
-                this.hp = this.DEFAULT_HP;
+                this.hp = this.total_hp;
             }
             else
             {

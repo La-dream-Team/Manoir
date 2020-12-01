@@ -5,23 +5,38 @@ public class Consumable extends Object{
     //Il y aura des objects qui donnent de la vie et d'autres qui la prennent
 
     //Attributs
-    private final int givenHealth;
-    private final int takenHealth;
+    private final int givenOrTakenHealth;
 
     //Constructors
-    public Consumable(String ConsumableName, int ID, int RemainingUses, Room CurrentRoom, int GivenHealth, int TakenHealth) 
+    public Consumable(String ConsumableName, int RemainingUses, int GivenOrTakenHealth) 
     {
-        super(ConsumableName, ID, RemainingUses, CurrentRoom);
-        this.givenHealth = GivenHealth; //Pour creer un objet qui donne de la vie on met takenHealth à 0
-        this.takenHealth = TakenHealth; //Pour creer un objet qui enleve de la vie on met givenHealth à 0
+        super(ConsumableName, RemainingUses);
+        this.givenOrTakenHealth = GivenOrTakenHealth; 
     } 
 
     //Method
     @Override
-    public void useObject(Person Objective)
+    public void use(Person Objective)
     {   
-        Objective.heal(this.givenHealth);
-        Objective.hurt(this.takenHealth);
-        this.use();
+        if(this.canUse() == true)
+        {
+            if(this.givenOrTakenHealth != 0)
+            {
+                if(this.givenOrTakenHealth > 0)
+                {
+                    Objective.heal(this.givenOrTakenHealth);
+                    this.canUse();
+                }
+                else
+                {
+                    Objective.hurt(-(this.givenOrTakenHealth));
+                    this.canUse();
+                } 
+            }
+        }
+        else
+        {
+            System.out.println("YOU HAVE ALREADY USED THIS CONSOMABLE TOO MANY TIMES");
+        }
     }
 }
