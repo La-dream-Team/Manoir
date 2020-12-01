@@ -52,6 +52,7 @@ public class Room{
     public void removeDoor(Door d){
         this.doors.remove(d);
     }
+    
 
     //Get door on room
 }

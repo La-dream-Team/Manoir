@@ -11,12 +11,19 @@ public class AutoLockedDoor extends DoorWithLock{
         super(r);
     }
     
+    public AutoLockedDoor()
+    {
+        super();
+    }
+    
     //methodes 
     @Override
     public void close()
     {
-        super.close();
-        super.lock();
+        if(super.getIsOpen()){
+            super.close();
+            super.lock();
+        }
     }
     
 

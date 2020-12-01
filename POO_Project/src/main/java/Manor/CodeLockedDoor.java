@@ -1,32 +1,35 @@
 
 package Manor;
 
-public class CodeLockDoor extends AutoLockedDoor {
+public class CodeLockedDoor extends AutoLockedDoor {
     // attributs
     private int code;
     private int DEFAULT_CODE = 0000; 
     
-    // constructeur(s)
-    public CodeLockDoor(Room r)
-    {
-        super(r);
-        this.code = DEFAULT_CODE;
-    }
+    private final int genaral_pass = 1686;
     
-    public CodeLockDoor(int pass, Room r)
+    // constructeur(s)
+    public CodeLockedDoor(int pass, Room r)
     {
         super(r);
         this.code = pass;
     }
     
+    public CodeLockedDoor(int pass)
+    {
+        super();
+        this.code = pass;
+    }
+    
     //methodes 
+    
     @Override
     public void unlock(){
         System.out.println("Code Faillure !");
     }
 
     public void unlock(int pass){
-        if(pass == this.code || pass == 1686){
+        if((pass == this.code) || (pass == this.genaral_pass)){
             super.unlock();
         }
         else

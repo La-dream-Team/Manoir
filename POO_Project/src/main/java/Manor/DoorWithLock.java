@@ -13,7 +13,18 @@ public class DoorWithLock extends Door implements Lockable {
         this.isLocked = DEFAULT_ISLOCKED;
     }
     
+    public DoorWithLock()
+    {
+        super(); 
+        this.isLocked = DEFAULT_ISLOCKED;
+    }
+    
     // méthodes
+    public boolean getIsLocked()
+    {
+        return this.isLocked;
+    }
+    
     public void unlock()
     {
        this.isLocked = false; 
@@ -21,7 +32,7 @@ public class DoorWithLock extends Door implements Lockable {
     
     public void lock()
     {
-       this.isLocked = false; 
+       this.isLocked = true; 
     }
     
     @Override
@@ -38,10 +49,7 @@ public class DoorWithLock extends Door implements Lockable {
             super.close();
     }
     
-    public boolean getIsLocked()
-    {
-        return this.isLocked;
-    }
+    
     
     @Override
     public void print()

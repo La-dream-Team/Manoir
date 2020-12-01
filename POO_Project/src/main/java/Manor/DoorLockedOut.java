@@ -9,6 +9,11 @@ public class DoorLockedOut extends Door{
         super(r);
     }
     
+    public DoorLockedOut() 
+    {
+        super();
+    }
+    
     // methodes
     @Override
     public void open() 

@@ -5,12 +5,11 @@
  */
 package Manor;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -18,35 +17,22 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class DoorLockedOutIT {
     
-    public DoorLockedOutIT() {
-    }
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
+    private DoorLockedOut door1= new DoorLockedOut();
+
     
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
+    @Before
     public void setUp() {
     }
     
-    @AfterEach
-    public void tearDown() {
-    }
-
-    /**
-     * Test of open method, of class DoorLockedOut.
-     */
-    @Test
-    public void testOpen() {
-        System.out.println("open");
-        DoorLockedOut instance = null;
-        instance.open();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @After
+    public void tearDownClass() {
     }
     
+    @Test
+    public void testopen(){
+        door1.open();
+        assertFalse(door1.getIsOpen());
+    }
+
 }

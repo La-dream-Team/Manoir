@@ -11,6 +11,10 @@ public class Key extends Object{
         super(KeyName, ID, 1, CurrentRoom); //Une cle on peut l'utiliser qu'une seule fois
         this.unlockableDoor = UnlockableDoor;
     } 
+    
+    public Key(int uses, String n, Door d){
+        
+    }
 
     //Method
     @Override
