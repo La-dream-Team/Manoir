@@ -6,9 +6,9 @@ public class Collectable extends Object{
     String content;
 
     //Constructor
-    public Collectable(String CollectableName, int RemainingUses, String Content)
+    public Collectable(String CollectableName, int RemainingUses, String Description, String Content)
     {
-        super(CollectableName, RemainingUses);
+        super(CollectableName, RemainingUses, Description);
         this.content = Content;
     } 
 
@@ -21,7 +21,7 @@ public class Collectable extends Object{
             if(Objective == null)
             {
                 System.out.println(this.content);
-                this.canUse();
+                this.setRemainingUses();
             }
             else
             {

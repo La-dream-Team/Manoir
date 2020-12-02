@@ -11,9 +11,9 @@ package Manor;
  */
 public class MeleeWeapon extends Weapon{
     
-    public MeleeWeapon(String MeleeWeaponName, int RemainingUses, int MeleeWeaponDamage)
+    public MeleeWeapon(String MeleeWeaponName, int RemainingUses, String Description, int MeleeWeaponDamage)
     {
-        super(MeleeWeaponName, RemainingUses, MeleeWeaponDamage);
+        super(MeleeWeaponName, RemainingUses, Description, MeleeWeaponDamage);
     }   
     
     @Override
@@ -28,7 +28,7 @@ public class MeleeWeapon extends Weapon{
             else if(Objective.isAlive() == true)
             {
                 Objective.hurt(this.getWeaponDamage());
-                this.canUse();
+                this.setRemainingUses();
             }
         }
         else
