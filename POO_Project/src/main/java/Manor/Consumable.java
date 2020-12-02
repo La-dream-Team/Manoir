@@ -8,9 +8,9 @@ public class Consumable extends Object{
     private final int givenOrTakenHealth;
 
     //Constructors
-    public Consumable(String ConsumableName, int RemainingUses, int GivenOrTakenHealth) 
+    public Consumable(String ConsumableName, int RemainingUses, String Description, int GivenOrTakenHealth) 
     {
-        super(ConsumableName, RemainingUses);
+        super(ConsumableName, RemainingUses, Description);
         this.givenOrTakenHealth = GivenOrTakenHealth; 
     } 
 
@@ -20,18 +20,24 @@ public class Consumable extends Object{
     {   
         if(this.canUse() == true)
         {
-            if(this.givenOrTakenHealth != 0)
-            {
-                if(this.givenOrTakenHealth > 0)
+            if(Objective != null){
+                if(this.givenOrTakenHealth != 0)
                 {
-                    Objective.heal(this.givenOrTakenHealth);
-                    this.canUse();
+                    if(this.givenOrTakenHealth > 0)
+                    {
+                        Objective.heal(this.givenOrTakenHealth);
+                        this.setRemainingUses();
+                    }
+                    else
+                    {
+                        Objective.hurt(-(this.givenOrTakenHealth));
+                        this.setRemainingUses();
+                    } 
                 }
-                else
-                {
-                    Objective.hurt(-(this.givenOrTakenHealth));
-                    this.canUse();
-                } 
+            }
+            else
+            {
+                System.out.println("YOU NEED A TARGET TO USE THIS OBJECT AGAINST");
             }
         }
         else

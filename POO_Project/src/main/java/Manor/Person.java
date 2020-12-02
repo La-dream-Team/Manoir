@@ -75,9 +75,9 @@ public abstract class Person{
         this.bag.remove(item));
     }*/
 
-    public void removeObject(int ID)
+    public void removeObject(int Id)
     {
-        this.bag.remove(ID);
+        this.bag.remove(Id);
         this.bagSize -= 1;
     }
 
@@ -92,8 +92,8 @@ public abstract class Person{
         }
         return false;
     }
-
-    public int findObject(String name)
+    
+    public int findIdObject(String name)
     {
         for(Object object : this.bag)
         {
@@ -109,8 +109,15 @@ public abstract class Person{
     {
         if(this.hasObject(name) == true)
         {
-            int item_id = this.findObject(name);
-            this.equippedItem = this.bag.get(item_id);
+            int item_id = this.findIdObject(name);
+            if(this.bag.get(item_id) instanceof Weapon)
+            {
+                this.equippedItem = this.bag.get(item_id);
+            }
+            else
+            {
+                System.out.println("ERROR, ERROR, YOU CAN ONLY HAVE EQUIPPED WEAPONS");
+            }
         }
     }
 
@@ -119,10 +126,43 @@ public abstract class Person{
         this.equippedItem = null; 
     }
 
-    public void useObject(Object Item, String Objective)
+    public void useObject(String Item, String Objective)
     {
-        //serach for the person we want to interact to
-        this.equippedItem.useObject(objective);
+        int ItemId = this.findIdObject(Item);
+        if(Objective == null || Objective.equals(""))
+        {
+            if(this.bag.get(ItemId) instanceof Charger)
+            {   
+                if(this.equippedItem instanceof Gun){
+                    this.equippedItem.reload();
+                }
+                else
+                {
+                    System.out.println("NONE OF YOUR WEAPONS CAN BE RECHARGED WITH THIS CHARGER");
+                }
+            }
+            else
+            {
+                this.bag.get(ItemId).use(null);
+            } 
+        }
+            //Object Element = this.bag.get(ItemId);
+        else
+        {
+            if(this.currentRoom.isOnPersons(Objective) == true)
+            {   
+                Person Target = this.currentRoom.getPerson(Objective);
+                if(this.bag.get(ItemId) instanceof Weapon)
+                {
+                    this.equippedItem.use(Target);
+                }
+                else
+                {
+                        
+                    this.bag.get(ItemId).use(Target);
+                }
+            }
+        }
     }
 
     public boolean isAlive()

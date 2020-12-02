@@ -14,30 +14,29 @@ public abstract class Object{
     
     
     //Constructor
-    public Object(String Name, int RemainingUses, String desc )
+    public Object(String Name, int RemainingUses, String Description)
     {
         this.name = Name;
         this.id = currentId;
         this.remainingUses = RemainingUses;
-        this.description = desc;
+        this.description = Description;
         currentId++;
     }
     
-    public Object(String Name, int RemainingUses )
+    /*public Object(String Name, int RemainingUses )
     {
         this.name = Name;
         this.id = currentId;
         this.remainingUses = RemainingUses;
         this.description = null;
         currentId++;
-    }
+    }*/
 
     //Methods
     public boolean canUse() //Si on peut utiliser un objet, on l'utilise et on retourne vrai, sinon false
     {
         if(this.remainingUses > 0)
         {
-            this.remainingUses -= 1;
             return true;
         }
         else
@@ -66,22 +65,29 @@ public abstract class Object{
     {
         return this.remainingUses;
     }
-
+    
+    public void setRemainingUses()
+    {
+        this.remainingUses -= 1;
+    }
+    
+    public void printDescription()
+    {
+        if( this.description != null)
+        {
+            System.out.println(this.description);
+        }
+    }
+    
     public void use(Person Objective)
     {
         if(this.canUse() == true)
         {
-            this.canUse();
+            this.setRemainingUses();
         }
         else
         {
             System.out.println("YOU HAVE ALREADY USED THIS OBJECT TOO MANY TIMES");
         }
-    }
-    
-    public void look()
-    {
-        if( this.description != null)
-            System.out.println(this.description); 
     }
 }

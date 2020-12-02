@@ -5,10 +5,11 @@ public class Key extends Object{
     //Attribut
     KeyLockedDoor unlockableDoor;
     Person currentOwner;
+    
     //Constructor
-    public Key(String KeyName, int RemainingUses, KeyLockedDoor UnlockableDoor)
+    public Key(String KeyName, int RemainingUses, String Description, KeyLockedDoor UnlockableDoor)
     {
-        super(KeyName, RemainingUses);
+        super(KeyName, RemainingUses, Description);
         this.unlockableDoor = UnlockableDoor;
         this.currentOwner = null;
     } 
@@ -29,7 +30,8 @@ public class Key extends Object{
             {
                 if(this.currentOwner.getRoom().isOnDoors(this.unlockableDoor) == true)
                 {
-                   this.unlockableDoor.unlock(this); 
+                   this.unlockableDoor.unlock(this);
+                   this.setRemainingUses();
                 }
                 else
                 {

@@ -3,8 +3,8 @@ package Manor;
 public class Charger extends Object{
 
     //Constructor
-    public Charger(String AmmoName)
+    public Charger(String ChargerName, String Description)
     {
-        super(AmmoName, 1);
+        super(ChargerName, 1, Description);
     }   
 }
