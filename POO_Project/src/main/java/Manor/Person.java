@@ -7,19 +7,21 @@ public abstract class Person{
     
     // Attributes
     private final String name;
-    private int hp; 
+    private int current_hp; 
     private final int total_hp;
-    private int bagSize = 0;
+    private int bagSize;
     private ArrayList<Object> bag = new ArrayList<>();
     private Object equippedItem;
     private Room currentRoom;
     
 
+    private final int DEFAULT_BAGSIZE = 6;
+    
     //Constructors
     public Person(Room CurrentRoom) //Par defaut on creera un deadBody
     {
         this.name = "Corpse";
-        this.hp = 0;
+        this.ba;
         this.total_hp = 0;
         this.bag = null;
         this.equippedItem = null;
