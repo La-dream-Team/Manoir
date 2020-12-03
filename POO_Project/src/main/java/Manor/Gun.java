@@ -33,13 +33,13 @@ public class Gun extends Weapon{
     @Override
     public void use(Person Objective) 
     {
-        if(this.hasOwner() == true)
+        if(this.hasOwner())
         {
-            if(this.canUse() == true)
+            if(this.canUse())
             {
                 if(Objective != null)
                 {          
-                    while(Objective.isAlive() == true && this.currentBullets > 0) //Pendant que notre objectif est vivant et on a des balles dans le chargeur, on tire
+                    while(Objective.isAlive() && this.currentBullets > 0) //Pendant que notre objectif est vivant et on a des balles dans le chargeur, on tire
                     {
                         Objective.hurt(this.getWeaponDamage()); 
                         this.currentBullets -= 1;

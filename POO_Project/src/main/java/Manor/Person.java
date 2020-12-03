@@ -155,7 +155,7 @@ public abstract class Person{
         }
     }
     public void equipObject(String name){
-        if(this.hasObject(name) == true)
+        if(this.hasObject(name))
         {
             int item_id = this.findObject(name);
             if(this.bag.get(item_id) instanceof Weapon)
@@ -185,7 +185,7 @@ public abstract class Person{
             }
             else
             {
-                if(this.currentRoom.isOnPersons(Objective) == true)
+                if(this.currentRoom.isOnPersons(Objective))
                 {   
                     Person Target = this.currentRoom.getPerson(Objective);
                     if(this.bag.get(ItemId) instanceof Weapon)

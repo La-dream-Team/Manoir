@@ -24,13 +24,13 @@ public class Consumable extends Object{
     @Override
     public void use(Person Objective)
     {   
-        if(this.hasOwner() == true)
+        if(this.hasOwner())
         {
-            if(this.canUse() == true)
+            if(this.canUse())
             {
                 if(Objective != null)
                 {
-                    if(Objective.isAlive() == true)
+                    if(Objective.isAlive())
                     {
                         if(this.givenOrTakenHealth != 0)
                         {

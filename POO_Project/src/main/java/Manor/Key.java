@@ -23,13 +23,13 @@ public class Key extends Object{
     @Override
     public void use(Person Objective)
     {   
-        if(this.hasOwner() == true)
+        if(this.hasOwner())
         {
-            if(this.canUse() == true)
+            if(this.canUse())
             {
                 if(Objective == null)
                 {
-                    if(this.getOwner().getRoom().isOnDoors(this.unlockableDoor) == true)
+                    if(this.getOwner().getRoom().isOnDoors(this.unlockableDoor))
                     {
                         this.unlockableDoor.unlock(this);
                         this.setRemainingUses();

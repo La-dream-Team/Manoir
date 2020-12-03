@@ -24,15 +24,15 @@ public class MeleeWeapon extends Weapon{
     @Override
     public void use(Person Objective)
     {
-        if(this.hasOwner() == true)
+        if(this.hasOwner())
         {
-            if(this.canUse() == true)
+            if(this.canUse())
             {
                 if(Objective == null)
                 {
                     System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
                 }
-                else if(Objective.isAlive() == true)
+                else if(Objective.isAlive())
                 {
                     Objective.hurt(this.getWeaponDamage());
                     this.setRemainingUses();
