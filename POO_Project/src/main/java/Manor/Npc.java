@@ -33,12 +33,17 @@ public class Npc extends Person{
         this.type = NpcType.CORPSE;
     }
     
-    public Npc(String Name,int Health, Room CurrentRoom){
+    public Npc(String Name,int Health, Room CurrentRoom, int Type){
         super(Name, Health, CurrentRoom);
         this.passiveOrActive = true;
         this.coefficient = 0f;
         this.shield = 0;
-        this.type = NpcType.CORPSE;
+        if(Type > 0 && Type < 5)
+        {//Case 4
+            this.type = NpcType.CORPSE;
+        }
+        
+        
     }
     
     //Method
