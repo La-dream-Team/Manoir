@@ -31,10 +31,20 @@ public class Npc extends Person{
         this.passiveOrActive = true;
         this.coefficient = 0f;
         this.shield = 0;
-        if(Type > 0 && Type < 5)
+        /*if(Type > 0 && Type < 5)
         {//Case 4
             this.type = NpcType.CORPSE;
-        }
+        }*/
+        switch(Type){
+            case 1: this.type = NpcType.SOLDIER;
+                break;
+            case 2: this.type = NpcType.TRADER;
+                break;
+            case 3: this.type = NpcType.FINAL_BOSS;
+                break;
+            default: this.type = NpcType.CORPSE;
+                break;            
+        }//fin sw
         
         
     }
