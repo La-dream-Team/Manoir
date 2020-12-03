@@ -11,26 +11,43 @@ public class Collectable extends Object{
         super(CollectableName, RemainingUses, Description);
         this.content = Content;
     } 
+    
+    public Collectable(String CollectableName, int RemainingUses, String Description, Person Owner, String Content)
+    {
+        super(CollectableName, RemainingUses, Description, Owner);
+        this.content = Content;
+    } 
 
     //Method
     @Override
     public void use(Person Objective)
     {   
-        if(this.canUse() == true)
+        if(this.hasOwner() == true)
         {
-            if(Objective == null)
+            if(this.canUse() == true)
             {
-                System.out.println(this.content);
-                this.setRemainingUses();
+                if(Objective == null)
+                {
+                    if(this.content.equals("") || this.content == null)
+                    {   
+                        System.out.println("WHO ARE THOSE PROGRAMMERS THAT  HAVE FORGOTTEN TO PUT CONTENT ON THIS OBJECT ... OR COULD IT BE DELIBERATE ...");
+                    }
+                    else
+                    {
+                        System.out.println(this.content);
+                        this.setRemainingUses();
+                    }
+                }
+                else
+                {
+                    System.out.println("THIS IS NOT A WEAPON NOR CONSUMABLE. YOU CANT ATTACK SOMEONE WITH IT, IT ONLY CAN GIVE YOU KNOWLEDGE SO BE GRATEFUL");
+                }
             }
             else
             {
-                System.out.println("THIS IS NOT A WEAPON, IT CAN GIVE KNOWLEDGE ONLY TO YOU SO BE GRATEFUL");
+                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                this.getOwner().removeObject(this.getId());
             }
-        }
-        else
-        {
-            System.out.println("YOU HAVE ALREADY USED THIS COLLECTABLE TOO MANY TIMES");
         }
     }
 }

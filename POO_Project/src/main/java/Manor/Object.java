@@ -8,11 +8,10 @@ public abstract class Object{
     private final int id;
     private int remainingUses;
     private String description;
+    private Person owner;
     
     private static int currentId = 0;
 
-    
-    
     //Constructor
     public Object(String Name, int RemainingUses, String Description)
     {
@@ -21,16 +20,18 @@ public abstract class Object{
         this.remainingUses = RemainingUses;
         this.description = Description;
         currentId++;
+        this.owner = null;
     }
     
-    /*public Object(String Name, int RemainingUses )
+    public Object(String Name, int RemainingUses, String Description, Person Owner)
     {
         this.name = Name;
         this.id = currentId;
         this.remainingUses = RemainingUses;
-        this.description = null;
+        this.description = Description;
         currentId++;
-    }*/
+        this.owner = Owner;
+    }
 
     //Methods
     public boolean canUse() //Si on peut utiliser un objet, on l'utilise et on retourne vrai, sinon false
@@ -79,15 +80,30 @@ public abstract class Object{
         }
     }
     
-    public void use(Person Objective)
+    public boolean hasOwner()
     {
-        if(this.canUse() == true)
+        if(this.owner != null)
         {
-            this.setRemainingUses();
+            return true;
         }
         else
         {
-            System.out.println("YOU HAVE ALREADY USED THIS OBJECT TOO MANY TIMES");
+            return false;
         }
+    }
+    
+    public Person getOwner()
+    {
+        return this.owner;
+    }
+    
+    public void setOwner(Person NewOwner)
+    {
+        this.owner = NewOwner;
+    }
+    
+    public void use(Person Objective)
+    {
+     
     }
 }

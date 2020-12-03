@@ -8,41 +8,71 @@ public class Consumable extends Object{
     private final int givenOrTakenHealth;
 
     //Constructors
-    public Consumable(String ConsumableName, int RemainingUses, String Description, int GivenOrTakenHealth) 
+    public Consumable(String ConsumableName, String Description, int GivenOrTakenHealth) 
     {
-        super(ConsumableName, RemainingUses, Description);
+        super(ConsumableName, 1, Description);
         this.givenOrTakenHealth = GivenOrTakenHealth; 
     } 
-
+    
+    public Consumable(String ConsumableName, String Description, Person Owner, int GivenOrTakenHealth) 
+    {
+        super(ConsumableName, 1, Description, Owner);
+        this.givenOrTakenHealth = GivenOrTakenHealth; 
+    } 
+    
     //Method
     @Override
     public void use(Person Objective)
     {   
-        if(this.canUse() == true)
+        if(this.hasOwner() == true)
         {
-            if(Objective != null){
-                if(this.givenOrTakenHealth != 0)
+            if(this.canUse() == true)
+            {
+                if(Objective != null)
                 {
-                    if(this.givenOrTakenHealth > 0)
+                    if(Objective.isAlive() == true)
                     {
-                        Objective.heal(this.givenOrTakenHealth);
-                        this.setRemainingUses();
+                        if(this.givenOrTakenHealth != 0)
+                        {
+                            if(this.givenOrTakenHealth > 0)
+                            {
+                                Objective.heal(this.givenOrTakenHealth);
+                                this.setRemainingUses();
+                            }
+                            else
+                            {
+                                Objective.hurt(-(this.givenOrTakenHealth));
+                                this.setRemainingUses();
+                            } 
+                        }
                     }
                     else
                     {
-                        Objective.hurt(-(this.givenOrTakenHealth));
-                        this.setRemainingUses();
-                    } 
+                        System.out.println("YOUR TARGET IS DEAD, IM SORRY");
+                    }
+                }
+                else
+                {
+                    if(this.givenOrTakenHealth != 0)
+                    {
+                        if(this.givenOrTakenHealth > 0)
+                        {
+                            this.getOwner().heal(this.givenOrTakenHealth);
+                            this.setRemainingUses();
+                        }
+                        else
+                        {
+                            this.getOwner().hurt(-(this.givenOrTakenHealth));
+                            this.setRemainingUses();
+                        } 
+                    }
                 }
             }
             else
             {
-                System.out.println("YOU NEED A TARGET TO USE THIS OBJECT AGAINST");
+                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                this.getOwner().removeObject(this.getId());
             }
-        }
-        else
-        {
-            System.out.println("YOU HAVE ALREADY USED THIS CONSOMABLE TOO MANY TIMES");
         }
     }
 }

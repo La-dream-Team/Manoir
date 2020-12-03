@@ -16,24 +16,33 @@ public class MeleeWeapon extends Weapon{
         super(MeleeWeaponName, RemainingUses, Description, MeleeWeaponDamage);
     }   
     
+    public MeleeWeapon(String MeleeWeaponName, int RemainingUses, String Description, Person Owner, int MeleeWeaponDamage)
+    {
+        super(MeleeWeaponName, RemainingUses, Description, Owner, MeleeWeaponDamage);
+    }
+    
     @Override
     public void use(Person Objective)
     {
-        if(this.canUse() == true)
+        if(this.hasOwner() == true)
         {
-            if(Objective == null)
+            if(this.canUse() == true)
             {
-                System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
+                if(Objective == null)
+                {
+                    System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
+                }
+                else if(Objective.isAlive() == true)
+                {
+                    Objective.hurt(this.getWeaponDamage());
+                    this.setRemainingUses();
+                }
             }
-            else if(Objective.isAlive() == true)
+            else
             {
-                Objective.hurt(this.getWeaponDamage());
-                this.setRemainingUses();
+                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                this.getOwner().removeObject(this.getId());
             }
-        }
-        else
-        {
-            System.out.println("YOUR" + this.getName() + "IT'S BROKEN");
         }
     }
 }

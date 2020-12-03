@@ -13,13 +13,20 @@ public abstract class Weapon extends Object{
         this.weaponDamage = WeaponDamage;
     }  
     
+    public Weapon (String Name, int RemainingUses, String Description, Person Owner, int WeaponDamage)
+    {
+        super(Name, RemainingUses, Description, Owner);
+        this.weaponDamage = WeaponDamage;
+    } 
+    
     //Method
     public int getWeaponDamage()
     {
         return this.weaponDamage;
     }
-    public void setWeaponDamage(int DmgCoef)
+    
+    public void setWeaponDamage(float DmgCoef)
     {
-        this.weaponDamage += DmgCoef;
+        this.weaponDamage += (int)DmgCoef;
     }
 }

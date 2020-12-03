@@ -5,6 +5,7 @@
  */
 package Manor;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ConsumableIT {
     
     public ConsumableIT() {
+        private NPC testSubject1;
+        private NPC testSubject2;
+        private NPC testSubject3;
+        private Consumable healingPotion = new Consumable("GRANDMA'S COOKIES", "THOSE COOKIES WERE MADE WITH LOVE BY ONE OF THE MANOR RESIDENTS GRANDMA", 20);
+        private Consumable hurtingPotion = new Consumable("MOLOTOV COCKTAIL", "THIS IS NOT VERY SAFE TO DRINK, I RECOMMEND YOU TO USE IT AGAINST YOUR ENEMIES", -35);
     }
     
     @BeforeAll
@@ -31,6 +37,9 @@ public class ConsumableIT {
     
     @BeforeEach
     public void setUp() {
+        testSubject1 = new NPC("FREDY", 100, null);
+        testSubject2 = new NPC("REMY", 20, null);
+        testSubject3 = new NPC("CORPSE", 0, null);
     }
     
     @AfterEach
@@ -38,16 +47,46 @@ public class ConsumableIT {
     }
 
     /**
-     * Test of useObject method, of class Consumable.
+     * Test of use method, of class Consumable.
      */
+        
     @Test
-    public void testUseObject() {
-        System.out.println("useObject");
-        Person Objective = null;
-        Consumable instance = null;
-        instance.useObject(Objective);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testUse1() {
+        
+        hurtingPotion.use(testSubject1);
+        assertFalse(hurtingPotion.canUse()); //test on peut pas le reutiliser
+        assertEquals(testSubject.getCurrentHp(), 65);
+    
     }
     
+    @Test
+    public void testUse2() {
+        
+        healingPotion.use(testSubject1);
+        assertFalse(healingPotion.canUse());
+        assertEquals(testSubject.getCurrentHp(), 100);
+        
+    }
+        
+    @Test 
+    public void testUse3() {
+        
+        hurtingPotion.use(testSubject2);
+        assertFalse(hurtingPotion.canUse());
+        assertEquals(testSubject.getCurrentHp(), 0);
+    } 
+     
+    @Test 
+    public void testUse4() {
+        hurtingPotion.use(testSubject3);
+        assertTrue(hurtingPotion.canUse());
+        assertEquals(testSubject.getCurrentHp(), 0);   
+    }
+
+    @Test 
+    public void testUse5() {
+        healingPotion.use(testSubject3);
+        assertTrue(healingPotion.canUse());
+        assertEquals(testSubject.getCurrentHp(), 0);    
+    }
 }

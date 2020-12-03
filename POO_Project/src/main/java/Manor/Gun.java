@@ -21,36 +21,47 @@ public class Gun extends Weapon{
         this.currentBullets = CurrentBullets; //Quand on cree une arme elle est deja charge
         this.CHARGERCAPACITY = CurrentBullets;
     } 
+    
+    public Gun(String GunName, int RemainingUses, int GunDamage, String Description, Person Owner, int CurrentBullets)
+    {
+        super(GunName, RemainingUses, Description, Owner, GunDamage);
+        this.currentBullets = CurrentBullets; //Quand on cree une arme elle est deja charge
+        this.CHARGERCAPACITY = CurrentBullets;
+    }
 
     //Methods
     @Override
-    public void use(Person Objective) //Si je mets string comment savoir la personne
+    public void use(Person Objective) 
     {
-        if(this.canUse() == true){
-            if(Objective != null)
-            {          
-                while(Objective.isAlive() == true && this.currentBullets > 0) //Pendant que notre objectif est vivant et on a des balles dans le chargeur, on tire
-                {
-                    Objective.hurt(this.getWeaponDamage()); 
-                    this.currentBullets -= 1;
+        if(this.hasOwner() == true)
+        {
+            if(this.canUse() == true)
+            {
+                if(Objective != null)
+                {          
+                    while(Objective.isAlive() == true && this.currentBullets > 0) //Pendant que notre objectif est vivant et on a des balles dans le chargeur, on tire
+                    {
+                        Objective.hurt(this.getWeaponDamage()); 
+                        this.currentBullets -= 1;
+                    }
+                    this.setRemainingUses();
                 }
-                this.setRemainingUses();
+                else
+                {
+                    System.out.println("YOU DONT HAVE A TARGET TO SHOOT, AT LEAST ... IS THERE A PHANTOM IN THE ROOM?");
+                }
             }
             else
             {
-                System.out.println("YOU DONT HAVE A TARGET TO SHOOT, AT LEAST ... IS THERE A PHANTTOM IN THE ROOM?");
+                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                this.getOwner().removeObject(this.getId());
             }
-        }
-        else
-        {
-            System.out.println("YOUR" + this.getName() + "IT'S BROKEN");
         }
     }
     
     public void reload()
     {
         this.currentBullets = this.CHARGERCAPACITY;
-        System.out.println("YOU HAVE RELOADED");
     }
 }
 
