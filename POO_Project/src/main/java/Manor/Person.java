@@ -10,11 +10,11 @@ public abstract class Person{
     private final String name;
     private int current_hp; 
     private final int total_hp;
-    private int bagSize = 0;
     ArrayList<Object> bag = new ArrayList<>();
     private Weapon equippedItem;
     private Room currentRoom;
     //private int balance;
+    private final int DEFAULT_BAGSIZE = 6;
     
 
     //Constructors
@@ -34,7 +34,6 @@ public abstract class Person{
         this.name = NewCorpse.name;
         this.current_hp = 0;
         this.total_hp = 0;
-        this.bagSize = NewCorpse.bagSize;
         this.bag = NewCorpse.bag;
         this.equippedItem = null;
         this.currentRoom = NewCorpse.currentRoom;
@@ -74,21 +73,60 @@ public abstract class Person{
     
     public void setRoom(String r) 
     {
+        if(this.currentRoom != null)
+        {
+            this.removeRoom();
+            this.currentRoom = Room;
+            this.currentRoom.addPerson(this);
+        }
+        else
+        {
+            this.currentRoom = Room;
+            this.currentRoom.addPerson(this);
+        }
     }
     
     public void removeRoom() 
     {
+        Room CurrentRoom = this.getRoom();
         this.currentRoom = null;
+        CurrentRoom.removePerson(this);
     }
     
     public void addObject(Object item)
     {
-        this.bag.add(item);
+        if(!this.hasObject(item.getName())){
+            if(item.getOwner() == null){
+                if(this.bag.size() < this.DEFAULT_BAGSIZE)
+                {
+                    item.setOwner(this);
+                    this.bag.add(item);
+                }
+                else
+                {
+                    System.out.println("IM SORRY BUT YOU DON'T HAVE ENOUGH SPACE IN YOUR INVENTORY");
+                }
+            } 
+            else
+            {
+                System.out.println("THIS" + item.getName() + "HAS ALREADY AN OWNER");
+            }
+        }
+        else
+        {
+            System.out.println("YOU ALREADY HAVE THIS ITEM");
+        }
     }
 
-    public void removeObject(int ID)
+    public void removeObject(int Id)
     {
-        this.bag.remove(ID);
+        if(this.hasObject(this.bag.get(Id).getName())){
+            Object Item = this.bag.get(Id);
+            this.bag.remove(Id);
+            if(Item.getOwner() != null){
+                Item.setOwner(null);
+            } 
+        }
     }
 
     public boolean hasObject(String name)//test persone a object
@@ -169,34 +207,47 @@ public abstract class Person{
     }
 
     public void unequipObject()
-    {
-        this.equippedItem = null; 
+    {   
+        if(this.equippedItem != null)
+        {
+            this.equippedItem = null;
+        }
     }
 
     public void useObject(String Item, String Objective)
     {
         if(Item == null || Item.equals(""))
         {
-            int ItemId = this.findObject(Item);
-            if(Objective == null || Objective.equals(""))
+            System.out.println("IF YOU WANT TO USE AN OBJECT THE PROGRAMMERS HAVE TO KNOW THE NAME OF THE OBJECT");
+        }
+        else
+        {
+            if(this.hasObject(Item))
             {
-                this.bag.get(ItemId).use(null);
+                int ItemId = this.findObject(Item);
+                if(Objective == null || Objective.equals(""))
+                {
+                    this.bag.get(ItemId).use(null);
+                }
+                else
+                {
+                    if(this.currentRoom.isOnPersons(Objective))
+                    {   
+                        Person Target = this.currentRoom.getPerson(Objective);
+                        if(this.bag.get(ItemId) instanceof Weapon)
+                        {
+                            this.equippedItem.use(Target);
+                        }
+                        else
+                        {   
+                        this.bag.get(ItemId).use(Target);
+                        }
+                    }
+                }
             }
             else
             {
-                if(this.currentRoom.isOnPersons(Objective))
-                {   
-                    Person Target = this.currentRoom.getPerson(Objective);
-                    if(this.bag.get(ItemId) instanceof Weapon)
-                    {
-                        this.equippedItem.use(Target);
-                    }
-                    else
-                    {
-                        
-                    this.bag.get(ItemId).use(Target);
-                    }
-                }
+               System.out.println("ERROR, ERROR, YOU DONT HAVE THE ITEM YOU ARE REQUESTING FOR");
             }
         }
     }

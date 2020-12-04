@@ -81,8 +81,10 @@ public class Room{
     
     public void removePerson(Person p){
         if(this.isOnPersons(p.getName())){
-            p.removeRoom();
             this.persons.remove(p);
+            if(p.getRoom() != null){
+                p.removeRoom();
+            } 
         }
         else{
             System.out.println(p.getName() + " isn't on " + this.name + "!");
