@@ -88,7 +88,9 @@ public abstract class Person{
     
     public void removeRoom() 
     {
-        this.getRoom().removePerson(this);
+        Room CurrentRoom = this.getRoom();
+        this.currentRoom = null;
+        CurrentRoom.removePerson(this);
     }
     
     public void addObject(Object item)
