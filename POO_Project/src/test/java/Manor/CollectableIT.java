@@ -5,12 +5,10 @@
  */
 package Manor;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -18,29 +16,20 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CollectableIT {
     
-    public CollectableIT() {
-        private Npc testSubject1;
-        private Npc testSubject2;
-        private Collectable readingBook = new Collectable("DON QUIXOTE", 863, "TO READ THIS BOOK YOU NEED AT LEAST TWO CENTURIES IRL", "In a village of La Mancha, the name of which I have no desire to call to mind, there lived not long since one of those gentlemen that keep a lance in the lance-rack, an old buckler, a lean hack, and a greyhound for coursing.");
-        private Collectable magazine = new Collectable("THE NEW MANOR", 1, "THIS IS A MAGAZINE ABOUT THE NEWEST MANSIONS NEARBY", null);
-    }
+    private Npc testSubject2;
+    private Collectable readingBook = new Collectable("DON QUIXOTE", 863, "TO READ THIS BOOK YOU NEED AT LEAST TWO CENTURIES IRL", "In a village of La Mancha, the name of which I have no desire to call to mind, there lived not long since one of those gentlemen that keep a lance in the lance-rack, an old buckler, a lean hack, and a greyhound for coursing.");
+    private Collectable magazine = new Collectable("THE NEW MANOR", 1, "THIS IS A MAGAZINE ABOUT THE NEWEST MANSIONS NEARBY", null);
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
     
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
+    @Before
     public void setUp(){
-        testSubject1 = null;
-        testSubject2 = new Npc("FREDY", 100, null);
+        testSubject2 = new Npc("FREDY", 100, null, 1);
+        testSubject2.addObject(readingBook);
+        testSubject2.addObject(magazine);
     }
     
-    @AfterEach
-    public void tearDown() {
+    @After
+    public void tearDownClass() {
     }
 
     /**
@@ -49,7 +38,7 @@ public class CollectableIT {
         
     @Test 
     public void testUse1() { //Cas ou l'object n'a pas de propietaire
-        readingBook.setOwner(testSubject1);
+        readingBook.setOwner(null);
         assertTrue(readingBook.hasOwner()); //On teste si le propietaire de l'objet est nul
     } 
         
@@ -57,13 +46,13 @@ public class CollectableIT {
     public void testUse2() { //Cas ou l'objet peut etre utilise
         readingBook.setOwner(testSubject2);
         assertTrue(readingBook.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        readingBook.use(testSubject1);
+        readingBook.use(null);
         assertTrue(readingBook.canUse()); //On teste si on peut pas le reutiliser
         assertEquals(readingBook.getRemainingUses(), 862);
     }
     
     @Test
-    public void testUse2() { //Cas ou l'objet peut pas etre utilise car on rentre un personne pas nulle
+    public void testUse3() { //Cas ou l'objet peut pas etre utilise car on rentre un personne pas nulle
         readingBook.setOwner(testSubject2);
         assertTrue(readingBook.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         readingBook.use(testSubject2);
@@ -72,12 +61,12 @@ public class CollectableIT {
     }
         
     @Test
-    public void testUse2() { //Cas ou l'objet n'a pas d'usages disponibles 
+    public void testUse4() { //Cas ou l'objet n'a pas d'usages disponibles 
         magazine.setOwner(testSubject2);
-        assertTrue(setOwner.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        magazine.use(testSubject1);
+        assertTrue(magazine.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
+        magazine.use(null);
         assertTrue(magazine.canUse()); //On teste si on peut pas le reutiliser
-        magazine.use(testSubject1);
+        magazine.use(null);
         assertFalse(magazine.canUse()); //On teste si on peut pas le reutiliser 
     }
 }
