@@ -72,9 +72,8 @@ public abstract class Person{
         return this.equippedItem;
     }
     
-    public void setRoom(Room Room) 
+    public void setRoom(String r) 
     {
-        this.currentRoom = Room;
     }
     
     public void removeRoom() 
