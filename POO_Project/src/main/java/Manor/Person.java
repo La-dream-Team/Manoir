@@ -13,7 +13,7 @@ public abstract class Person{
     ArrayList<Object> bag = new ArrayList<>();
     private Weapon equippedItem;
     private Room currentRoom;
-    //private int balance;
+    private int money;
     private final int DEFAULT_BAGSIZE = 6;
     
 
@@ -26,7 +26,7 @@ public abstract class Person{
         this.bag = null;
         this.equippedItem = null;
         this.currentRoom = CurrentRoom;
-        //this.balance = 0;
+        this.money = 0;
     }
 
     public Person(Person NewCorpse) //Pour ceer un deadBody a partir d'une personne
@@ -37,17 +37,17 @@ public abstract class Person{
         this.bag = NewCorpse.bag;
         this.equippedItem = null;
         this.currentRoom = NewCorpse.currentRoom;
-        //this.balance = 0;
+        this.money = NewCorpse.money;
     }
 
-    public Person(String Name, int Health, Room CurrentRoom) //Pour creer un personnage, par defaut il n'aura pas d'objet equipe
+    public Person(String Name, int Health, Room CurrentRoom, int Money) //Pour creer un personnage, par defaut il n'aura pas d'objet equipe
     {
         this.name = Name;
         this.current_hp = Health;
         this.total_hp = Health;
         this.equippedItem = null;
         this.currentRoom = CurrentRoom;
-        //this.balance = 0;
+        this.money = Money;
     }
 
     //Methods
@@ -55,10 +55,15 @@ public abstract class Person{
     {
         return this.name;
     }
-
-    public Room getRoom() 
+    
+    public int getCurrentHp()
     {
-        return this.currentRoom;
+        return this.current_hp;
+    }
+    
+    public void setCurrentHp(int newHp)
+    {
+        this.current_hp = newHp;
     }
     
     public ArrayList getBag()
@@ -66,12 +71,22 @@ public abstract class Person{
         return this.bag;
     }
     
+    public int getDefaultBagSize()
+    {
+        return this.DEFAULT_BAGSIZE;
+    }
+    
     public Weapon getEquippedItem()
     {
         return this.equippedItem;
     }
     
-    public void setRoom(String r) 
+    public Room getRoom() 
+    {
+        return this.currentRoom;
+    }
+    
+    /*public int setRoom(String Room) 
     {
         if(this.currentRoom != null)
         {
@@ -84,7 +99,7 @@ public abstract class Person{
             this.currentRoom = Room;
             this.currentRoom.addPerson(this);
         }
-    }
+    }*/
     
     public void removeRoom() 
     {
@@ -96,21 +111,25 @@ public abstract class Person{
     public void addObject(Object item)
     {
         if(!this.hasObject(item.getName())){
-            if(item.getOwner() == null){
-                if(this.bag.size() < this.DEFAULT_BAGSIZE)
+            
+            if(this.bag.size() < this.DEFAULT_BAGSIZE)
+            {
+                if(item.getOwner() == null)
                 {
                     item.setOwner(this);
                     this.bag.add(item);
                 }
-                else
+                else //Si l'objet possede deja un propietaire on change le propietaire
                 {
-                    System.out.println("IM SORRY BUT YOU DON'T HAVE ENOUGH SPACE IN YOUR INVENTORY");
+                    item.getOwner().removeObject(item.getId());
+                    item.setOwner(this);
+                    this.bag.add(item);
                 }
-            } 
+            }
             else
             {
-                System.out.println("THIS" + item.getName() + "HAS ALREADY AN OWNER");
-            }
+                System.out.println("IM SORRY BUT YOU DON'T HAVE ENOUGH SPACE IN YOUR INVENTORY");
+            } 
         }
         else
         {
@@ -120,12 +139,16 @@ public abstract class Person{
 
     public void removeObject(int Id)
     {
-        if(this.hasObject(this.bag.get(Id).getName())){
-            Object Item = this.bag.get(Id);
-            this.bag.remove(Id);
-            if(Item.getOwner() != null){
-                Item.setOwner(null);
-            } 
+        for(Object object : this.bag)
+        {
+            if(object.getId() == Id)
+            {
+                if(object.getOwner() != null)
+                {
+                    object.setOwner(null);
+                } 
+                this.bag.remove(object);
+            }
         }
     }
 
@@ -191,6 +214,7 @@ public abstract class Person{
             }
         }
     }
+    
     public void equipObject(String name){
         if(this.hasObject(name))
         {
@@ -250,6 +274,21 @@ public abstract class Person{
                System.out.println("ERROR, ERROR, YOU DONT HAVE THE ITEM YOU ARE REQUESTING FOR");
             }
         }
+    }
+    
+    public int getMoney()
+    {
+        return this.money;
+    }
+    
+    public void addMoney(int Money)
+    {
+        this.money += Money;
+    }
+    
+    public void substractMoney(int Money)
+    {
+        this.money -= Money;
     }
     
     public void printInventory(){

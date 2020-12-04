@@ -3,8 +3,8 @@ package Manor;
 
 
 public class Npc extends Person{
+    
     // Attributes
-    private boolean passiveOrActive; //Attack true or Passive false
     private float coefficient;
     private int shield;
     private NpcType type; //1-soldier, 2-Trader, 3- FinalBoss, 4- corpse
@@ -12,7 +12,6 @@ public class Npc extends Person{
     //Constructors
     public Npc(Room CurrentRoom){
         super(CurrentRoom); 
-        this.passiveOrActive = true;
         this.coefficient = 0f;
         this.shield = 0;
         this.type = NpcType.CORPSE;
@@ -20,15 +19,13 @@ public class Npc extends Person{
     
     public Npc(Person NewCorpse){
         super(NewCorpse);
-        this.passiveOrActive = true;
         this.coefficient = 0f;
         this.shield = 0;
         this.type = NpcType.CORPSE;
     }
     
-    public Npc(String Name,int Health, Room CurrentRoom, int Type){
-        super(Name, Health, CurrentRoom);
-        this.passiveOrActive = true;
+    public Npc(String Name,int Health, Room CurrentRoom, int Money, int Type){
+        super(Name, Health, CurrentRoom, Money);
         this.coefficient = 0f;
         this.shield = 0;
         /*if(Type > 0 && Type < 5)
@@ -50,9 +47,35 @@ public class Npc extends Person{
     }
     
     //Method
-    public void setMode(boolean PassiveOrActive)
+    @Override
+    public void hurt(int receivedDamage)
     {
-        this.passiveOrActive = PassiveOrActive;
+        if(this.shield == 0)
+        {
+            if(this.getCurrentHp() - receivedDamage <= 0)
+            {
+                this.setCurrentHp(0);
+            } 
+            else
+            {
+                int CurrentHealth = this.getCurrentHp();
+                CurrentHealth -= receivedDamage;
+                this.setCurrentHp(CurrentHealth);
+            }
+        }
+        else
+        {
+            if(this.shield - receivedDamage > 0)
+            {
+                this.shield -= receivedDamage;
+            }
+            else if(this.shield - receivedDamage < 0)
+            {
+                int restOfDamage = this.shield - receivedDamage;
+                this.shield = 0;
+                this.hurt(-restOfDamage);
+            }
+        }
     }
     
     public void talk(String Message)
