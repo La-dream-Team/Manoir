@@ -32,18 +32,25 @@ public class Consumable extends Object{
                 {
                     if(Objective.isAlive())
                     {
-                        if(this.givenOrTakenHealth != 0)
+                        if(Objective != this.getOwner())
                         {
-                            if(this.givenOrTakenHealth > 0)
+                            if(this.givenOrTakenHealth != 0)
                             {
-                                Objective.heal(this.givenOrTakenHealth);
-                                this.setRemainingUses();
+                                if(this.givenOrTakenHealth > 0)
+                                {
+                                    Objective.heal(this.givenOrTakenHealth);
+                                    this.setRemainingUses();
+                                }
+                                else
+                                {
+                                    Objective.hurt(-(this.givenOrTakenHealth));
+                                    this.setRemainingUses();
+                                }
                             }
-                            else
-                            {
-                                Objective.hurt(-(this.givenOrTakenHealth));
-                                this.setRemainingUses();
-                            } 
+                        }
+                        else
+                        {
+                            System.out.println("IF YOU WANT TO USE THIS OBJECT ON YOURSELF THEN DONT SPECIFY AN OBJECTIVE");
                         }
                     }
                     else

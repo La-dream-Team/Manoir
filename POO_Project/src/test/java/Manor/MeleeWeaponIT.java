@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author thibault
  */
-public class AmmunitionIT {
+public class MeleeWeaponIT {
     
-    public AmmunitionIT() {
+    public MeleeWeaponIT() {
     }
     
     @BeforeAll
@@ -37,8 +37,27 @@ public class AmmunitionIT {
     public void tearDown() {
     }
 
+    /**
+     * Test of useObject method, of class Weapon.
+     */
     @Test
-    public void testSomeMethod() {
+    public void testUseObject() {
+        System.out.println("useObject");
+        Person Objective = null;
+        Weapon instance = null;
+        instance.useObject(Objective);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of reload method, of class Weapon.
+     */
+    @Test
+    public void testReload() {
+        System.out.println("reload");
+        Weapon instance = null;
+        instance.reload();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
