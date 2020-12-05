@@ -56,12 +56,6 @@ public abstract class Object{
         return this.id;
     }
     
-    public int getCurrentId()
-    {
-        return currentId;
-    }
-    
-    
     public int getRemainingUses()
     {
         return this.remainingUses;

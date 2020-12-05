@@ -5,47 +5,33 @@
  */
 package Manor;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- *
- * @author thibault
- */
 public class ConsumableIT {
     
-    public ConsumableIT() {
-        private Npc testSubject1;
-        private Npc testSubject2;
-        private Npc testSubject3;
-        private Npc testSubject4;
-        private Consumable healingPotion = new Consumable("GRANDMA'S COOKIES", "THOSE COOKIES WERE MADE WITH LOVE BY ONE OF THE MANOR RESIDENTS GRANDMA", 20);
-        private Consumable hurtingPotion = new Consumable("MOLOTOV COCKTAIL", "THIS IS NOT VERY SAFE TO DRINK, I RECOMMEND YOU TO USE IT AGAINST YOUR ENEMIES", -35);
-    }
+    private Npc testSubject1;
+    private Npc testSubject2;
+    private Npc testSubject3;
+    private Npc testSubject4;
+    private Room room;
+    private Consumable healingPotion = new Consumable("GRANDMA'S COOKIES", "THOSE COOKIES WERE MADE WITH LOVE BY ONE OF THE MANOR RESIDENTS GRANDMA", 20);
+    private Consumable hurtingPotion = new Consumable("MOLOTOV COCKTAIL", "THIS IS NOT VERY SAFE TO DRINK, I RECOMMEND YOU TO USE IT AGAINST YOUR ENEMIES", -35);
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
     
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
+    @Before
     public void setUp() {
-        testSubject1 = new Npc("FREDY", 100, null);
-        testSubject2 = new Npc("REMY", 20, null);
-        testSubject3 = new Npc("CORPSE", 0, null);
-        testSubject3 = null;
+        room = new Room("couloir");
+        testSubject1 = new Npc("FREDY", 100, room, 35, 1);
+        testSubject2 = new Npc("REMY", 20, room, 47, 2);
+        testSubject3 = new Npc(room);
+        testSubject4 = null;
     }
     
-    @AfterEach
-    public void tearDown() {
+    @After
+    public void tearDownClass() {
     }
 
     /**

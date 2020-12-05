@@ -20,7 +20,7 @@ public abstract class Person{
     //Constructors
     public Person(Room CurrentRoom) //Par defaut on creera un deadBody
     {
-        this.name = "Corpse";
+        this.name = "CORPSE";
         this.current_hp = 0;
         this.total_hp = 0;
         this.bag = null;
@@ -243,7 +243,7 @@ public abstract class Person{
     {
         if(Item == null || Item.equals(""))
         {
-            System.out.println("IF YOU WANT TO USE AN OBJECT THE PROGRAMMERS HAVE TO KNOW THE NAME OF THE OBJECT");
+            System.out.println("IF YOU WANT TO USE AN OBJECT THE PROGRAMMERS HAVE TO KNOW THE NAME OF IT");
         }
         else
         {
@@ -261,12 +261,23 @@ public abstract class Person{
                         Person Target = this.currentRoom.getPerson(Objective);
                         if(this.bag.get(ItemId) instanceof Weapon)
                         {
-                            this.equippedItem.use(Target);
+                            if(ItemId == this.equippedItem.getId())
+                            {
+                                this.equippedItem.use(Target);
+                            }
+                            else
+                            {
+                                System.out.println("YOU HAVE TO HAVE EQUIPPED THE WEAPON YOU WANT TO USE BEFORE USING IT");
+                            }
                         }
                         else
                         {   
-                        this.bag.get(ItemId).use(Target);
+                            this.bag.get(ItemId).use(Target);
                         }
+                    }
+                    else
+                    {
+                        System.out.println("THE PERSON YOU WANT TO ATTACK IS NOT ON THIS ROOM");
                     }
                 }
             }

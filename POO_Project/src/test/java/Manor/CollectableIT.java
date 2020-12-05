@@ -10,10 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author thibault
- */
 public class CollectableIT {
     
     private Npc testSubject2;
