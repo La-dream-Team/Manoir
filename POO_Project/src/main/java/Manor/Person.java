@@ -116,6 +116,7 @@ public abstract class Person{
             {
                 if(item.getOwner() == null)
                 {
+                    this.currentRoom.removeObject(item); //On enleve l'objet de la piece ou il se trouve et on le met dans le sac
                     item.setOwner(this);
                     this.bag.add(item);
                 }
@@ -292,10 +293,9 @@ public abstract class Person{
     }
     
     public void printInventory(){
-        Iterator<Object>reader=bag.iterator();
-        while (reader.hasNext()){
-            Object rator = reader.next();
-            System.out.println(rator+"/");
-        }        
+        for (int i = 0; i < this.bag.size(); i++) 
+        {
+            System.out.println(i + "-" + this.bag.get(i).getName());
+        }       
     }
 }

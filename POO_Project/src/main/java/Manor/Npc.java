@@ -28,10 +28,7 @@ public class Npc extends Person{
         super(Name, Health, CurrentRoom, Money);
         this.coefficient = 0f;
         this.shield = 0;
-        /*if(Type > 0 && Type < 5)
-        {//Case 4
-            this.type = NpcType.CORPSE;
-        }*/
+        /*if(Type > 0 && Type < 5){}*/
         switch(Type){
             case 1: this.type = NpcType.SOLDIER;
                 break;
@@ -39,8 +36,10 @@ public class Npc extends Person{
                 break;
             case 3: this.type = NpcType.FINAL_BOSS;
                 break;
-            default: this.type = NpcType.CORPSE;
-                break;            
+            default: this.type = NpcType.SOLDIER;
+                break;
+            /*default: this.type = NpcType.CORPSE;
+                break;*/            
         }//fin sw
         
         

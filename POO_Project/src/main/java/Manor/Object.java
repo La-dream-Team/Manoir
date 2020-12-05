@@ -7,7 +7,7 @@ public abstract class Object{
     private final String name;
     private final int id;
     private int remainingUses;
-    private String description;
+    private final String description;
     private Person owner;
     
     private static int currentId = 0;
