@@ -19,7 +19,8 @@ public class CollectableIT {
     private Npc testSubject2;
     private Room room;
     private Collectable readingBook = new Collectable("DON QUIXOTE", 863, "TO READ THIS BOOK YOU NEED AT LEAST TWO CENTURIES IRL", "In a village of La Mancha, the name of which I have no desire to call to mind, there lived not long since one of those gentlemen that keep a lance in the lance-rack, an old buckler, a lean hack, and a greyhound for coursing.");
-    private Collectable magazine = new Collectable("THE NEW MANOR", 1, "THIS IS A MAGAZINE ABOUT THE NEWEST MANSIONS NEARBY", null);
+    private Collectable magazine = new Collectable("THE NEW MANOR", 1, "THIS IS A MAGAZINE ABOUT THE NEWEST MANSIONS NEARBY", "THE NEW MANOR OF THE NEIGHBORHOOD HAS 7 FLOORS WITH 15 ROOMS ON EACH ...");
+    private Collectable note = new Collectable("NOTE 1", 1, "THIS IS A NOTE OF ONE OF THE MANOR RESIDENTS", null);
     
     
     @Before
@@ -46,10 +47,11 @@ public class CollectableIT {
         
     @Test
     public void testUse2() { //Cas ou l'objet peut etre utilise
+        assertNotNull(note.content);
         readingBook.setOwner(testSubject2);
         assertTrue(readingBook.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         readingBook.use(null);
-        assertTrue(readingBook.canUse()); //On teste si on peut pas le reutiliser
+        assertTrue(readingBook.canUse()); //On teste si on peut le reutiliser
         assertEquals(readingBook.getRemainingUses(), 862);
     }
     
@@ -58,8 +60,8 @@ public class CollectableIT {
         readingBook.setOwner(testSubject2);
         assertTrue(readingBook.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         readingBook.use(testSubject2);
-        assertTrue(readingBook.canUse()); //On teste si on peut pas le reutiliser
-        assertEquals(readingBook.getRemainingUses(), 863);   
+        assertTrue(readingBook.canUse()); //On teste si on peut le reutiliser
+        assertEquals(readingBook.getRemainingUses(), 863); //On teste si les usages ont pas changé
     }
         
     @Test
@@ -67,8 +69,11 @@ public class CollectableIT {
         magazine.setOwner(testSubject2);
         assertTrue(magazine.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         magazine.use(null);
-        assertTrue(magazine.canUse()); //On teste si on peut pas le reutiliser
-        magazine.use(null);
-        assertFalse(magazine.canUse()); //On teste si on peut pas le reutiliser 
+        assertFalse(magazine.canUse()); //On teste si on ne peut pas la reutiliser
+    }
+    
+    @Test
+    public void testUse5() { //Cas ou l'objet n'a pas de contenu
+        assertNull(note.content);
     }
 }
