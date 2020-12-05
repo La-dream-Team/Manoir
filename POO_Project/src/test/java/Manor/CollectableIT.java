@@ -17,13 +17,15 @@ import static org.junit.Assert.*;
 public class CollectableIT {
     
     private Npc testSubject2;
+    private Room room;
     private Collectable readingBook = new Collectable("DON QUIXOTE", 863, "TO READ THIS BOOK YOU NEED AT LEAST TWO CENTURIES IRL", "In a village of La Mancha, the name of which I have no desire to call to mind, there lived not long since one of those gentlemen that keep a lance in the lance-rack, an old buckler, a lean hack, and a greyhound for coursing.");
     private Collectable magazine = new Collectable("THE NEW MANOR", 1, "THIS IS A MAGAZINE ABOUT THE NEWEST MANSIONS NEARBY", null);
     
     
     @Before
     public void setUp(){
-        testSubject2 = new Npc("FREDY", 100, null, 1);
+        room = new Room("couloir");
+        testSubject2 = new Npc("FREDY", 100, room, 35, 1);
         testSubject2.addObject(readingBook);
         testSubject2.addObject(magazine);
     }

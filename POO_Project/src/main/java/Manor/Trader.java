@@ -19,6 +19,8 @@ public class Trader extends Npc{
         Scanner ChosenObject = new Scanner(System.in); 
         System.out.println("I HAVE ALL THOSE ITEMS :");
         this.printInventory();
+        System.out.println("EACH ONE COSTS" + price + "PIECES");
+        System.out.println("REMEMBER YOU HAVE" + buyer.getMoney() + "PIECES AVAILABLES TO BUY");
         System.out.println("CHOOSE THE OBJECT YOU WANT TO BUY ME AND ENTER ITS NUMBER (IF YOU WANT TO EXIT THE SHOP ENTER -1) :");
         int CodeObject = ChosenObject.nextInt();
         if(CodeObject != -1)
