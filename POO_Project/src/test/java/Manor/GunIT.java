@@ -24,9 +24,7 @@ public class GunIT {
         room = new Room("couloir");
         testSubject1 = new Npc("FREDY", 100, room, 35, 1);
         testSubject2 = new Npc("REMY", 20, room, 47, 2);
-        testSubject2.addObject(AK47);
-        chargerAK47 = new Charger("AK-47 Charger", "THIS CHARGER ALLOWS YOU TO RELOAD THE GUN NAMED AK-47");
-        testSubject2.addObject(chargerAK47);
+        chargerAK47 = new Charger("AK-47 Charger", "THIS CHARGER ALLOWS YOU TO RELOAD THE GUN NAMED AK-47"); 
     }
     
     @After
@@ -42,7 +40,6 @@ public class GunIT {
     @Test
     public void testUse2() { //On tente d'utiliser l'arme sur personne
         testSubject1.addObject(AK47);
-        testSubject1.addObject(chargerAK47);
         testSubject1.useObject(AK47.getName(), null);
         assertEquals(AK47.getCurrentBullets(), AK47.getChargerCapacity());  
     }
@@ -50,17 +47,17 @@ public class GunIT {
     @Test
     public void testUse3() { //On tente d'utiliser l'arme sur le propietaire
         testSubject1.addObject(AK47);
-        testSubject1.addObject(chargerAK47);
         testSubject1.useObject(AK47.getName(), testSubject1.getName());
         assertEquals(testSubject1.getCurrentHp(), 100);
         assertEquals(AK47.getCurrentBullets(), 45);  
     }
     
     @Test
-    public void testUse4() { //On tente d'utiliser l'arme sur le propietaire et on teste si on peut la reutiliser
+    public void testUse4() { //On utilise l'arme sur l'objectif et on teste si on peut la reutiliser
         testSubject2.addObject(goldGun);
         testSubject2.useObject(goldGun.getName(), testSubject1.getName());
         assertFalse(testSubject1.isAlive());
+        assertFalse(goldGun.canUse());
         assertEquals(goldGun.getCurrentBullets(), 0);;  
         assertFalse(goldGun.getOwner().hasObject(goldGun.getName())); //On teste si le propietaire il n'a plus l'object
     }
@@ -71,6 +68,7 @@ public class GunIT {
         testSubject2.addObject(chargerAK47);
         testSubject2.useObject(AK47.getName(), testSubject1.getName());
         assertFalse(testSubject1.isAlive());
+        assertEquals(AK47.getRemainingUses(), 10);
         assertEquals(AK47.getCurrentBullets(), 45);
         testSubject2.useObject(chargerAK47.getName(), null);
         assertEquals(AK47.getCurrentBullets(), AK47.getChargerCapacity());  

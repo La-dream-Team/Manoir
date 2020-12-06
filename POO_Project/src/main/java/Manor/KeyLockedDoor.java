@@ -19,6 +19,11 @@ public class KeyLockedDoor extends DoorWithLock{
         this.currentKey = new Key(("key number" + this.getID()), uses, "THIS KEY CAN MAYBE OPEN A LOCKED DOOR NEARBY", this);
     }
     
+    public Key getCurrentKey()
+    {
+        return this.currentKey;
+    }
+    
     @Override
     public void unlock(){
         System.out.print("No key found");

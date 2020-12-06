@@ -10,50 +10,52 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author thibault
- */
 public class MeleeWeaponIT {
     
     private Room room;
     private Npc testSubject1;
     private Npc testSubject2;
-    private Charger chargerAK47; 
     private MeleeWeapon excalibur = new MeleeWeapon("EXCALIBUR", 10, "THIS IS THE LEGENDARY SWORD OF THE KING ARTHUR", 50);
-    private MeleeWeapon fork = new MeleeWeapon("FORK", 2, "THIS GUN WILL ALLOW YOU TO ONESHOT ONE ENEMY", 4); 
+    private MeleeWeapon fork = new MeleeWeapon("FORK", 1, "THIS GUN WILL ALLOW YOU TO ONESHOT ONE ENEMY", 4); 
     
     @Before
     public void setUp() {
+        room = new Room("couloir");
+        testSubject1 = new Npc("FREDY", 100, room, 35, 1);
+        testSubject2 = new Npc("REMY", 20, room, 47, 2);
     }
     
     @After
     public void tearDownClass() {
     }
 
-    /**
-     * Test of useObject method, of class Weapon.
-     */
     @Test
-    public void testUseObject() {
-        System.out.println("useObject");
-        Person Objective = null;
-        Weapon instance = null;
-        instance.useObject(Objective);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of reload method, of class Weapon.
-     */
-    @Test
-    public void testReload() {
-        System.out.println("reload");
-        Weapon instance = null;
-        instance.reload();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testUse1() { //Cas ou l'object n'a pas de propietaire
+        fork.setOwner(null);
+        assertFalse(fork.hasOwner()); //On teste si le propietaire de l'objet est nul
     }
     
+    @Test
+    public void testUse2() { //On tente d'utiliser l'arme sur personne
+        testSubject1.addObject(fork);
+        testSubject1.useObject(fork.getName(), null);
+        assertEquals(fork.getRemainingUses(), 1);  
+    }
+    
+    @Test
+    public void testUse3() { //On tente d'utiliser l'arme sur le propietaire
+        testSubject1.addObject(excalibur);
+        testSubject1.useObject(excalibur.getName(), testSubject1.getName());
+        assertEquals(testSubject1.getCurrentHp(), 100);
+        assertEquals(excalibur.getRemainingUses(), 10);
+    }
+    
+    @Test
+    public void testUse4() { //On utilise l'arme sur l'objectif et on teste si on peut la reutiliser
+        testSubject2.addObject(fork);
+        testSubject2.useObject(fork.getName(), testSubject1.getName());
+        assertTrue(testSubject1.isAlive());
+        assertFalse(fork.canUse());  
+        assertEquals(testSubject1.getCurrentHp(), 96); //On teste si on a efectue un changement de vie sur l'objectif
+    }
 }
