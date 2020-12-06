@@ -16,8 +16,12 @@ import static org.junit.Assert.*;
  */
 public class MeleeWeaponIT {
     
-    public MeleeWeaponIT() {
-    }
+    private Room room;
+    private Npc testSubject1;
+    private Npc testSubject2;
+    private Charger chargerAK47; 
+    private MeleeWeapon excalibur = new MeleeWeapon("EXCALIBUR", 10, "THIS IS THE LEGENDARY SWORD OF THE KING ARTHUR", 50);
+    private MeleeWeapon fork = new MeleeWeapon("FORK", 2, "THIS GUN WILL ALLOW YOU TO ONESHOT ONE ENEMY", 4); 
     
     @Before
     public void setUp() {

@@ -15,8 +15,8 @@ public class GunIT {
     private Npc testSubject1;
     private Npc testSubject2;
     private Charger chargerAK47; 
-    private Gun AK47 = new Gun("AK-47", 10, 20, "THIS GUN WILL ALLOW YOU TO KILL YOUR ENEMIES WITHIN A FEW SECONDS", 50);
-    private Gun goldGun = new Gun("Gold Gun", 1, 9999, "THIS GUN WILL ALLOW YOU TO ONESHOT ONE ENEMY", 1);
+    private Gun AK47 = new Gun("AK-47", 10, "THIS GUN WILL ALLOW YOU TO KILL YOUR ENEMIES WITHIN A FEW SECONDS", 20, 50);
+    private Gun goldGun = new Gun("Gold Gun", 1, "THIS GUN WILL ALLOW YOU TO ONESHOT ONE ENEMY", 9999, 1);
     
     
     @Before

@@ -15,7 +15,7 @@ public class Gun extends Weapon{
     private int currentBullets;
     private final int CHARGERCAPACITY;
     
-    public Gun(String GunName, int RemainingUses, int GunDamage, String Description, int CurrentBullets)
+    public Gun(String GunName, int RemainingUses, String Description, int GunDamage, int CurrentBullets)
     {
         super(GunName, RemainingUses, Description, GunDamage);
         this.currentBullets = CurrentBullets; //Quand on cree une arme elle est deja charge
