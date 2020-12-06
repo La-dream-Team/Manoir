@@ -8,11 +8,6 @@ public class Charger extends Object{
         super(ChargerName, 1, Description);
     }   
     
-    public Charger(String ChargerName, String Description, Person Owner)
-    {
-        super(ChargerName, 1, Description, Owner);
-    }
-    
     @Override
     public void use(Person Objective)
     {
@@ -26,22 +21,18 @@ public class Charger extends Object{
                     {
                         Gun weaponWithBullets = (Gun)this.getOwner().getEquippedItem();
                         weaponWithBullets.reload();
-                        System.out.println("YOU HAVE RELOADED");
+                        System.out.println("YOU HAVE RELOADED BUT YOU HAVE ALREADY USED ME TOO MANY TIMES SO LET ME REST IN PEACE");
+                        this.getOwner().removeObject(this.getId());
                     }
                     else
                     {
-                        System.out.println("NONE OF YOUR WEAPONS CAN BE RECHARGED WITH THIS CHARGER");
+                        System.out.println("YOUR EQUIPPED WEAPON CAN'T BE RELOAD WITH THIS CHARGER");
                     }
                 }
                 else
                 {
                     System.out.println("THIS IS NOT A WEAPON NOR CONSUMABLE. YOU CANT ATTACK SOMEONE WITH IT, IT ONLY CAN RELOAD THE WEAPON U HAVE EQUIPPED");
                 }
-            }
-            else
-            {
-                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                this.getOwner().removeObject(this.getId());
             }
         }
     }

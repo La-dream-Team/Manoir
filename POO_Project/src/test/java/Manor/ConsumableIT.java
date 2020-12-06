@@ -39,48 +39,52 @@ public class ConsumableIT {
     @Test 
     public void testUse1() { //Cas ou l'object n'a pas de propietaire
         hurtingPotion.setOwner(null);
-        assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet est nul
+        assertFalse(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet est nul
     }    
         
     @Test
     public void testUse2() { //Cas pour faire des degats a une personne 
-        hurtingPotion.setOwner(testSubject2);
+        testSubject2.addObject(hurtingPotion);
         assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         hurtingPotion.use(testSubject1);
         assertFalse(hurtingPotion.canUse()); //On teste si on ne peut pas la reutiliser
+        assertFalse(hurtingPotion.getOwner().hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
         assertEquals(testSubject1.getCurrentHp(), 65); //On verifie le changement de vie de l'objectif
     }
     
     @Test
     public void testUse3() { //Cas pour donner de la vie a une personne avec toutes ses hp 
-        healingPotion.setOwner(testSubject2);
+        testSubject2.addObject(healingPotion);
         assertTrue(healingPotion.hasOwner());  //On teste si le propietaire de l'objet n'est pas nul
         healingPotion.use(testSubject1);
         assertFalse(healingPotion.canUse()); //On teste si on ne peut pas la reutiliser
+        assertFalse(healingPotion.getOwner().hasObject(healingPotion.getName())); //On teste si le propietaire il n'a plus l'object
         assertEquals(testSubject1.getCurrentHp(), 100); //On verifie qui n'a pas eu de changement de vie sur l'objectif  
     }
         
     @Test 
     public void testUse4() { //Cas pour faire des degats a une personne avec moins de hp que le degats qu'on le fait 
-        hurtingPotion.setOwner(testSubject1);
+        testSubject1.addObject(hurtingPotion);
         assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         hurtingPotion.use(testSubject2);
-        assertFalse(hurtingPotion.canUse()); //On teste si on peut pas le reutiliser
+        assertFalse(hurtingPotion.canUse()); //On teste si on ne peut pas le reutiliser
+        assertFalse(hurtingPotion.getOwner().hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
         assertEquals(testSubject2.getCurrentHp(), 0); //On verifie le changement de vie de l'objectif
     } 
     
     @Test 
-    public void testUse5() {  //Cas pour donner de la vie a une personne
-        healingPotion.setOwner(testSubject1);
+    public void testUse5() {  //Cas pour donner de la vie a une personne  
+        testSubject1.addObject(healingPotion);
         assertTrue(healingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         healingPotion.use(testSubject2);
-        assertFalse(healingPotion.canUse()); //On teste si on peut pas le reutiliser
+        assertFalse(healingPotion.canUse()); //On teste si on ne peut pas le reutiliser
+        assertFalse(healingPotion.getOwner().hasObject(healingPotion.getName())); //On teste si le propietaire il n'a plus l'object
         assertEquals(testSubject2.getCurrentHp(), 40); //On verifie le changement de vie de l'objectif 
     }
         
     @Test 
     public void testUse6() { //Cas pour faire des degats a une personne morte
-        hurtingPotion.setOwner(testSubject1);
+        testSubject1.addObject(hurtingPotion);
         assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         hurtingPotion.use(testSubject3);
         assertTrue(hurtingPotion.canUse()); //On teste si on peut le reutiliser
@@ -89,7 +93,7 @@ public class ConsumableIT {
 
     @Test 
     public void testUse7() { //Cas pour donner de la vie a une personne morte
-        healingPotion.setOwner(testSubject1);
+        testSubject1.addObject(healingPotion);
         assertTrue(healingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         healingPotion.use(testSubject3);
         assertTrue(healingPotion.canUse()); //On teste si on peut le reutiliser
@@ -98,27 +102,30 @@ public class ConsumableIT {
     
     @Test 
     public void testUse8() { //Cas pour enlever de la vie au propietaire du consomable
-        hurtingPotion.setOwner(testSubject1);
+        testSubject1.addObject(hurtingPotion);
         assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         hurtingPotion.use(null);
         assertFalse(hurtingPotion.canUse()); //On teste si on peut pas le reutiliser
+        assertFalse(hurtingPotion.getOwner().hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
         assertEquals(testSubject1.getCurrentHp(), 65); //On verifie le changement de vie de l'objectif
     }
     
     @Test 
     public void testUse9() { //Cas pour donner de la vie au propietaire du consomable
-        healingPotion.setOwner(testSubject2);
+        testSubject2.addObject(healingPotion);
         assertTrue(healingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         healingPotion.use(null);
         assertFalse(healingPotion.canUse()); //On teste si on peut pas le reutiliser
+        assertFalse(healingPotion.getOwner().hasObject(healingPotion.getName())); //On teste si le propietaire il n'a plus l'object
         assertEquals(testSubject2.getCurrentHp(), 40); //On verifie le changement de vie de l'objectif
     }
     
     public void testUse10() { //Cas pour utiliser l'object en rentrant comme objective le propietaire
-        hurtingPotion.setOwner(testSubject1);
+        testSubject1.addObject(hurtingPotion);
         assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
         hurtingPotion.use(testSubject1);
         assertTrue(hurtingPotion.canUse()); //On teste si on peut le reutiliser
+        assertFalse(hurtingPotion.getOwner().hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
     }
     
 }

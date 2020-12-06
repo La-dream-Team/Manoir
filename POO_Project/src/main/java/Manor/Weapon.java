@@ -13,12 +13,6 @@ public abstract class Weapon extends Object{
         this.weaponDamage = WeaponDamage;
     }  
     
-    public Weapon (String Name, int RemainingUses, String Description, Person Owner, int WeaponDamage)
-    {
-        super(Name, RemainingUses, Description, Owner);
-        this.weaponDamage = WeaponDamage;
-    } 
-    
     //Method
     public int getWeaponDamage()
     {

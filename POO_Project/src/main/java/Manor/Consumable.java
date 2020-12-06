@@ -12,13 +12,7 @@ public class Consumable extends Object{
     {
         super(ConsumableName, 1, Description);
         this.givenOrTakenHealth = GivenOrTakenHealth; 
-    } 
-    
-    public Consumable(String ConsumableName, String Description, Person Owner, int GivenOrTakenHealth) 
-    {
-        super(ConsumableName, 1, Description, Owner);
-        this.givenOrTakenHealth = GivenOrTakenHealth; 
-    } 
+    }  
     
     //Method
     @Override
@@ -40,11 +34,15 @@ public class Consumable extends Object{
                                 {
                                     Objective.heal(this.givenOrTakenHealth);
                                     this.setRemainingUses();
+                                    System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                                    this.getOwner().removeObject(this.getId());
                                 }
                                 else
                                 {
                                     Objective.hurt(-(this.givenOrTakenHealth));
                                     this.setRemainingUses();
+                                    System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                                    this.getOwner().removeObject(this.getId());
                                 }
                             }
                         }
@@ -66,19 +64,18 @@ public class Consumable extends Object{
                         {
                             this.getOwner().heal(this.givenOrTakenHealth);
                             this.setRemainingUses();
+                            System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                            this.getOwner().removeObject(this.getId());
                         }
                         else
                         {
                             this.getOwner().hurt(-(this.givenOrTakenHealth));
                             this.setRemainingUses();
+                            System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                            this.getOwner().removeObject(this.getId());
                         } 
                     }
                 }
-            }
-            else
-            {
-                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                this.getOwner().removeObject(this.getId());
             }
         }
     }

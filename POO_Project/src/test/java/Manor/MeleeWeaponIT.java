@@ -5,12 +5,10 @@
  */
 package Manor;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -21,20 +19,12 @@ public class MeleeWeaponIT {
     public MeleeWeaponIT() {
     }
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
+    @Before
     public void setUp() {
     }
     
-    @AfterEach
-    public void tearDown() {
+    @After
+    public void tearDownClass() {
     }
 
     /**

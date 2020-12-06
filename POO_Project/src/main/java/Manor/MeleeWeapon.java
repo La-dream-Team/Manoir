@@ -16,32 +16,46 @@ public class MeleeWeapon extends Weapon{
         super(MeleeWeaponName, RemainingUses, Description, MeleeWeaponDamage);
     }   
     
-    public MeleeWeapon(String MeleeWeaponName, int RemainingUses, String Description, Person Owner, int MeleeWeaponDamage)
-    {
-        super(MeleeWeaponName, RemainingUses, Description, Owner, MeleeWeaponDamage);
-    }
-    
     @Override
     public void use(Person Objective)
     {
         if(this.hasOwner())
         {
-            if(this.canUse())
+            if(this.getOwner() != Objective)
             {
-                if(Objective == null)
+                if(this.canUse())
                 {
-                    System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
-                }
-                else if(Objective.isAlive())
-                {
-                    Objective.hurt(this.getWeaponDamage());
-                    this.setRemainingUses();
+                    if(this.getRemainingUses() == 1)
+                    {
+                        if(Objective == null)
+                        {
+                            System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
+                        }
+                        else if(Objective.isAlive())
+                        {
+                            Objective.hurt(this.getWeaponDamage());
+                            this.setRemainingUses();
+                            System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                            this.getOwner().removeObject(this.getId());
+                        }
+                    }
+                    else
+                    {
+                        if(Objective == null)
+                        {
+                            System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
+                        }
+                        else if(Objective.isAlive())
+                        {
+                            Objective.hurt(this.getWeaponDamage());
+                            this.setRemainingUses();
+                        }
+                    }
                 }
             }
             else
             {
-                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                this.getOwner().removeObject(this.getId());
+                System.out.println("IM SORRY BUT YOU CAN'T KILL YOURSELF WITH A WEAPON, BUT YOU CAN TRY WITH OTHER OBJECTS ...");
             }
         }
     }

@@ -5,42 +5,45 @@
  */
 package Manor;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- *
- * @author thibault
- */
 public class ChargerIT {
+    private Room room;
+    private Npc testSubject1;
+    private Charger chargerAK47 = new Charger("AK-47 Charger", "THIS CHARGER ALLOWS YOU TO RELOAD THE GUN NAMED AK-47");
     
-    public ChargerIT() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
+    @Before
     public void setUp() {
+        room = new Room("couloir");
+        testSubject1 = new Npc("FREDY", 100, room, 35, 1);
+        testSubject1.addObject(chargerAK47);
     }
     
-    @AfterEach
-    public void tearDown() {
+    @After
+    public void tearDownClass() {
     }
 
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testUse1() { //Cas ou l'object n'a pas de propietaire
+        chargerAK47.setOwner(null);
+        assertFalse(chargerAK47.hasOwner()); //On teste si le propietaire de l'objet est nul
     }
     
+    @Test
+    public void testUse2() { //Cas ou l'object n'est pas null
+        assertTrue(chargerAK47.hasOwner()); //On teste si le propietaire de l'objet est nul
+        chargerAK47.use(testSubject1);
+        assertTrue(chargerAK47.canUse()); //On teste si on peut le reutiliser
+    }
+    
+    @Test
+    public void testUse3() { //Cas ou on utilise l'object
+        assertTrue(chargerAK47.hasOwner()); //On teste si le propietaire de l'objet est nul
+        chargerAK47.use(null);
+        assertFalse(chargerAK47.canUse()); //On teste si on ne peut pas le reutiliser
+        assertFalse(chargerAK47.getOwner().hasObject(chargerAK47.getName())); //On teste si le propietaire il n'a plus l'object
+    }
 }

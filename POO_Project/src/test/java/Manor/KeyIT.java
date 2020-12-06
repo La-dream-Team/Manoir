@@ -5,49 +5,28 @@
  */
 package Manor;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- *
- * @author thibault
- */
 public class KeyIT {
+    private Room room;
+    private KeyLockedDoor door; 
     
-    public KeyIT() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
+    @Before
     public void setUp() {
+         room = new Room("couloir");
+         door = new KeyLockedDoor(room, 5);    
     }
     
-    @AfterEach
-    public void tearDown() {
+    @After
+    public void tearDownClass() {
     }
 
-    /**
-     * Test of useObject method, of class Key.
-     */
     @Test
-    public void testUseObject() {
-        System.out.println("useObject");
-        Person objective = null;
-        Key instance = null;
-        instance.useObject(objective);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testUse() {
+        
     }
     
 }

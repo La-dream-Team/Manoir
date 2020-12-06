@@ -22,16 +22,6 @@ public abstract class Object{
         currentId++;
         this.owner = null;
     }
-    
-    public Object(String Name, int RemainingUses, String Description, Person Owner)
-    {
-        this.name = Name;
-        this.id = currentId;
-        this.remainingUses = RemainingUses;
-        this.description = Description;
-        currentId++;
-        this.owner = Owner;
-    }
 
     //Methods
     public boolean canUse() //Si on peut utiliser un objet, on l'utilise et on retourne vrai, sinon false
