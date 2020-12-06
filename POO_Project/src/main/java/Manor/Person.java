@@ -152,8 +152,8 @@ public abstract class Person{
             }
         }
     }
-
-    public boolean hasObject(String name)//test persone a object
+    
+    public boolean hasObject(String name)//test persone possede object
     {
         for(Object object : this.bag)
         {
@@ -164,7 +164,19 @@ public abstract class Person{
         }
         return false;
     }
-
+    
+    public void dropObject(String name)
+    {
+        for(Object object : this.bag)
+        {
+            if(object.getName().equals(name))
+            {
+                this.currentRoom.addObject(object);
+                this.removeObject(object.getId());
+            }
+        }
+    }
+    
     public int findObject(String name)
     {
         for(Object object : this.bag)
