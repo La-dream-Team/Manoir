@@ -38,6 +38,7 @@ public class MeleeWeaponIT {
     @Test
     public void testUse2() { //On tente d'utiliser l'arme sur personne
         testSubject1.addObject(fork);
+        testSubject1.equipObject(fork.getName());
         testSubject1.useObject(fork.getName(), null);
         assertEquals(fork.getRemainingUses(), 1);  
     }
@@ -45,14 +46,24 @@ public class MeleeWeaponIT {
     @Test
     public void testUse3() { //On tente d'utiliser l'arme sur le propietaire
         testSubject1.addObject(excalibur);
+        testSubject1.equipObject(excalibur.getName());
         testSubject1.useObject(excalibur.getName(), testSubject1.getName());
         assertEquals(testSubject1.getCurrentHp(), 100);
         assertEquals(excalibur.getRemainingUses(), 10);
     }
     
     @Test
-    public void testUse4() { //On utilise l'arme sur l'objectif et on teste si on peut la reutiliser
+    public void testUse4() { //On utilise une arme qu'on a pas equipée
+        testSubject1.addObject(excalibur);
+        testSubject1.useObject(excalibur.getName(), testSubject2.getName());
+        assertTrue(testSubject2.isAlive());
+        assertEquals(excalibur.getRemainingUses(), 10);
+    }
+    
+    @Test
+    public void testUse5() { //On utilise l'arme sur l'objectif et on teste si on peut la reutiliser
         testSubject2.addObject(fork);
+        testSubject2.equipObject(fork.getName());
         testSubject2.useObject(fork.getName(), testSubject1.getName());
         assertTrue(testSubject1.isAlive());
         assertFalse(fork.canUse());  

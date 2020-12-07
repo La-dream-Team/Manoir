@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Game{
     private ArrayList<Floor> manoir = new ArrayList<>();
-    private Person Player;
+    private Player player;
 
 
     
@@ -68,7 +68,7 @@ public class Game{
                     break;
                 case "TAKE":
                     if(lenList == 2){
-                        ret = this.take(com.get(1), com.get(1));
+                        ret = this.take(com.get(1));
                     }
  
                     break;
@@ -85,7 +85,7 @@ public class Game{
                     break;
                 case "EQUIPE":
                     if(lenList == 2){
-                        ret = this.take(com.get(1), com.get(1));
+                        ret = this.take(com.get(1));
                     }
                     
                     break;
@@ -154,7 +154,7 @@ public class Game{
         if(com != null){
             Room r = this.findRoom(com);
             if(r != null){
-                ret = this.Player.setRoom(r);
+                ret = this.player.setRoom(r);
             }
             else{
                 System.out.println("Room Faillure");
@@ -169,16 +169,16 @@ public class Game{
         if(com != null){
             switch (com){
                 case "inventory" : 
-                    this.Player.printInventory();
+                    this.player.printInventory();
                     ret = 1;
                     
                     break;
                 case "room":
-                    this.Player.getRoom().print();
+                    this.player.getRoom().print();
                     
                     break;
                 case "traders":
-                    this.Player.getRoom().printMarkets();
+                    this.player.getRoom().printMarkets();
                     
                     break;
                 default: 
@@ -188,17 +188,17 @@ public class Game{
         return ret;
     }
     
-    public int take(String s1, String s2){
+    public int take(String s1){
         int ret = 0;
         if(s1 != null){
-            this.Player.takeObject(s1, s2);
+            this.player.takeObject(s1);
         }
         return ret;
     }
     
     public int use(String s1, String s2){
         if(s1 != null){
-            this.Player.useObject(s1, s2);
+            this.player.useObject(s1, s2);
         }
         return 1;
     }
@@ -206,7 +206,7 @@ public class Game{
     public int equipe(String obj){
         int ret = 0;
         if(obj != null){
-            ret = this.Player.equipObject(obj);
+            ret = this.player.equipObject(obj);
         }
         return ret;
     }

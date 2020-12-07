@@ -220,6 +220,9 @@ public abstract class Person{
         if(this.current_hp - receivedDamage <= 0)
         {
             this.current_hp = 0;
+            Corpse newCorpse = new Corpse(this.name, "HE DIED BECAUSE OF YOU, MAYBE IT WAS FOR SELF DEFENSE OR MAYBE YOUR MURDEROUS INSTINCT SHOWED UP");
+            this.dropObjects();
+            this.removeRoom();
         } 
         else
         {

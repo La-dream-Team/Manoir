@@ -40,6 +40,7 @@ public class GunIT {
     @Test
     public void testUse2() { //On tente d'utiliser l'arme sur personne
         testSubject1.addObject(AK47);
+        testSubject1.equipObject(AK47.getName());
         testSubject1.useObject(AK47.getName(), null);
         assertEquals(AK47.getCurrentBullets(), AK47.getChargerCapacity());  
     }
@@ -47,6 +48,7 @@ public class GunIT {
     @Test
     public void testUse3() { //On tente d'utiliser l'arme sur le propietaire
         testSubject1.addObject(AK47);
+        testSubject1.equipObject(AK47.getName());
         testSubject1.useObject(AK47.getName(), testSubject1.getName());
         assertEquals(testSubject1.getCurrentHp(), 100);
         assertEquals(AK47.getCurrentBullets(), 45);  
@@ -55,6 +57,7 @@ public class GunIT {
     @Test
     public void testUse4() { //On utilise l'arme sur l'objectif et on teste si on peut la reutiliser
         testSubject2.addObject(goldGun);
+        testSubject2.equipObject(goldGun.getName());
         testSubject2.useObject(goldGun.getName(), testSubject1.getName());
         assertFalse(testSubject1.isAlive());
         assertFalse(goldGun.canUse());
@@ -62,9 +65,17 @@ public class GunIT {
         assertFalse(goldGun.getOwner().hasObject(goldGun.getName())); //On teste si le propietaire il n'a plus l'object
     }
     
+    public void testUse5() { //On utilise une arme qu'on a pas equipée
+        testSubject1.addObject(goldGun);
+        testSubject1.useObject(goldGun.getName(), testSubject2.getName());
+        assertTrue(testSubject2.isAlive());
+        assertTrue(goldGun.canUse());
+    }
+    
     @Test
-    public void test5withReload() { //On teste le cas completement fonctionel de l'arme et on la recharge
+    public void test6withReload() { //On teste le cas completement fonctionel de l'arme et on la recharge
         testSubject2.addObject(AK47);
+        testSubject2.equipObject(AK47.getName());
         testSubject2.addObject(chargerAK47);
         testSubject2.useObject(AK47.getName(), testSubject1.getName());
         assertFalse(testSubject1.isAlive());
