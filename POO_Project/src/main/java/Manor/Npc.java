@@ -15,7 +15,7 @@ public class Npc extends Person{
         super(NewName, NewNpc.getCurrentHp(), NewNpc.getRoom(), NewNpc.getMoney());
         this.coefficient = 0f;
         this.shield = 0;
-        this.type = NpcType.CORPSE;
+        this.type = NewNpc.type;
     }
     
     public Npc(String Name,int Health, Room CurrentRoom, int Money, int Type){

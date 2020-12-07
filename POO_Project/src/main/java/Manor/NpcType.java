@@ -10,5 +10,5 @@ package Manor;
  * @author R3V0LUTI0N
  */
 public enum NpcType {
-    SOLDIER, TRADER, FINAL_BOSS, CORPSE
+    SOLDIER, TRADER, FINAL_BOSS
 }

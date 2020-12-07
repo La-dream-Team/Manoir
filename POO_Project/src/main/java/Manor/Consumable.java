@@ -1,6 +1,6 @@
 package Manor;
 
-import Manor.Person;
+//import Manor.Person;
 
 public class Consumable extends Object{
 
