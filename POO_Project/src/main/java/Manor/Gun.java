@@ -43,49 +43,56 @@ public class Gun extends Weapon{
     {
         if(this.hasOwner())
         {
-            if(this.getOwner() != Objective)
+            if((Gun)this.getOwner().getEquippedItem() == this)
             {
-                if(this.canUse())
+                if(this.getOwner() != Objective)
                 {
-                    if(this.getRemainingUses() == 1)
+                    if(this.canUse())
                     {
-                        if(Objective != null)
-                        {          
-                            while(Objective.isAlive() && this.currentBullets > 0) //Pendant que notre objectif est vivant et on a des balles dans le chargeur, on tire
-                            {
-                                Objective.hurt(this.getWeaponDamage()); 
-                                this.currentBullets -= 1;
+                        if(this.getRemainingUses() == 1)
+                        {
+                            if(Objective != null)
+                            {          
+                                while(Objective.isAlive() && this.currentBullets > 0) //Pendant que notre objectif est vivant et on a des balles dans le chargeur, on tire
+                                {
+                                    Objective.hurt(this.getWeaponDamage()); 
+                                    this.currentBullets -= 1;
+                                }
+                                this.setRemainingUses();
+                                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                                this.getOwner().removeObject(this.getId());
                             }
-                            this.setRemainingUses();
-                            System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                            this.getOwner().removeObject(this.getId());
-                        }
+                            else
+                            {
+                                System.out.println("YOU DONT HAVE A TARGET TO SHOOT, AT LEAST ... IS THERE A PHANTOM IN THE ROOM?");
+                            }
+                        }   
                         else
                         {
-                            System.out.println("YOU DONT HAVE A TARGET TO SHOOT, AT LEAST ... IS THERE A PHANTOM IN THE ROOM?");
-                        }
-                    }   
-                    else
-                    {
-                        if(Objective != null)
-                        {          
-                            while(Objective.isAlive() && this.currentBullets > 0) //Pendant que notre objectif est vivant et on a des balles dans le chargeur, on tire
-                            {
-                                Objective.hurt(this.getWeaponDamage()); 
-                                this.currentBullets -= 1;
+                            if(Objective != null)
+                            {          
+                                while(Objective.isAlive() && this.currentBullets > 0) //Pendant que notre objectif est vivant et on a des balles dans le chargeur, on tire
+                                {
+                                    Objective.hurt(this.getWeaponDamage()); 
+                                    this.currentBullets -= 1;
+                                }
+                                this.setRemainingUses();
                             }
-                            this.setRemainingUses();
-                        }
-                        else
-                        {
-                            System.out.println("YOU DONT HAVE A TARGET TO SHOOT, AT LEAST ... IS THERE A PHANTOM IN THE ROOM?");
+                            else
+                            {
+                                System.out.println("YOU DONT HAVE A TARGET TO SHOOT, AT LEAST ... IS THERE A PHANTOM IN THE ROOM?");
+                            }
                         }
                     }
+                }
+                else
+                {
+                    System.out.println("IM SORRY BUT YOU CAN'T KILL YOURSELF WITH A WEAPON, BUT YOU CAN TRY WITH OTHER OBJECTS ...");
                 }
             }
             else
             {
-                System.out.println("IM SORRY BUT YOU CAN'T KILL YOURSELF WITH A WEAPON, BUT YOU CAN TRY WITH OTHER OBJECTS ...");
+                System.out.println("YOU HAVE TO HAVE EQUIPPED THE WEAPON YOU WANT TO USE BEFORE USING IT");
             }
         }
     }

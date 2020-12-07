@@ -190,4 +190,18 @@ public class Room{
             System.out.println("there is no trader in this room");
         }
     }
+    
+    public Object stringToObject(String name)
+    {
+        Object ret = null;
+        for(Object object : this.objects)
+        {
+            if(object.getName().equals(name))
+            {
+                ret = object;
+                break;
+            }
+        }
+        return ret;
+    }
 }

@@ -5,10 +5,6 @@ import java.util.Scanner;
 
 public class Trader extends Npc{
 
-    public Trader(Person NewCorpse){
-        super(NewCorpse);
-    }
-    
     public Trader(String Name,int Health, Room CurrentRoom, int Money, int Type){
         super(Name, Health, CurrentRoom, Money, 2);   
     }
