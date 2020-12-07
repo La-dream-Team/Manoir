@@ -202,7 +202,21 @@ public abstract class Person{
         }
         return -1;
     }
-
+    
+    public int findIndex(String name)
+    {
+        int index = -1;
+        for(int i = 0; i < this.bag.size(); i++)
+        {
+            if(this.bag.get(i).getName() == name)
+            {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+    
     public boolean isAlive()
     {
         if(this.current_hp > 0)
@@ -281,18 +295,17 @@ public abstract class Person{
         {
             if(this.hasObject(Item))
             {
-                int ItemId = this.findObject(Item);
+                int ItemIndex = this.findIndex(Item);
                 if(Objective == null || Objective.equals(""))
                 {
-                    this.bag.get(ItemId).use(null);
+                    this.bag.get(ItemIndex).use(null);
                 }
                 else
                 {
                     if(this.currentRoom.isOnPersons(Objective))
                     {   
                         Person Target = this.currentRoom.getPerson(Objective);
-                        this.bag.get(ItemId).use(Target);
-                        
+                        this.bag.get(ItemIndex).use(Target);
                     }
                     else
                     {
