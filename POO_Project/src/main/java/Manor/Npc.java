@@ -10,15 +10,9 @@ public class Npc extends Person{
     private NpcType type; //1-soldier, 2-Trader, 3- FinalBoss, 4- corpse
     
     //Constructors
-    public Npc(Room CurrentRoom){
-        super(CurrentRoom); 
-        this.coefficient = 0f;
-        this.shield = 0;
-        this.type = NpcType.CORPSE;
-    }
-    
-    public Npc(Person NewCorpse){
-        super(NewCorpse);
+
+    public Npc(Npc NewNpc, String NewName){ //On cree un Npc par copie sans inventaire
+        super(NewName, NewNpc.getCurrentHp(), NewNpc.getRoom(), NewNpc.getMoney());
         this.coefficient = 0f;
         this.shield = 0;
         this.type = NpcType.CORPSE;

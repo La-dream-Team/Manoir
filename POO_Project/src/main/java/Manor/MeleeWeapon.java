@@ -21,41 +21,48 @@ public class MeleeWeapon extends Weapon{
     {
         if(this.hasOwner())
         {
-            if(this.getOwner() != Objective)
+            if((MeleeWeapon)this.getOwner().getEquippedItem() == this)
             {
-                if(this.canUse())
+                if(this.getOwner() != Objective)
                 {
-                    if(this.getRemainingUses() == 1)
+                    if(this.canUse())
                     {
-                        if(Objective == null)
+                        if(this.getRemainingUses() == 1)
                         {
-                            System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
+                            if(Objective == null)
+                            {
+                                System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
+                            }
+                            else if(Objective.isAlive())
+                            {
+                                Objective.hurt(this.getWeaponDamage());
+                                this.setRemainingUses();
+                                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                                this.getOwner().removeObject(this.getId());
+                            }
                         }
-                        else if(Objective.isAlive())
+                        else
                         {
-                            Objective.hurt(this.getWeaponDamage());
-                            this.setRemainingUses();
-                            System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                            this.getOwner().removeObject(this.getId());
+                            if(Objective == null)
+                            {
+                                System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
+                            }
+                            else if(Objective.isAlive())
+                            {
+                                Objective.hurt(this.getWeaponDamage());
+                                this.setRemainingUses();
+                            }
                         }
                     }
-                    else
-                    {
-                        if(Objective == null)
-                        {
-                            System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
-                        }
-                        else if(Objective.isAlive())
-                        {
-                            Objective.hurt(this.getWeaponDamage());
-                            this.setRemainingUses();
-                        }
-                    }
+                }
+                else
+                {
+                    System.out.println("IM SORRY BUT YOU CAN'T KILL YOURSELF WITH A WEAPON, BUT YOU CAN TRY WITH OTHER OBJECTS ...");
                 }
             }
             else
             {
-                System.out.println("IM SORRY BUT YOU CAN'T KILL YOURSELF WITH A WEAPON, BUT YOU CAN TRY WITH OTHER OBJECTS ...");
+                System.out.println("YOU HAVE TO HAVE EQUIPPED THE WEAPON YOU WANT TO USE BEFORE USING IT");
             }
         }
     }

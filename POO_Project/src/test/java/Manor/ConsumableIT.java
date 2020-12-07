@@ -25,7 +25,6 @@ public class ConsumableIT {
         room = new Room("couloir");
         testSubject1 = new Npc("FREDY", 100, room, 35, 1);
         testSubject2 = new Npc("REMY", 20, room, 47, 2);
-        testSubject3 = new Npc(room);
     }
     
     @After
@@ -80,24 +79,6 @@ public class ConsumableIT {
         assertFalse(healingPotion.canUse()); //On teste si on ne peut pas le reutiliser
         assertFalse(healingPotion.getOwner().hasObject(healingPotion.getName())); //On teste si le propietaire il n'a plus l'object
         assertEquals(testSubject2.getCurrentHp(), 40); //On verifie le changement de vie de l'objectif 
-    }
-        
-    @Test 
-    public void testUse6() { //Cas pour faire des degats a une personne morte
-        testSubject1.addObject(hurtingPotion);
-        assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        hurtingPotion.use(testSubject3);
-        assertTrue(hurtingPotion.canUse()); //On teste si on peut le reutiliser
-        assertEquals(testSubject3.getCurrentHp(), 0); //On verifie le changement de vie de l'objectif
-    }
-
-    @Test 
-    public void testUse7() { //Cas pour donner de la vie a une personne morte
-        testSubject1.addObject(healingPotion);
-        assertTrue(healingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        healingPotion.use(testSubject3);
-        assertTrue(healingPotion.canUse()); //On teste si on peut le reutiliser
-        assertEquals(testSubject3.getCurrentHp(), 0); //On verifie le changement de vie de l'objectif
     }
     
     @Test 
