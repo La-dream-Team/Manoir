@@ -111,6 +111,9 @@ public class Game{
             System.out.println("   - GO <name_Room> : to go to the given room.");
             System.out.println("   - HELP <order> : to show order's uses.");
             System.out.println("   - LOOK <object> : to discribe different objects.");
+            System.out.println("   - TAKE <object> : to take objects on the current room.");
+            System.out.println("   - USE <object> <special> : to use an object on your inventory.");
+            System.out.println("   - EQUIPE <object> : to equipe an object on your inventory.");
         }
         else{
             switch (com){
@@ -124,8 +127,19 @@ public class Game{
                     break;
                 case "LOOK":
                     System.out.println("You need to use LOOK with one argument.");
-                    System.out.println("give inventory, room or trader.");
+                    System.out.println("Give inventory, room or trader.");
                     System.out.println("If you didn't give argument, the order look the current room.");
+                    break;
+                case "TAKE":
+                    System.out.println("You need to use TAKE with one argument.");
+                    System.out.println("You can only take an object on your current room.");
+                    break;
+                case "USE":
+                    System.out.println("You can give 2 or 1 arguments.");
+                    break;
+                case "EQUIPE":
+                    System.out.println("You need to use EQUIPE with one argument.");
+                    System.out.println("You can only equipe an object on your invetory.");
                     break;
                 default : 
                     ret = 0;
