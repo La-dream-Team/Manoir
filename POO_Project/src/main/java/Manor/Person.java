@@ -1,9 +1,6 @@
 
 package Manor;
 
-import Objects.Weapon;
-import Objects.Object;
-import Doors.Door;
 import java.util.ArrayList;
 
 public abstract class Person{

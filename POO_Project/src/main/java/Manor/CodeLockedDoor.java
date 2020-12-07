@@ -1,5 +1,5 @@
 
-package Doors;
+package Manor;
 
 import Manor.Room;
 

@@ -1,5 +1,5 @@
 
-package Objects;
+package Manor;
 
 import Manor.Person;
 

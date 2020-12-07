@@ -5,7 +5,6 @@
  */
 package Manor;
 
-import Objects.Consumable;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -2,7 +2,6 @@
 package Manor;
 
 
-import Doors.Door;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

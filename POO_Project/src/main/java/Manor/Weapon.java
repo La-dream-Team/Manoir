@@ -1,5 +1,5 @@
 
-package Objects;
+package Manor;
 
 public abstract class Weapon extends Object{
     

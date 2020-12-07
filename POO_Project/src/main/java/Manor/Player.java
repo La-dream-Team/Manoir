@@ -1,8 +1,6 @@
 
 package Manor;
 
-import Objects.Object;
-
 public class Player extends Person {
     
     public Player(String Name,int Health, Room CurrentRoom)

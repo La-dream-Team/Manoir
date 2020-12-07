@@ -1,5 +1,5 @@
 
-package Doors;
+package Manor;
 
 public interface Lockable {
     public void lock();

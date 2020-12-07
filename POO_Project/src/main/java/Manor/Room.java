@@ -1,8 +1,6 @@
 
 package Manor;
 
-import Objects.Object;
-import Doors.Door;
 import java.util.ArrayList;
 
 public class Room{

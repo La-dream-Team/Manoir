@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Doors;
+package Manor;
 
-import Objects.Key;
+import Manor.Key;
 import Manor.Room;
 
 /**

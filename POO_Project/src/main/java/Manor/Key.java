@@ -1,6 +1,5 @@
-package Objects;
+package Manor;
 
-import Doors.KeyLockedDoor;
 import Manor.Person;
 
 public class Key extends Object{
