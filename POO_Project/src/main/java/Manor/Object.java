@@ -56,12 +56,9 @@ public abstract class Object{
         this.remainingUses -= 1;
     }
     
-    public void printDescription()
+    public String getDescription()
     {
-        if( this.description != null)
-        {
-            System.out.println(this.description);
-        }
+        return this.description; 
     }
     
     public boolean hasOwner()

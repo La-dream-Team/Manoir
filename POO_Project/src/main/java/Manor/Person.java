@@ -337,7 +337,7 @@ public abstract class Person{
     public void printInventory(){
         for (int i = 0; i < this.bag.size(); i++) 
         {
-            System.out.println(i + "-" + this.bag.get(i).getName());
+            System.out.println(i + "-" + this.bag.get(i).getName() + "-" + this.bag.get(i).getDescription());
         }       
     }
 }
