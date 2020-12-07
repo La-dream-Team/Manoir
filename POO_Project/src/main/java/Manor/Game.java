@@ -83,7 +83,7 @@ public class Game{
                     }
                     
                     break;
-                case "EQUIPE":
+                case "EQUIP":
                     if(lenList == 2){
                         ret = this.take(com.get(1));
                     }
@@ -106,44 +106,44 @@ public class Game{
     public int help(String com){
         int ret = 1;
         if(com == null){
-            System.out.println("This is the order list :");
-            System.out.println("   - QUIT : to close the program.");
-            System.out.println("   - GO <name_Room> : to go to the given room.");
-            System.out.println("   - HELP <order> : to show order's uses.");
-            System.out.println("   - LOOK <object> : to discribe different objects.");
-            System.out.println("   - TAKE <object> : to take objects on the current room.");
-            System.out.println("   - USE <object> <special> : to use an object on your inventory.");
-            System.out.println("   - EQUIPE <object> : to equipe an object on your inventory.");
+            System.out.println("THIS IS THE COMMAND LIST :");
+            System.out.println("   - QUIT : TO CLOSE THE PROGRAM.");
+            System.out.println("   - GO <ROOM NAME> : TO GO TO THE DESIRED ROOM.");
+            System.out.println("   - HELP <COMMAND> : TO SHOW COMMANDS USAGES.");
+            System.out.println("   - LOOK <STRING PARAMETER> : TO DESCRIBE DIFFERENT OBJECTS.");
+            System.out.println("   - TAKE <OBJECT NAME> : TO TAKE AN ITEM FROM THE CURRENT ROOM.");
+            System.out.println("   - USE <OBJECT NAME> <TARGET NAME> : TO USE AN ITEM FROM YOUR INVENTORY.");
+            System.out.println("   - EQUIP <OBJECT NAME> : TO EQUIP A WEAPON FROM YOUR INVENTORY.");
         }
         else{
             switch (com){
                 case "QUIT":
-                    System.out.println("Just use QUIT with zero argument.");
-                    System.out.println("Warning if you quit you will lose your progress !");
+                    System.out.println("JUST USE QUIT WITH ZERO ARGUMENTS.");
+                    System.out.println("WARNING, IF YOU QUIT YOU WILL LOSE ALL YOUR PROGRESS !");
                     break;
                 case "GO":
-                    System.out.println("You need to use GO with one argument.");
-                    System.out.println("You must give next room.");
+                    System.out.println("YOU NEED TO ENTER GO + ONE ARGUMENT.");
+                    System.out.println("YOU MUST GIVE THE NEXT ROOM NAME.");
                     break;
                 case "LOOK":
-                    System.out.println("You need to use LOOK with one argument.");
-                    System.out.println("Give inventory, room or trader.");
-                    System.out.println("If you didn't give argument, the order look the current room.");
+                    System.out.println("YOU CAN ENTER LOOK + ONE ARGUMENT.");
+                    System.out.println("ACCORDING TO THE VALUE OF THE ARGUMENT, YOU WILL SHOW YOUR INVENTORY OR A TRADER'S INVENTORY OR YOU WILL LOOK AT THE DESCRIPTION OF A ROOM OR AN OBJECT.");
+                    //System.out.println("IF YOU DON'T ENTER ANY ARGUMENT, THE COMMAND WILL ALLOW YOU TO SEE A DESCRIPTION OF YOUR CURRENT ROOM.");
                     break;
                 case "TAKE":
-                    System.out.println("You need to use TAKE with one argument.");
-                    System.out.println("You can only take an object on your current room.");
+                    System.out.println("YOU NEED TO ENTER TAKE + ONE ARGUMENT.");
+                    System.out.println("YOU CAN ONLY TAKE ONE OBJECT FROM YOUR CURRENT ROOM'S FLOOR.");
                     break;
                 case "USE":
-                    System.out.println("You can give 2 or 1 arguments.");
+                    System.out.println("YOU CAN ENTER USE + ONE OR USE + TWO ARGUMENTS.");
                     break;
-                case "EQUIPE":
-                    System.out.println("You need to use EQUIPE with one argument.");
+                case "EQUIP":
+                    System.out.println("YOU NEED TO ENTER EQUIP + ONE ARGUMENT.");
                     System.out.println("You can only equipe an object on your invetory.");
                     break;
                 default : 
                     ret = 0;
-                    System.out.println("Unusable argument !");
+                    System.out.println("UNUSABLE ARGUMENT !");
             }
         }
         return ret; 
@@ -157,7 +157,7 @@ public class Game{
                 ret = this.player.setRoom(r);
             }
             else{
-                System.out.println("Room Faillure");
+                System.out.println("ROOM FAILLURE");
                 return ret;
             }
         }
@@ -168,21 +168,21 @@ public class Game{
         int ret = 0; 
         if(com != null){
             switch (com){
-                case "inventory" : 
+                case "INVENTORY" : 
                     this.player.printInventory();
                     ret = 1;
                     
                     break;
-                case "room":
+                case "ROOM":
                     this.player.getRoom().print();
                     
                     break;
-                case "traders":
+                case "TRADERS":
                     this.player.getRoom().printMarkets();
                     
                     break;
                 default: 
-                    System.out.println("Unusable argument !");
+                    System.out.println("UNUSABLE ARGUMENT !");
             }
         }
         return ret;

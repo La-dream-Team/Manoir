@@ -14,6 +14,9 @@ public class Corpse {
     
     
     public void print(){
-        
+        if(this.description != null || !"".equals(this.description))
+        {
+            System.out.println(this.description);
+        }
     }
 }

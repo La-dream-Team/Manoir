@@ -55,7 +55,7 @@ public class DoorWithLock extends Door implements Lockable {
     public void print()
     {
         super.print();
-        System.out.print( "; is Locked = "+this.isLocked);
+        System.out.println( "IS LOCKED = " + this.isLocked);
     }
     
     

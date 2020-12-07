@@ -59,7 +59,7 @@ public class Room{
     public boolean isOnPersons(String n){
         boolean ret = false;
         for(Person current : this.persons){
-            if(current.getName() == n ){
+            if(current.getName().equals(n) ){
                 ret = true;
                 break;
             }
@@ -70,7 +70,7 @@ public class Room{
     public Person getPerson(String n){
         Person ret = null;
         for(Person current : this.persons){
-            if(current.getName() == n){
+            if(current.getName().equals(n)){
                 ret = current;
                 break;
             }
@@ -91,7 +91,7 @@ public class Room{
             } 
         }
         else{
-            System.out.println(p.getName() + " isn't on " + this.name + "!");
+            System.out.println(p.getName() + "IS NOT ON" + this.name + "!");
         }
     }
     
@@ -116,7 +116,7 @@ public class Room{
     
     public void addObject(Object o){
         if(this.isOnObjects(o))
-            System.err.print("This object is already present in the room !");
+            System.err.print("THE OBJECT IS ALREADY PRESENT ON THIS ROOM!");
         else{
             this.objects.add(o);
         }
@@ -126,7 +126,7 @@ public class Room{
         if(this.isOnObjects(o))
             this.objects.remove(o);
         else
-            System.out.println(o.getName() + " isn't on " + this.name + "!");
+            System.out.println(o.getName() + "IS NOT ON" + this.name + "!");
     }
     
     public boolean isOnCorpse(Corpse c){
@@ -142,7 +142,7 @@ public class Room{
     
     public void addCorpse(Corpse c){
         if(this.isOnCorpse(c)){
-            System.err.print("this corpse is already present in the room !");
+            System.err.print("THE CORPSE IS ALREADY PRESENT ON THIS ROOM!");
         }
         else
             this.corpses.add(c);
@@ -175,19 +175,20 @@ public class Room{
         
         if(len != 0){
             if(len > 1){
-                System.out.println("Here are differents traders :");
+                System.out.println("HERE ARE THE DIFFERENT TRADERS:");
             }
             else{
-                System.out.println("Here is different trader :");
+                System.out.println("HERE IS THE TRADER :");
             }
             
             for(Person current : traders){
+                System.out.println("INVENTORY OF " + current.getName() + ":");
                 current.printInventory();
             }
                     
         }
         else{
-            System.out.println("there is no trader in this room");
+            System.out.println("THERE IS NOT A TRADER ON THIS ROOM");
         }
     }
     

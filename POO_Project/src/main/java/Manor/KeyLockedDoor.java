@@ -16,7 +16,7 @@ public class KeyLockedDoor extends DoorWithLock{
     // attributs 
     public KeyLockedDoor(Room r, int uses){
         super(r);
-        this.currentKey = new Key(("key number" + this.getID()), uses, "THIS KEY CAN MAYBE OPEN A LOCKED DOOR NEARBY", this);
+        this.currentKey = new Key(("KEY NUMBER : " + this.getID()), uses, "THIS KEY CAN MAYBE OPEN A LOCKED DOOR NEARBY", this);
     }
     
     public Key getCurrentKey()
@@ -26,7 +26,7 @@ public class KeyLockedDoor extends DoorWithLock{
     
     @Override
     public void unlock(){
-        System.out.print("No key found");
+        System.out.print("NO KEY FOUND");
     }
     
     public void unlock(Key k){

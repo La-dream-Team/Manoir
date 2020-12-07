@@ -86,7 +86,7 @@ public class Door implements Closeable {
     
     public void addRoom(Room r){
         if(this.rooms.size() > 1)
-            System.err.println("erreur de creation de la carte le porte apartient deja a deux salles !");
+            System.err.println("CREATION ERROR, THE DOOR IS ALREADY ON TWO DIFFERENT ROOMS !");
         else{
             this.rooms.add(r);
             if(!r.isOnDoors(this))
@@ -96,9 +96,9 @@ public class Door implements Closeable {
     
     public void print(){
         if(this.isOpen)
-            System.out.print(getClass().getName()+ " "+ this.id + " is opened ");
+            System.out.print(getClass().getName()+ " "+ this.id + "IS OPENED");
         else
-            System.out.print(getClass().getName()+ " "+ this.id + " is closed ");
+            System.out.print(getClass().getName()+ " "+ this.id + "IS CLOSED");
     }
     
     

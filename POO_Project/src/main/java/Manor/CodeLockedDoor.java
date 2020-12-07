@@ -25,7 +25,7 @@ public class CodeLockedDoor extends AutoLockedDoor {
     
     @Override
     public void unlock(){
-        System.out.println("Code Faillure !");
+        System.out.println("CODE FAILLURE !");
     }
 
     public void unlock(int pass){
@@ -33,7 +33,7 @@ public class CodeLockedDoor extends AutoLockedDoor {
             super.unlock();
         }
         else
-            System.out.println("Wrong Code !");
+            System.out.println("WRONG CODE !");
     }
     
     public int getCode()
@@ -45,6 +45,6 @@ public class CodeLockedDoor extends AutoLockedDoor {
     public void print()
     {
         super.print();
-        System.out.print("; code = " + this.code);
+        System.out.print("CODE = " + this.code);
     }
 }
