@@ -66,6 +66,29 @@ public class Game{
                         }
                     }
                     break;
+                case "TAKE":
+                    if(lenList == 2){
+                        ret = this.take(com.get(1), com.get(1));
+                    }
+ 
+                    break;
+                case "USE": 
+                    if(lenList == 3){
+                        ret = this.use(com.get(1), com.get(1));
+                    }
+                    else{
+                        if(lenList == 2){
+                            ret = this.use(com.get(1), null);
+                        }
+                    }
+                    
+                    break;
+                case "EQUIPE":
+                    if(lenList == 2){
+                        ret = this.take(com.get(1), com.get(1));
+                    }
+                    
+                    break;
                 default :  
                     ret = 0;
             };
@@ -75,7 +98,7 @@ public class Game{
             return 0;
     }
     
-    // il n'y a pas de sevgarde donc on renvoie simplement -1 pour dire au programme que l'utilisateur veux quiter le jeu
+    // il n'y a pas de sauvegarde donc on renvoie simplement -1 pour dire au programme que l'utilisateur veux quiter le jeu
     public int quit(){
         return -1;
     }
@@ -151,4 +174,26 @@ public class Game{
         return ret;
     }
     
+    public int take(String s1, String s2){
+        int ret = 0;
+        if(s1 != null){
+            this.Player.takeObject(s1, s2);
+        }
+        return ret;
+    }
+    
+    public int use(String s1, String s2){
+        if(s1 != null){
+            this.Player.useObject(s1, s2);
+        }
+        return 1;
+    }
+    
+    public int equipe(String obj){
+        int ret = 0;
+        if(obj != null){
+            ret = this.Player.equipObject(obj);
+        }
+        return ret;
+    }
 }
