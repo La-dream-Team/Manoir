@@ -5,6 +5,8 @@
  */
 package Manor;
 
+import Objects.Key;
+import Doors.KeyLockedDoor;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

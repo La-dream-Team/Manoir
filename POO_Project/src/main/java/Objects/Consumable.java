@@ -1,4 +1,6 @@
-package Manor;
+package Objects;
+
+import Manor.Person;
 
 public class Consumable extends Object{
 

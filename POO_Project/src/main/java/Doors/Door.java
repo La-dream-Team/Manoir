@@ -1,6 +1,7 @@
 
-package Manor;
+package Doors;
 
+import Manor.Room;
 import java.util.ArrayList;
 
 public class Door implements Closeable {

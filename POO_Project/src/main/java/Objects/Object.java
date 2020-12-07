@@ -1,5 +1,7 @@
 
-package Manor;
+package Objects;
+
+import Manor.Person;
 
 public abstract class Object{
     

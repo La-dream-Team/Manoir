@@ -5,6 +5,7 @@
  */
 package Manor;
 
+import Objects.MeleeWeapon;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

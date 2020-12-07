@@ -5,6 +5,8 @@
  */
 package Manor;
 
+import Objects.Gun;
+import Objects.Charger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

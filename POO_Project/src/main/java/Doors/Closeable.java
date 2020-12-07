@@ -1,5 +1,5 @@
 
-package Manor;
+package Doors;
 
 public interface Closeable {
     public void open();

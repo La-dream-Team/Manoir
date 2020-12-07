@@ -1,5 +1,7 @@
 
-package Manor;
+package Doors;
+
+import Manor.Room;
 
 
 public class AutoLockedDoor extends DoorWithLock{
