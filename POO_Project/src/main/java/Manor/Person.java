@@ -242,7 +242,7 @@ public abstract class Person{
         }
     }
     
-    public void equipObject(String name){
+    public int equipObject(String name){
         if(this.hasObject(name))
         {
             int item_id = this.findObject(name);
@@ -254,7 +254,10 @@ public abstract class Person{
             {
                 System.out.println("ERROR, ERROR, YOU CAN ONLY HAVE EQUIPPED WEAPONS");
             }
+            return 1;
         }
+        else 
+            return 0;
     }
 
     public void unequipObject()
