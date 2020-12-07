@@ -85,20 +85,40 @@ public abstract class Person{
         return this.currentRoom;
     }
     
-    /*public int setRoom(String Room) 
+    public int setRoom(Room r) 
     {
-        if(this.currentRoom != null)
-        {
-            this.removeRoom();
-            this.currentRoom = Room;
-            this.currentRoom.addPerson(this);
+        if(this.currentRoom == null){
+            System.err.print("This person haven't current room !");
+            // erreur on arrete le jeu 
+            return -1; 
         }
-        else
-        {
-            this.currentRoom = Room;
-            this.currentRoom.addPerson(this);
+        else{
+            Door dcurrent = this.currentRoom.isNextRoom(r);
+            // si les deux pièces sont proches
+            if(dcurrent != null){
+                // le joueur ne peux pas passer à travers les portes 
+                if(dcurrent.getIsOpen()){
+                    // la porte est ouverte donc le joueur peux passer dans l'autre salle
+                    this.removeRoom();
+                    this.currentRoom = r;
+                    r.addPerson(this);
+                    
+                    // un changement a été fait dans le jeu 
+                    return 1;
+                }
+                else{
+                    System.out.println("The " + dcurrent.getClass().getSimpleName() + " isn't opened !");
+                    // le jeu n'a pas été mis a jour 
+                    return 0;
+                }
+            }
+            else{
+                System.out.println("The target door's to far !");
+                // le jeu n'a pas été mis a jour 
+                return 0;
+            }
         }
-    }*/
+    }
     
     public void removeRoom() 
     {

@@ -25,6 +25,10 @@ public class Room{
     }
 
     // methodes
+    public String getName(){
+        return this.name;
+    }
+    
     public boolean isOnDoors(Door d){
         boolean ret = false;
         for(Door current : this.doors){
@@ -146,5 +150,44 @@ public class Room{
     
     public void print(){
         
+    }
+    
+    public Door isNextRoom(Room r){
+        Door ret = null;
+        for(Door currentd : this.doors){
+            if(currentd.isContact(r)){
+                ret = currentd;
+                break;
+            }
+        }
+        return ret;
+    }
+    
+    public void printMarkets(){
+        ArrayList<Person> traders = new ArrayList<>();
+        for(Person current : this.persons){
+            if(current instanceof Trader){
+                traders.add(current);
+            }
+        }
+        
+        int len = traders.size();
+        
+        if(len != 0){
+            if(len > 1){
+                System.out.println("Here are differents traders :");
+            }
+            else{
+                System.out.println("Here is different trader :");
+            }
+            
+            for(Person current : traders){
+                current.printInventory();
+            }
+                    
+        }
+        else{
+            System.out.println("there is no trader in this room");
+        }
     }
 }

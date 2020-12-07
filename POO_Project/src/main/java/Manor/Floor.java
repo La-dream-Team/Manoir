@@ -6,6 +6,10 @@ import java.util.ArrayList;
 public class Floor{
 
     // Attributs
-    private ArrayList<Room> pieces = new ArrayList<>();
+    private ArrayList<Room> rooms = new ArrayList<>();
 
+    
+    public ArrayList<Room> getRooms(){
+        return this.rooms;
+    }
 }

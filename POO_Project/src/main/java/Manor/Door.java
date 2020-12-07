@@ -113,4 +113,14 @@ public class Door implements Closeable {
         }
         return ret;
     }
+    
+    
+    public boolean isContact(Room r){
+        if(this.getconnected() != null ){
+            Door d2 = this.getconnected();
+            return (this.isOnRooms(r) || d2.isOnRooms(r));
+        }
+        else 
+            return this.isOnRooms(r);
+    }
 }
