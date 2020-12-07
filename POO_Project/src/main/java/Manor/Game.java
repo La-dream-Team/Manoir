@@ -1,13 +1,74 @@
 
 package Manor;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Game{
     private ArrayList<Floor> manoir = new ArrayList<>();
     private Player player;
+    private Npc finalboss;
+    
+    
+    
+    public Game(){
+        this.manoir = initMap();
+        this.player = scanplayer();
+        this.finalboss = intBoss();
+    }
 
+    
+    public String[] givecommand(){
+        Scanner scan = new Scanner(System.in);
+        String command = scan.nextLine();
+        
+        return command.split(" ");
+    }
+    
+    
+    public void doGame(){
+        int ret = 0 ;
+        do{
+            ret = doRond();
+        }while(((this.player.isAlive()) && (this.finalboss.isAlive()) && (ret != -1)));
+        
+        if(ret == -1)
+            System.out.println("THANK YOU FOR PLAYING !");
+        else{
+            if(!(this.player.isAlive()))
+                System.out.println("SORRY YOU ARE DEAD.");
+            else
+                System.out.println("GOOD JOB YOU FINISHED THE GAME !");
+            
+            System.out.println("DO YOU WANT PLAY AGAIN ? (YES/NO)");
+            boolean play = false;
+            do{
+                String[] cmd = this.givecommand();
+                if(cmd[0].equals("YES")){
+                    play = true;
+                    break;
+                }
+                else{
+                    if(cmd[0].equals("NO"))
+                        break;
+                    else
+                        System.out.println("PLEASE ENTER YES OR NO.");
+                }
+            }while(true);
+            
+            
+        }
+       
+    }
+    
+    public int doRond(){
+        int ret = 0;
+        String[] cmd = this.givecommand();
+        ret = this.exec(cmd);
+        return ret;
+    }
 
+    
     
     public Room findRoom(String strr){
         Room ret = null;
@@ -27,14 +88,14 @@ public class Game{
     // la liste contient tous les mots que l'utilisateur entre
     // la methode retourn -1 si le jeu s'arrete 
     // 0 si aucune action est faite et 1 si une action a été faite
-    public int exec(ArrayList<String> com){
-        int lenList = com.size();
+    public int exec(String[] com){
+        int lenList = com.length;
         if(lenList>0){
             int ret = -15;
-            switch (com.get(0)){
+            switch (com[0]){
                 case "GO" :
                     if(lenList == 2){
-                        ret = this.go(com.get(1));
+                        ret = this.go(com[1]);
                     }
                     break;
                 case "QUIT" :
@@ -48,7 +109,7 @@ public class Game{
                 
                 case "HELP" : 
                     if(lenList == 2){
-                        ret = this.help(com.get(1));
+                        ret = this.help(com[1]);
                     }
                     else{
                         if(lenList == 1){
@@ -58,7 +119,7 @@ public class Game{
                     break;
                 case "LOOK":
                     if(lenList == 2){
-                        ret = this.look(com.get(1));
+                        ret = this.look(com[1]);
                     }
                     else{
                         if(lenList == 1){
@@ -68,24 +129,24 @@ public class Game{
                     break;
                 case "TAKE":
                     if(lenList == 2){
-                        ret = this.take(com.get(1));
+                        ret = this.take(com[1]);
                     }
  
                     break;
                 case "USE": 
                     if(lenList == 3){
-                        ret = this.use(com.get(1), com.get(1));
+                        ret = this.use(com[1], com[2]);
                     }
                     else{
                         if(lenList == 2){
-                            ret = this.use(com.get(1), null);
+                            ret = this.use(com[1], null);
                         }
                     }
                     
                     break;
                 case "EQUIP":
                     if(lenList == 2){
-                        ret = this.take(com.get(1));
+                        ret = this.take(com[1]);
                     }
                     
                     break;
