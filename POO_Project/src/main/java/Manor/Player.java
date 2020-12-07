@@ -8,17 +8,17 @@ public class Player extends Person {
         super(Name, Health, CurrentRoom, 0);
     }
     
-    public void takeMoney(Person corpse)
+    /*public void takeMoney(Person corpse)
     {
         if(corpse.getMoney() != 0)
         {
             this.addMoney(corpse.getMoney());
             corpse.substractMoney(corpse.getMoney());
         }
-    }
+    }*/
     
-    public void takeObject(String ItemName){
-       
+    public void takeObject(String ItemName)
+    { 
         if(this.bag.size() < this.getDefaultBagSize())
         {
             Object NewItem = this.getRoom().stringToObject(ItemName);
