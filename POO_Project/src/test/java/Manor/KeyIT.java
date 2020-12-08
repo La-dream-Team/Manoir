@@ -21,7 +21,7 @@ public class KeyIT {
          room = new Room("couloir");
          door = new KeyLockedDoor(room, 5);
          key = door.getCurrentKey();
-         testSubject1 = new Npc("FREDY", 100, room, 35, 1);
+         testSubject1 = new Npc("FREDY", 100, room, 35, 0f, 1);
     }
     
     @After

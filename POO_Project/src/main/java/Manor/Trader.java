@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Trader extends Npc{
 
-    public Trader(String Name,int Health, Room CurrentRoom, int Money, int Type){
-        super(Name, Health, CurrentRoom, Money, 2);   
+    public Trader(String Name,int Health, Room CurrentRoom, int Money, float Difficulty, int Type){
+        super(Name, Health, CurrentRoom, Money, Difficulty, 2);   
     }
     
     //Fonction pour echanger des objects par argent   

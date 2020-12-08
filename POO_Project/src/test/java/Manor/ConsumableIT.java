@@ -23,8 +23,8 @@ public class ConsumableIT {
     @Before
     public void setUp() {
         room = new Room("couloir");
-        testSubject1 = new Npc("FREDY", 100, room, 35, 1);
-        testSubject2 = new Npc("REMY", 20, room, 47, 2);
+        testSubject1 = new Npc("FREDY", 100, room, 35, 0f, 1);
+        testSubject2 = new Npc("REMY", 20, room, 47, 0f, 2);
     }
     
     @After

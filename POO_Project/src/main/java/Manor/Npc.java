@@ -20,10 +20,10 @@ public class Npc extends Person{
         this.type = NewNpc.type;
     }
     
-    public Npc(String Name,int Health, Room CurrentRoom, int Money, int Type){
+    public Npc(String Name,int Health, Room CurrentRoom, int Money, float Difficulty, int Type){
         super(Name, Health, CurrentRoom, Money);
         this.aggressive = false;
-        this.coefficient = 0f;
+        this.coefficient = Difficulty;
         this.shield = 0;
         /*if(Type > 0 && Type < 5){}*/
         switch(Type){
@@ -42,12 +42,6 @@ public class Npc extends Person{
         
     }
     
-    //Method
-    /*public boolean getPassiveOrAgressive()
-    {
-        return this.aggressive;
-    }*/
-    
     public void switchMode()
     {
         if(this.aggressive)
@@ -63,7 +57,11 @@ public class Npc extends Person{
     
     @Override
     public void hurt(int receivedDamage)
-    {
+    {   
+        if(this.coefficient > 0f)
+        {
+            receivedDamage = receivedDamage * (int)this.coefficient;
+        }
         if(this.shield == 0)
         {
             if(this.getCurrentHp() - receivedDamage <= 0)
