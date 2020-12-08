@@ -102,14 +102,6 @@ public class Room{
         }
     }
     
-    public void addDoors(ArrayList<Door> ds){
-        for(Door current : ds){
-            if(!(this.isOnDoors(current))){
-                this.doors.add(current);
-            }
-        }
-    }
-    
     public boolean isOnObjects(Object o){
         boolean ret = false;
         for(Object current : this.objects){
