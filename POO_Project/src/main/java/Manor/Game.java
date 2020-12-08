@@ -303,7 +303,7 @@ public class Game{
                     
                     break;
                 case "ROOM":
-                    this.player.getRoom().print();
+                    this.player.getRoom().print(this.player);
                     
                     break;
                 case "TRADERS":

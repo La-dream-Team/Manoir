@@ -262,7 +262,7 @@ public abstract class Person{
     public int equipObject(String name){
         if(this.hasObject(name))
         {
-            int item_id = this.findObject(name);
+            int item_id = this.findIndex(name);
             if(this.bag.get(item_id) instanceof Weapon)
             {
                 this.equippedItem = (Weapon)this.bag.get(item_id);

@@ -124,4 +124,19 @@ public class Door implements Closeable {
         else 
             return this.isOnRooms(r);
     }
+    
+    public String getNameOtherRoom(Room r){
+        String ret = null;
+        if(this.connected == null){
+            for(Room currentr : this.rooms){
+                if(currentr != r)
+                    ret = currentr.getName();
+            }
+        }
+        else{
+            // revoie le nom de la prochaine salle
+            ret = this.connected.rooms.get(0).getName();
+        }
+        return ret;
+    }
 }

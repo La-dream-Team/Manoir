@@ -155,8 +155,43 @@ public class Room{
             this.corpses.add(c);
     }
     
-    public void print(){
+    public void print(Player p){
+        System.out.println("ON THE " + this.name + " WE HAVE");
+        if(this.objects.size() != 0){
+            System.out.println("HERE ARE THE DIFERENTS OBJECTS :");
+            for(Object currento : this.objects){
+                System.out.println("   -" + currento.getName() + " : " + currento.getDescription());
+            }
+        }
+        else
+            System.out.println("NO OBJECTS ON THIS ROOM !");
         
+        if(this.corpses.size() != 0){
+            System.out.println("HERE ARE THE DIFERENTS CORPS :");
+            for(Corpse currentc : this.corpses){
+                System.out.println("   -" + currentc.getName() + " : " + currentc.getDesc());
+            }
+        }
+            
+        if(this.persons.size() != 1){
+            System.out.println("HERE ARE THE DIFERENTS PERSONS :");
+            for(Person currentp : this.persons){
+                if(currentp != p)
+                    System.out.println("   -" + currentp.getName());
+            }
+        }
+        else
+            System.out.println("THERE IS NOBODY IN THE ROOM !");
+        
+        if(this.doors.size() != 0){
+            System.out.println("HERE ARE THE DIFERENTS NEXT ROOMS :");
+            for(Door currentd : this.doors){
+               System.out.println("   -" + currentd.getNameOtherRoom(this));
+            }
+        }
+        else{
+            System.err.println("THE PLAYER IS BLOCKED !");
+        }
     }
     
     public Door isNextRoom(Room r){
@@ -223,4 +258,6 @@ public class Room{
             }
         }
     }
+    
+   
 }

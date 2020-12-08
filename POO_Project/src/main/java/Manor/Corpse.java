@@ -13,10 +13,11 @@ public class Corpse {
     }
     
     
-    public void print(){
-        if(this.description != null || !"".equals(this.description))
-        {
-            System.out.println(this.description);
-        }
+    public String getName(){
+        return this.name;
+    }
+    
+    public String getDesc(){
+        return this.description;
     }
 }
