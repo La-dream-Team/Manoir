@@ -13,7 +13,7 @@ public abstract class Person{
     private Weapon equippedItem;
     private Room currentRoom;
     private int money;
-    private final int DEFAULT_BAGSIZE = 6;
+    private static final int DEFAULT_BAGSIZE = 6;
    
     public Person(String name, int health, Room currentRoom, int money) //Pour creer un personnage, par defaut il n'aura pas d'objet equipe
     {
