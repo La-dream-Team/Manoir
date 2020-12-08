@@ -15,14 +15,14 @@ public abstract class Person{
     private int money;
     private final int DEFAULT_BAGSIZE = 6;
    
-    public Person(String Name, int Health, Room CurrentRoom, int Money) //Pour creer un personnage, par defaut il n'aura pas d'objet equipe
+    public Person(String name, int health, Room currentRoom, int money) //Pour creer un personnage, par defaut il n'aura pas d'objet equipe
     {
-        this.name = Name;
-        this.current_hp = Health;
-        this.total_hp = Health;
+        this.name = name;
+        this.current_hp = health;
+        this.total_hp = health;
         this.equippedItem = null;
-        this.currentRoom = CurrentRoom;
-        this.money = Money;
+        this.currentRoom = currentRoom;
+        this.money = money;
     }
 
     //Methods

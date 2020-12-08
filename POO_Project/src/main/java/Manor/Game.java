@@ -8,13 +8,16 @@ public class Game{
     private ArrayList<Floor> manoir = new ArrayList<>();
     private Player player;
     private Npc finalboss;
+    private int difficulty;
     
     
     
     public Game(){
-        this.manoir = initMap();
-        this.player = scanplayer();
-        this.finalboss = intBoss();
+        this.manoir = Map.initMap();
+        this.player = this.scanPlayer();
+        this.finalboss = this.initBoss();
+        
+        this.doGame();
     }
 
     
@@ -25,6 +28,47 @@ public class Game{
         return command.split(" ");
     }
     
+    public Player scanPlayer(){
+        Player ret = null;
+        Scanner scan = new Scanner(System.in);
+        
+        System.out.println("GIVE YOUR PLAYER NAME PLEASE !");
+        String name = scan.nextLine();
+        
+        do{
+        System.out.println("ENTER THE DIFFICULTY 1, 2 or 3 !");
+        this.difficulty = scan.nextInt();
+        }while(((this.difficulty < 1) || (this.difficulty > 3)));
+        
+        Floor starterFloor = this.getFloor("BASEMENT");
+        Room starterRoom = starterFloor.getRoom("PRISON0");
+        
+        ret = new Player(name, (150 - (30 * this.difficulty)), starterRoom);
+        starterRoom.addPerson(ret);
+        
+        return ret;
+    }
+    
+    public Npc initBoss(){
+        Floor starterFloor = this.getFloor("BASEMENT");
+        Room boosRoom = starterFloor.getRoom("WC1");
+        
+        Npc ret = new Npc("BADBOY", (150 - (30 * this.difficulty)), boosRoom, 150, 3);
+        boosRoom.addPerson(ret);
+        
+        return ret;
+    }
+    
+    public Floor getFloor(String f){
+        Floor ret = null;
+        for(Floor current : this.manoir){
+            if(f.equals(current.getName())){
+                ret = current;
+                break;
+            }
+        }   
+        return ret;
+    }
     
     public void doGame(){
         int ret = 0 ;
@@ -270,5 +314,9 @@ public class Game{
             ret = this.player.equipObject(obj);
         }
         return ret;
+    }
+    
+    public static void main(String[] args){
+        Game currentGame = new Game();
     }
 }

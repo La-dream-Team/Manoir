@@ -81,6 +81,9 @@ public class Room{
     
     public void addPerson(Person p){
         this.persons.add(p);
+        if(p.getRoom() != this){
+            p.setRoom(this);
+        }
     }
     
     public void removePerson(Person p){

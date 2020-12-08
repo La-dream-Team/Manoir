@@ -14,6 +14,10 @@ public class Floor{
         this.name = name;
     }
     
+    public String getName(){
+        return this.name;
+    }
+    
     public boolean isOnRooms(Room r ){
         boolean ret = false;
         for(Room current : this.rooms){
@@ -29,6 +33,17 @@ public class Floor{
         if(!this.isOnRooms(r)){
             this.rooms.add(r);
         }
+    }
+    
+    public Room getRoom(String r){
+        Room ret = null;
+        for(Room current : this.rooms){
+            if(r.equals(current.getName())){
+                ret = current;
+                break;
+            }
+        }   
+        return ret;
     }
     
     
