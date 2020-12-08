@@ -78,6 +78,10 @@ public class Room{
         return ret;
     }
     
+    public ArrayList<Person> getPersons(){
+        return this.persons;
+    }
+    
     
     public void addPerson(Person p){
         this.persons.add(p);

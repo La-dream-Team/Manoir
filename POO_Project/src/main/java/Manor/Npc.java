@@ -31,7 +31,10 @@ public class Npc extends Person{
                 break;
             case 2: this.type = NpcType.TRADER;
                 break;
-            case 3: this.type = NpcType.FINAL_BOSS;
+            case 3: 
+                this.type = NpcType.FINAL_BOSS;
+                this.shield = Health;
+                this.aggressive = true;
                 break;
             default: this.type = NpcType.SOLDIER;
                 break;
@@ -89,4 +92,11 @@ public class Npc extends Person{
             }
         }
     } 
+    
+    public void attak(Player p){
+        if(this.aggressive){
+            System.out.println(this.getName() + " ATTACK YOU !");
+            super.useObject(this.getEquippedItem().getName(), p.getName());
+        }
+    }
 }

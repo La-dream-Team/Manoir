@@ -9,6 +9,7 @@ public class Game{
     private Player player;
     private Npc finalboss;
     private int difficulty;
+    private float coef;
     
     
     
@@ -40,6 +41,18 @@ public class Game{
         this.difficulty = scan.nextInt();
         }while(((this.difficulty < 1) || (this.difficulty > 3)));
         
+        switch (this.difficulty){
+            case 1:
+                this.coef = 1.f;
+                break;
+            case 2:
+                this.coef = 1.2f;
+                break;
+            case 3:
+                this.coef = 1.5f;
+                break;
+        }
+        
         Floor starterFloor = this.getFloor("BASEMENT");
         Room starterRoom = starterFloor.getRoom("PRISON0");
         
@@ -50,10 +63,10 @@ public class Game{
     }
     
     public Npc initBoss(){
-        Floor starterFloor = this.getFloor("BASEMENT");
+        Floor starterFloor = this.getFloor("FIRST-FLOOR");
         Room boosRoom = starterFloor.getRoom("WC1");
         
-        Npc ret = new Npc("BADBOY", (150 - (30 * this.difficulty)), boosRoom, 150, 3);
+        Npc ret = new Npc("BADBOY", (150 - (30 * this.difficulty)), boosRoom,150,this.coef, 3);
         boosRoom.addPerson(ret);
         
         return ret;
@@ -73,7 +86,10 @@ public class Game{
     public void doGame(){
         int ret = 0 ;
         do{
+            System.out.println("ENTER YOU ORDER :");
             ret = doRond();
+            
+            this.playnpc();
         }while(((this.player.isAlive()) && (this.finalboss.isAlive()) && (ret != -1)));
         
         if(ret == -1)
@@ -103,6 +119,15 @@ public class Game{
             
         }
        
+    }
+    
+    public void playnpc(){
+        ArrayList<Person> personInRoom =this.player.getRoom().getPersons();
+        for(Person currentp : personInRoom){
+            if(currentp != this.player){
+                ((Npc) currentp).attak(this.player);
+            }
+        }
     }
     
     public int doRond(){
@@ -232,8 +257,7 @@ public class Game{
                     break;
                 case "LOOK":
                     System.out.println("YOU CAN ENTER LOOK + ONE ARGUMENT.");
-                    System.out.println("ACCORDING TO THE VALUE OF THE ARGUMENT, YOU WILL SHOW YOUR INVENTORY OR A TRADER'S INVENTORY OR YOU WILL LOOK AT THE DESCRIPTION OF A ROOM OR AN OBJECT.");
-                    //System.out.println("IF YOU DON'T ENTER ANY ARGUMENT, THE COMMAND WILL ALLOW YOU TO SEE A DESCRIPTION OF YOUR CURRENT ROOM.");
+                    System.out.println("ACCORDING TO THE VALUE OF THE ARGUMENT, YOU WILL SHOW YOUR INVENTORY \nOR A TRADER'S INVENTORY OR YOU WILL LOOK AT THE DESCRIPTION OF A ROOM OR AN OBJECT.");
                     break;
                 case "TAKE":
                     System.out.println("YOU NEED TO ENTER TAKE + ONE ARGUMENT.");
@@ -290,6 +314,8 @@ public class Game{
                     System.out.println("UNUSABLE ARGUMENT !");
             }
         }
+        else
+            System.out.println("PLEASE ENTER AN ARGUMENT OR DO <HELP LOOK>!");
         return ret;
     }
     
