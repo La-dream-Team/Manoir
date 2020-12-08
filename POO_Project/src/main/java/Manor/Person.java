@@ -41,7 +41,7 @@ public abstract class Person{
         this.current_hp = newHp;
     }
     
-    public ArrayList getBag()
+    public ArrayList<Object> getBag()
     {
         return this.bag;
     }
