@@ -18,7 +18,7 @@ public class CollectableIT {
     @Before
     public void setUp(){
         room = new Room("couloir");
-        testSubject1 = new Npc("FREDY", 100, room, 35, 1);
+        testSubject1 = new Npc("FREDY", 100, room, 35, 0f, 1);
         testSubject1.addObject(readingBook);
         testSubject1.addObject(magazine);
     }

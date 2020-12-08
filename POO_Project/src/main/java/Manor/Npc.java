@@ -5,6 +5,7 @@ package Manor;
 public class Npc extends Person{
     
     // Attributes
+    private boolean aggressive; //passive -> false / aggressive -> true
     private float coefficient;
     private int shield;
     private NpcType type; //1-soldier, 2-Trader, 3- FinalBoss, 4- corpse
@@ -13,14 +14,16 @@ public class Npc extends Person{
 
     public Npc(Npc NewNpc, String NewName){ //On cree un Npc par copie sans inventaire
         super(NewName, NewNpc.getCurrentHp(), NewNpc.getRoom(), NewNpc.getMoney());
+        this.aggressive = false;
         this.coefficient = 0f;
         this.shield = 0;
         this.type = NewNpc.type;
     }
     
-    public Npc(String Name,int Health, Room CurrentRoom, int Money, int Type){
+    public Npc(String Name,int Health, Room CurrentRoom, int Money, float Difficulty, int Type){
         super(Name, Health, CurrentRoom, Money);
-        this.coefficient = 0f;
+        this.aggressive = false;
+        this.coefficient = Difficulty;
         this.shield = 0;
         /*if(Type > 0 && Type < 5){}*/
         switch(Type){
@@ -39,10 +42,26 @@ public class Npc extends Person{
         
     }
     
-    //Method
+    public void switchMode()
+    {
+        if(this.aggressive)
+        {
+            this.aggressive = false;
+        }
+    }
+    
+    public void talk(String Message)
+    {
+         System.out.println(Message);
+    }
+    
     @Override
     public void hurt(int receivedDamage)
-    {
+    {   
+        if(this.coefficient > 0f)
+        {
+            receivedDamage = receivedDamage * (int)this.coefficient;
+        }
         if(this.shield == 0)
         {
             if(this.getCurrentHp() - receivedDamage <= 0)
@@ -69,10 +88,5 @@ public class Npc extends Person{
                 this.hurt(-restOfDamage);
             }
         }
-    }
-    
-    public void talk(String Message)
-    {
-         System.out.println(Message);
-    }
+    } 
 }

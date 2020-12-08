@@ -18,9 +18,4 @@ public abstract class Weapon extends Object{
     {
         return this.weaponDamage;
     }
-    
-    public void setWeaponDamage(float DmgCoef)
-    {
-        this.weaponDamage += (int)DmgCoef;
-    }
 }

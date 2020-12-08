@@ -208,4 +208,15 @@ public class Room{
         }
         return ret;
     }
+    
+    public void switchModeForAll()
+    {
+        for(Person p : this.persons)
+        {
+            if(p instanceof Npc)
+            {
+                ((Npc) p).switchMode();
+            }
+        }
+    }
 }
