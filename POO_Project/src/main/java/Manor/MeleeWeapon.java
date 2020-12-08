@@ -38,6 +38,7 @@ public class MeleeWeapon extends Weapon{
                             else if(Objective.isAlive())
                             {
                                 Objective.hurt(this.getWeaponDamage());
+                                super.use(Objective);
                                 this.setRemainingUses();
                                 System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
                                 this.getOwner().removeObject(this.getId());
@@ -52,6 +53,7 @@ public class MeleeWeapon extends Weapon{
                             else if(Objective.isAlive())
                             {
                                 Objective.hurt(this.getWeaponDamage());
+                                super.use(Objective);
                                 this.setRemainingUses();
                             }
                         }

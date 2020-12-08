@@ -60,6 +60,7 @@ public class Gun extends Weapon{
                                     Objective.hurt(this.getWeaponDamage()); 
                                     this.currentBullets -= 1;
                                 }
+                                super.use(Objective);
                                 this.setRemainingUses();
                                 System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
                                 this.getOwner().removeObject(this.getId());
@@ -78,6 +79,7 @@ public class Gun extends Weapon{
                                     Objective.hurt(this.getWeaponDamage()); 
                                     this.currentBullets -= 1;
                                 }
+                                super.use(Objective);
                                 this.setRemainingUses();
                             }
                             else

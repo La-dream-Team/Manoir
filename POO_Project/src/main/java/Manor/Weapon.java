@@ -18,4 +18,12 @@ public abstract class Weapon extends Object{
     {
         return this.weaponDamage;
     }
+    
+    @Override
+    public void use(Person Objective){
+        if(super.getOwner() instanceof Player){
+            // si un jouteur attaque un enemie dan une salle tous les npc sont aggressifs
+            super.getOwner().getRoom().switchModeForAll();
+        }
+    }
 }

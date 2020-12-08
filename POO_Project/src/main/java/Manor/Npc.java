@@ -49,7 +49,7 @@ public class Npc extends Person{
     {
         if(this.aggressive)
         {
-            this.aggressive = false;
+            this.aggressive = true;
         }
     }
     
