@@ -6,7 +6,6 @@ public class Key extends Object{
     
     //Attribut
     KeyLockedDoor unlockableDoor;
-    Person currentOwner;
     
     //Constructor
     public Key(String KeyName, int RemainingUses, String Description, KeyLockedDoor UnlockableDoor)
