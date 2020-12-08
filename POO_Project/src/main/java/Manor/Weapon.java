@@ -19,6 +19,11 @@ public abstract class Weapon extends Object{
         return this.weaponDamage;
     }
     
+    public void setWeaponDamage(float Coefficient)
+    {
+        this.weaponDamage += (int)Coefficient;
+    }
+    
     @Override
     public void use(Person Objective){
         if(super.getOwner() instanceof Player){
