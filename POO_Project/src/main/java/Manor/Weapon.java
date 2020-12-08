@@ -21,7 +21,7 @@ public abstract class Weapon extends Object{
     
     public void setWeaponDamage(float Coefficient)
     {
-        this.weaponDamage += (int)Coefficient;
+        this.weaponDamage = (int)((float)this.weaponDamage * Coefficient);
     }
     
     @Override

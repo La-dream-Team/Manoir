@@ -91,7 +91,10 @@ public class Npc extends Person{
     
     public void attak(Player p){
         if(this.aggressive){
-            this.getEquippedItem().setWeaponDamage(this.coefficient);
+            if(this.coefficient >= 1f)
+            {
+                this.getEquippedItem().setWeaponDamage(this.coefficient);
+            }
             System.out.println(this.getName() + " ATTACK YOU !");
             super.useObject(this.getEquippedItem().getName(), p.getName());
         }
