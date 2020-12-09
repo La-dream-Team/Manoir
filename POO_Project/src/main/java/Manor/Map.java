@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 public class Map{
     
-    public static ArrayList<Floor> initMap(){
+    public static ArrayList<Floor> initMap(float coef){
         ArrayList<Floor> ret = new ArrayList<>();
-        ret.add(initBasement());
-        ret.add(initFirstFloor(ret.get(0)));
+        ret.add(initBasement(coef));
+        ret.add(initFirstFloor(ret.get(0), coef));
         
         return ret;
     }
     
-    public static Floor initBasement(){
+    public static Floor initBasement(float coef){
         Floor ret = new Floor("BASEMENT");
         
         // initialisation des salles 
@@ -26,6 +26,8 @@ public class Map{
         Door priCorri = new Door();
         prison0.addDoor(priCorri);
         corridor0.addDoor(priCorri);
+        
+        // cadravre dans la prison
         Corpse watchMan = new Corpse("WHATCHMAN","YOU KILLED THIS MAN BY STRANGULATION !");
         prison0.addCorpse(watchMan);
         
@@ -41,6 +43,14 @@ public class Map{
         coffeeRoom0.addDoor(cofCorri);
         corridor0.addDoor(cofCorri);
         
+        // npc dans la salle
+        Npc recuit = new Npc("RECRUIT0",10 ,coffeeRoom0, 10, coef, 1);
+        coffeeRoom0.addPerson(recuit);
+        //arme de la recrue
+        MeleeWeapon knife = new MeleeWeapon("KNIFE0", 25, "A BASIC KNIFE", 25);
+        recuit.addObject(knife);
+        recuit.equipObject("KNIFE0");
+        
         Room stairs0 = new Room("STAIRS0");
         ret.addRoom(stairs0);
         Door staiCorri = new Door();
@@ -50,7 +60,7 @@ public class Map{
         return ret;
     }
     
-    public static Floor initFirstFloor(Floor basement){
+    public static Floor initFirstFloor(Floor basement, float coef){
         Floor ret = new Floor("FIRST-FLOOR");
         
         // initialisation des salles 

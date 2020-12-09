@@ -130,16 +130,10 @@ public abstract class Person{
         }
     }
 
-    public void removeObject(int Id)
+    public void removeObject(Object o)
     {
-        for(Object object : this.bag)
-        {
-            if(object.getId() == Id)
-            {
-                object.setOwner(null);
-                this.bag.remove(object);
-            }
-        }
+        o.setOwner(null);
+        this.bag.remove(o);
     }
     
     public boolean hasObject(String name)//test persone possede object
@@ -161,19 +155,17 @@ public abstract class Person{
             if(object.getName().equals(name))
             {
                 this.currentRoom.addObject(object);
-                object.setOwner(null);
-                this.removeObject(object.getId());
+                this.removeObject(object);
             }
         }
     }
     
     public void dropObjects()
     {
-        for(Object object : this.bag)
+        for(Object current : this.bag)
         {
-            this.currentRoom.addObject(object);
-            object.setOwner(null);
-            this.removeObject(object.getId());
+            this.getRoom().addObject(current);
+            this.removeObject(current);
         }
     }
     
@@ -208,7 +200,7 @@ public abstract class Person{
         int index = -1;
         for(int i = 0; i < this.bag.size(); i++)
         {
-            if(this.bag.get(i).getName() == name)
+            if(this.bag.get(i).getName().equals(name))
             {
                 index = i;
                 break;
@@ -262,10 +254,10 @@ public abstract class Person{
     public int equipObject(String name){
         if(this.hasObject(name))
         {
-            int item_id = this.findIndex(name);
-            if(this.bag.get(item_id) instanceof Weapon)
+            Object currento = this.stringToObject(name);
+            if(currento instanceof Weapon)
             {
-                this.equippedItem = (Weapon)this.bag.get(item_id);
+                this.equippedItem = (Weapon)currento;
             }
             else
             {
@@ -340,5 +332,8 @@ public abstract class Person{
         {
             System.out.println(i + "-" + this.bag.get(i).getName() + "-" + this.bag.get(i).getDescription());
         }       
+        
+        if(this.equippedItem != null)
+            System.out.println("YOUR EQUIPPED WEAPON IS" + this.equippedItem.getName());
     }
 }

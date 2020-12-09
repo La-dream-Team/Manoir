@@ -66,12 +66,18 @@ public class Npc extends Person{
             if(this.getCurrentHp() - receivedDamage <= 0)
             {
                 this.setCurrentHp(0);
+                System.out.println("YOU KILLED ME !");
+                this.dropObjects();
+                Corpse corpse = new Corpse(this.getName(), "");
+                this.getRoom().addCorpse(corpse);
+                this.getRoom().removePerson(this);
             } 
             else
             {
                 int CurrentHealth = this.getCurrentHp();
                 CurrentHealth -= receivedDamage;
                 this.setCurrentHp(CurrentHealth);
+                System.out.println("YOU ATTACKED ME, I'M GONNA KILLED YOU !");
             }
         }
         else

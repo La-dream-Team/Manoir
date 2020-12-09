@@ -37,14 +37,14 @@ public class Consumable extends Object{
                                     Objective.heal(this.givenOrTakenHealth);
                                     this.setRemainingUses();
                                     System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                                    this.getOwner().removeObject(this.getId());
+                                    this.getOwner().removeObject(this);
                                 }
                                 else
                                 {
                                     Objective.hurt(-(this.givenOrTakenHealth));
                                     this.setRemainingUses();
                                     System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                                    this.getOwner().removeObject(this.getId());
+                                    this.getOwner().removeObject(this);
                                 }
                             }
                         }
@@ -67,14 +67,14 @@ public class Consumable extends Object{
                             this.getOwner().heal(this.givenOrTakenHealth);
                             this.setRemainingUses();
                             System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                            this.getOwner().removeObject(this.getId());
+                            this.getOwner().removeObject(this);
                         }
                         else
                         {
                             this.getOwner().hurt(-(this.givenOrTakenHealth));
                             this.setRemainingUses();
                             System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                            this.getOwner().removeObject(this.getId());
+                            this.getOwner().removeObject(this);
                         } 
                     }
                 }

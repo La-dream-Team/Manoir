@@ -35,7 +35,7 @@ public class Collectable extends Object{
                             System.out.println(this.content);
                             this.setRemainingUses();
                             System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                            this.getOwner().removeObject(this.getId());
+                            this.getOwner().removeObject(this);
                         }
                     }
                     else

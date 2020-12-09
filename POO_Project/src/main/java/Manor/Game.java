@@ -14,7 +14,25 @@ public class Game{
     
     
     public Game(){
-        this.manoir = Map.initMap();
+        Scanner scan = new Scanner(System.in);
+        do{
+        System.out.println("ENTER THE DIFFICULTY 1, 2 or 3 !");
+        this.difficulty = scan.nextInt();
+        }while(((this.difficulty < 1) || (this.difficulty > 3)));
+        
+        switch (this.difficulty){
+            case 1:
+                this.coef = 1.f;
+                break;
+            case 2:
+                this.coef = 1.2f;
+                break;
+            case 3:
+                this.coef = 1.5f;
+                break;
+        }
+        
+        this.manoir = Map.initMap(this.coef);
         this.player = this.scanPlayer();
         this.finalboss = this.initBoss();
         
@@ -35,29 +53,19 @@ public class Game{
         
         System.out.println("GIVE YOUR PLAYER NAME PLEASE !");
         String name = scan.nextLine();
-        
-        do{
-        System.out.println("ENTER THE DIFFICULTY 1, 2 or 3 !");
-        this.difficulty = scan.nextInt();
-        }while(((this.difficulty < 1) || (this.difficulty > 3)));
-        
-        switch (this.difficulty){
-            case 1:
-                this.coef = 1.f;
-                break;
-            case 2:
-                this.coef = 1.2f;
-                break;
-            case 3:
-                this.coef = 1.5f;
-                break;
-        }
+       
         
         Floor starterFloor = this.getFloor("BASEMENT");
         Room starterRoom = starterFloor.getRoom("PRISON0");
         
+        // creation et initialisation du joueur
         ret = new Player(name, (150 - (30 * this.difficulty)), starterRoom);
         starterRoom.addPerson(ret);
+        
+        // on lui donne un katana
+        MeleeWeapon katana = new MeleeWeapon("KATANA0", 5, "A BASIC KATANA", 25);
+        ret.addObject(katana);
+        ret.equipObject("KATANA0");
         
         return ret;
     }

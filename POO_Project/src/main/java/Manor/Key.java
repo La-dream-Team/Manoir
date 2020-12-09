@@ -31,7 +31,7 @@ public class Key extends Object{
                             this.unlockableDoor.unlock(this);
                             this.setRemainingUses();
                             System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                            this.getOwner().removeObject(this.getId());
+                            this.getOwner().removeObject(this);
                         }
                         else
                         {
