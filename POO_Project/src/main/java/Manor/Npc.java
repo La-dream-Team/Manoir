@@ -63,14 +63,15 @@ public class Npc extends Person{
     {   
         if(this.shield == 0)
         {
-            if(this.getCurrentHp() - receivedDamage <= 0)
+            if((this.getCurrentHp() - receivedDamage) <= 0)
             {
                 this.setCurrentHp(0);
                 System.out.println("YOU KILLED ME !");
                 this.dropObjects();
-                Corpse corpse = new Corpse(this.getName(), "");
+                Corpse corpse = new Corpse(this.getName(), "HE DIED BECAUSE OF YOU, MAYBE IT WAS FOR SELF DEFENSE OR MAYBE YOUR MURDEROUS INSTINCT SHOWED UP");
                 this.getRoom().addCorpse(corpse);
-                this.getRoom().removePerson(this);
+                this.getRoom().removePerson(this.getName());
+ 
             } 
             else
             {

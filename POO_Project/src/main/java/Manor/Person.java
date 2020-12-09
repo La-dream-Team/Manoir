@@ -98,9 +98,9 @@ public abstract class Person{
     
     public void removeRoom() 
     {
-        Room CurrentRoom = this.getRoom();
-        this.currentRoom = null;
-        CurrentRoom.removePerson(this);
+        if(this.currentRoom != null)
+        this.currentRoom.removePerson(this.getName());
+        
     }
     
     public void addObject(Object item) //MODIF
@@ -165,8 +165,8 @@ public abstract class Person{
         for(Object current : this.bag)
         {
             this.getRoom().addObject(current);
-            this.removeObject(current);
         }
+        this.bag.clear();
     }
     
     public Object stringToObject(String name)
@@ -226,9 +226,6 @@ public abstract class Person{
         if(this.current_hp - receivedDamage <= 0)
         {
             this.current_hp = 0;
-            Corpse newCorpse = new Corpse(this.name, "HE DIED BECAUSE OF YOU, MAYBE IT WAS FOR SELF DEFENSE OR MAYBE YOUR MURDEROUS INSTINCT SHOWED UP");
-            this.dropObjects();
-            this.removeRoom();
         } 
         else
         {

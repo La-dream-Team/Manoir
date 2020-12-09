@@ -27,35 +27,21 @@ public class MeleeWeapon extends Weapon{
             {
                 if(this.getOwner() != Objective)
                 {
-                    if(this.canUse())
-                    {
-                        if(this.getRemainingUses() == 1)
+                    if(this.canUse()){
+                        if(Objective == null)
                         {
-                            if(Objective == null)
-                            {
-                                System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
-                            }
-                            else if(Objective.isAlive())
-                            {
-                                Objective.hurt(this.getWeaponDamage());
-                                super.use(Objective);
-                                this.setRemainingUses();
-                                System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                                this.getOwner().removeObject(this);
-                            }
+                            System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
                         }
-                        else
-                        {
-                            if(Objective == null)
-                            {
-                                System.out.println("THERE AREN'T ENEMIES AROUND YOU, DO YOU HAVE VISIONS?");
-                            }
-                            else if(Objective.isAlive())
-                            {
-                                Objective.hurt(this.getWeaponDamage());
-                                super.use(Objective);
-                                this.setRemainingUses();
-                            }
+                        else if(Objective.isAlive()){
+                            Objective.hurt(this.getWeaponDamage());
+                            super.use(Objective);
+                            this.setRemainingUses();
+                        }
+                        
+                        
+                        if(this.getRemainingUses() == 0){
+                            System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                                this.getOwner().removeObject(this);
                         }
                     }
                 }

@@ -90,15 +90,16 @@ public class Room{
         }
     }
     
-    public void removePerson(Person p){
-        if(this.isOnPersons(p.getName())){
-            this.persons.remove(p);
-            if(p.getRoom() != null){
-                p.removeRoom();
+    public void removePerson(String name){
+        if(this.isOnPersons(name)){
+            Person current = this.getPerson(name);
+            this.persons.remove(current);
+            if(current.getRoom() != null){
+                current.setRoom(null);
             } 
         }
         else{
-            System.out.println(p.getName() + "IS NOT ON" + this.name + "!");
+            System.out.println(name + " IS NOT ON " + this.name + "!");
         }
     }
     
@@ -148,25 +149,25 @@ public class Room{
     }
     
     public void print(Player p){
-        System.out.println("ON THE " + this.name + " WE HAVE");
+        System.out.println("YOU ARE ON THE " + this.name + ".");
         if(this.objects.size() != 0){
-            System.out.println("HERE ARE THE DIFERENTS OBJECTS :");
+            System.out.println("THESE ARE THE DIFERENTS OBJECTS ON THE ROOM :");
             for(Object currento : this.objects){
                 System.out.println("   -" + currento.getName() + " : " + currento.getDescription());
             }
         }
         else
-            System.out.println("NO OBJECTS ON THIS ROOM !");
+            System.out.println("THERE ARE NO OBJECTS ON THIS ROOM !");
         
         if(this.corpses.size() != 0){
-            System.out.println("HERE ARE THE DIFERENTS CORPS :");
+            System.out.println("THESE ARE THE DIFERENTS CORPSE ON THE ROOM :");
             for(Corpse currentc : this.corpses){
                 System.out.println("   -" + currentc.getName() + " : " + currentc.getDesc());
             }
         }
             
         if(this.persons.size() != 1){
-            System.out.println("HERE ARE THE DIFERENTS PERSONS :");
+            System.out.println("THESE ARE THE DIFERENTS PERSONS ON THE ROOM :");
             for(Person currentp : this.persons){
                 if(currentp != p)
                     System.out.println("   -" + currentp.getName());
@@ -176,7 +177,7 @@ public class Room{
             System.out.println("THERE IS NOBODY IN THE ROOM !");
         
         if(this.doors.size() != 0){
-            System.out.println("HERE ARE THE DIFERENTS NEXT ROOMS :");
+            System.out.println("THESE ARE THE ROOMS NEARBY THIS ROOM :");
             for(Door currentd : this.doors){
                System.out.println("   -" + currentd.getNameOtherRoom(this) + "(" 
                        + currentd.getClass().getSimpleName().toUpperCase() + " NUMBER " + currentd.getID() + ")");
