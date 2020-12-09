@@ -244,6 +244,9 @@ public class Game{
             System.out.println("   - TAKE <OBJECT NAME> : TO TAKE AN ITEM FROM THE CURRENT ROOM.");
             System.out.println("   - USE <OBJECT NAME> <TARGET NAME> : TO USE AN ITEM FROM YOUR INVENTORY.");
             System.out.println("   - EQUIP <OBJECT NAME> : TO EQUIP A WEAPON FROM YOUR INVENTORY.");
+            System.out.println("   - TRADE <TRADER NAME> : TO EXCHANGE MONEY FOR ITEMS WITH A MERCHANT.");
+            System.out.println("   - OPEN <DOOR NUMBER> : TO OPEN A DOOR IN YOUR ROOM.");
+            System.out.println("   - UNLOCK <DOOR NUMBER> : TO UNLOCK A LOCKED DOOR IN YOUR ROOM.");
         }
         else{
             switch (com){
@@ -265,19 +268,23 @@ public class Game{
                     break;
                 case "USE":
                     System.out.println("YOU CAN ENTER USE + ONE OR USE + TWO ARGUMENTS.");
+                    System.out.println("DEPENDING ON THE TYPE OF OBJECT YOU WANT TO USE.");
                     break;
                 case "EQUIP":
                     System.out.println("YOU NEED TO ENTER EQUIP + ONE ARGUMENT.");
-                    System.out.println("You can only equipe an object on your invetory.");
+                    System.out.println("YOU CAN ONLY EQUIPE AN OBJECT THAT IS ON YOUR INVENTORY.");
                     break;
                 case "TRADE":
-                    
+                    System.out.println("YOU NEED TO ENTER TRADE + ONE ARGUMENT.");
+                    System.out.println("THE MERCHANT MUST BE CLOSE TO YOU.");
                     break;
                 case "OPEN":
-                
+                    System.out.println("YOU NEED TO ENTER OPEN + ONE ARGUMENT.");
+                    System.out.println("THE DOOR YOU WANT TO OPEN HAS TO BE IN THE SAME ROOM AS YOU.");
                     break;
                 case "UNLOCK":
-                    
+                    System.out.println("YOU NEED TO ENTER UNLOCK + ONE ARGUMENT.");
+                    System.out.println("THE DOOR YOU WANT TO UNLOCK HAS TO BE IN THE SAME ROOM AS YOU.");
                     break;
                 default : 
                     ret = 0;
