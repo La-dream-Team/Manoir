@@ -10,7 +10,7 @@ public class Trader extends Npc{
     }
     
     //Fonction pour echanger des objects par argent   
-    public void Exchange(Person buyer, int price)
+    public void exchange(Player buyer, int price)
     {
         Scanner ChosenObject = new Scanner(System.in); 
         System.out.println("I HAVE ALL THOSE ITEMS :");

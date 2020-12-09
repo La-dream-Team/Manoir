@@ -61,10 +61,6 @@ public class Npc extends Person{
     @Override
     public void hurt(int receivedDamage)
     {   
-        if(this.coefficient > 0f)
-        {
-            receivedDamage = receivedDamage * (int)this.coefficient;
-        }
         if(this.shield == 0)
         {
             if(this.getCurrentHp() - receivedDamage <= 0)
@@ -95,6 +91,10 @@ public class Npc extends Person{
     
     public void attak(Player p){
         if(this.aggressive){
+            if(this.coefficient >= 1f)
+            {
+                this.getEquippedItem().setWeaponDamage(this.coefficient);
+            }
             System.out.println(this.getName() + " ATTACK YOU !");
             super.useObject(this.getEquippedItem().getName(), p.getName());
         }
