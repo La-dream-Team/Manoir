@@ -215,7 +215,7 @@ public class Game{
                     break;
                 case "EQUIP":
                     if(lenList == 2){
-                        ret = this.take(com[1]);
+                        ret = this.equip(com[1]);
                     }
                     
                     break;
@@ -269,6 +269,15 @@ public class Game{
                 case "EQUIP":
                     System.out.println("YOU NEED TO ENTER EQUIP + ONE ARGUMENT.");
                     System.out.println("You can only equipe an object on your invetory.");
+                    break;
+                case "TRADE":
+                    
+                    break;
+                case "OPEN":
+                
+                    break;
+                case "UNLOCK":
+                    
                     break;
                 default : 
                     ret = 0;
@@ -334,7 +343,7 @@ public class Game{
         return 1;
     }
     
-    public int equipe(String obj){
+    public int equip(String obj){
         int ret = 0;
         if(obj != null){
             ret = this.player.equipObject(obj);
