@@ -5,7 +5,7 @@ public class Player extends Person {
     
     public Player(String Name,int Health, Room CurrentRoom)
     {
-        super(Name, Health, CurrentRoom, 0);
+        super(Name, Health, CurrentRoom, 150);
     }
     
     /*public void takeMoney(Person corpse)

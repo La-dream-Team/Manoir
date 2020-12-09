@@ -219,6 +219,19 @@ public class Game{
                     }
                     
                     break;
+                case "TRADE":
+                    if(lenList == 2){
+                        ret = this.trade(com[1]);
+                    }
+                    
+                    break;
+                case "OPEN":
+                
+                    break;
+                case "UNLOCK":
+                    
+                    break;    
+                
                 default :  
                     ret = 0;
             };
@@ -355,6 +368,20 @@ public class Game{
         if(obj != null){
             ret = this.player.equipObject(obj);
         }
+        return ret;
+    }
+    
+    public int trade(String person){
+        int ret = 0; 
+        Trader npc =((Trader) this.player.getRoom().giveMeTrader(person));
+        if(npc != null){
+            npc.exchange(this.player, 10);
+            ret = 1;
+        }
+        else{
+            System.out.println("UNUSABLE ARGUMENT !");
+        }
+        
         return ret;
     }
     

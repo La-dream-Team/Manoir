@@ -251,5 +251,17 @@ public class Room{
         }
     }
     
-   
+   public Person giveMeTrader(String trader){
+       Person ret = null;
+       for(Person current : this.persons){
+           if(trader.equals(current.getName())){
+               if(current instanceof Trader){
+                   ret = current;
+               }
+               break;
+           }
+       }       
+       
+       return ret;
+   }
 }
