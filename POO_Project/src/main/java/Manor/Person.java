@@ -64,7 +64,7 @@ public abstract class Person{
     public int setRoom(Room r) 
     {
         if(this.currentRoom == null){
-            System.err.print("This person haven't current room !");
+            System.err.print("THIS ¨PERSON HAVEN'T CURRENT ROOM !");
             // erreur on arrete le jeu 
             return -1; 
         }
@@ -83,13 +83,13 @@ public abstract class Person{
                     return 1;
                 }
                 else{
-                    System.out.println("The " + dcurrent.getClass().getSimpleName() + " isn't opened !");
+                    System.out.println("THE " + dcurrent.getClass().getSimpleName().toUpperCase() + " ISN'T OPENED !");
                     // le jeu n'a pas été mis a jour 
                     return 0;
                 }
             }
             else{
-                System.out.println("The target door's to far !");
+                System.out.println("THE TARGET DOOR'S TO FAR !");
                 // le jeu n'a pas été mis a jour 
                 return 0;
             }

@@ -178,7 +178,8 @@ public class Room{
         if(this.doors.size() != 0){
             System.out.println("HERE ARE THE DIFERENTS NEXT ROOMS :");
             for(Door currentd : this.doors){
-               System.out.println("   -" + currentd.getNameOtherRoom(this));
+               System.out.println("   -" + currentd.getNameOtherRoom(this) + "(" 
+                       + currentd.getClass().getSimpleName().toUpperCase() + " NUMBER " + currentd.getID() + ")");
             }
         }
         else{
@@ -261,6 +262,19 @@ public class Room{
                break;
            }
        }       
+       
+       return ret;
+   }
+   
+   public Door giveMeDoor(int number ){
+       Door ret = null;
+       
+       for(Door current : this.doors){
+           if(number == current.getID()){
+               ret = current;
+               break;
+           }
+       }
        
        return ret;
    }

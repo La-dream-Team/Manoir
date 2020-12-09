@@ -27,14 +27,10 @@ public class KeyLockedDoor extends DoorWithLock{
         return this.currentKey;
     }
     
-    @Override
-    public void unlock(){
-        System.out.print("NO KEY FOUND");
-    }
     
     public void unlock(Key k){
         if(this.currentKey == k){
-            super.unlock();
+            super.unlock(-1);
         }
     }
 }

@@ -88,7 +88,14 @@ public class Game{
         do{
             System.out.println("ENTER YOU ORDER :");
             ret = doRond();
-            
+            if(ret == 0){
+                System.out.println("THE GAME HAS NOT CHANGED");
+            }
+            else{
+                if(ret == 1){
+                    System.out.println("THE GAME HAS CHANGED");
+                }
+            }
             this.playnpc();
         }while(((this.player.isAlive()) && (this.finalboss.isAlive()) && (ret != -1)));
         
@@ -144,7 +151,7 @@ public class Game{
         for(Floor currentFloor : this.manoir){
              ArrayList<Room> list = currentFloor.getRooms();
              for(Room currentRoom : list){
-                 if(currentRoom.getName() == strr){
+                 if(currentRoom.getName().equals(strr)){
                      ret = currentRoom;
                      break;
                  }
@@ -226,9 +233,20 @@ public class Game{
                     
                     break;
                 case "OPEN":
-                
+                    if(lenList == 2){
+                        ret = this.open(com[1]);
+                    }
+                  
                     break;
                 case "UNLOCK":
+                    if(lenList == 3){
+                        ret = this.unlock(com[1], com[2]);
+                    }
+                    else{
+                        if(lenList == 2){
+                            ret = this.unlock(com[1], null);
+                        }
+                    }
                     
                     break;    
                 
@@ -385,7 +403,48 @@ public class Game{
         return ret;
     }
     
+    public int open(String door){
+        int ret = 0;
+        // convertion du string en entier 
+        int number = Integer.valueOf(door);
+        
+        // recupère la porte correspondent à l'entier 
+        Door openned = this.player.getRoom().giveMeDoor(number);
+        openned.open();
+        
+        // on verrifie si la porte est ouverte 
+        if(openned.getIsOpen()){
+            ret = 1;
+        }
+        
+        return ret;
+    }
+    
+    public int unlock(String s1, String s2){
+        int ret = 0;
+        // convertion du string en entier 
+        int number = Integer.valueOf(s1);
+        
+        // recupère la porte correspondent à l'entier 
+        Door d = this.player.getRoom().giveMeDoor(number);
+        
+        if(!((d instanceof Door) || (d instanceof DoorLockedOut))){
+            DoorWithLock d2 = (DoorWithLock) d;
+            if(s2 == null)
+                ret = d2.unlock(-1);
+            else 
+                ret = d2.unlock(Integer.valueOf(s2));
+        }
+        else{
+            System.out.println("UNUSABLE ARGUMENT !");
+        }
+        
+        return ret;
+    }
+    
+    
     public static void main(String[] args){
+        
         Game currentGame = new Game();
     }
 }

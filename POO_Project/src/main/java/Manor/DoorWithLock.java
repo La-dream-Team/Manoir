@@ -3,7 +3,7 @@ package Manor;
 
 import Manor.Room;
 
-public class DoorWithLock extends Door implements Lockable {
+public class DoorWithLock extends Door {
     // attributs 
     private boolean isLocked ; 
     
@@ -27,9 +27,17 @@ public class DoorWithLock extends Door implements Lockable {
         return this.isLocked;
     }
     
-    public void unlock()
+    public int unlock(int arg)
     {
-       this.isLocked = false; 
+       int ret = 0;
+       if(arg != -1){
+           System.out.println("UNUSABLE ARGUMENT !");
+       }
+       else{
+           this.isLocked = false;
+           ret = 1;
+       }
+       return ret;
     }
     
     public void lock()

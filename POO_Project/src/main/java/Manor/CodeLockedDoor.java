@@ -26,16 +26,21 @@ public class CodeLockedDoor extends AutoLockedDoor {
     //methodes 
     
     @Override
-    public void unlock(){
-        System.out.println("CODE FAILLURE !");
-    }
-
-    public void unlock(int pass){
-        if((pass == this.code) || (pass == this.genaral_pass)){
-            super.unlock();
-        }
-        else
-            System.out.println("WRONG CODE !");
+    public int unlock(int arg)
+    {
+       int ret = 0;
+       if(arg == -1){
+           System.out.println("UNUSABLE ARGUMENT !");
+       }
+       else{
+           if(arg == this.code){
+               ret = super.unlock(-1);
+           }
+           else{
+               System.out.println("CODE FAILLURE !");
+           }
+       }
+       return ret;
     }
     
     public int getCode()
