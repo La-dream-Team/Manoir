@@ -7,7 +7,7 @@ public class DoorWithLock extends Door {
     // attributs 
     private boolean isLocked ; 
     
-    private final boolean DEFAULT_ISLOCKED = false;
+    private final boolean DEFAULT_ISLOCKED = true;
     // constructeur(s) 
     public DoorWithLock(Room r)
     {
