@@ -52,7 +52,6 @@ public class KeyIT {
         testSubject1.useObject(key.getName(), null);
         assertFalse(door.getIsLocked());
         assertEquals(key.getRemainingUses(), 4);
-        assertTrue(door.getIsOpen());
     }
     
 }
