@@ -22,45 +22,26 @@ public class Key extends Object{
         {
             if(this.canUse())
             {
-                if(this.getRemainingUses() == 1)
+                if(Objective == null)
                 {
-                    if(Objective == null)
+                    if(this.getOwner().getRoom().isOnDoors(this.unlockableDoor))
                     {
-                        if(this.getOwner().getRoom().isOnDoors(this.unlockableDoor))
-                        {
-                            this.unlockableDoor.unlock(this);
-                            this.setRemainingUses();
-                            System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                            this.getOwner().removeObject(this);
-                        }
-                        else
-                        {
-                            System.out.println("NEARBY DOORS CANT BE OPENNED WITH YOUR KEY");
-                        }
+                        this.unlockableDoor.unlock(this);
+                        this.setRemainingUses();
                     }
                     else
                     {
-                        System.out.println("THIS IS NOT A WEAPON NOR CONSUMABLE. YOU CANT ATTACK SOMEONE WITH IT, IT ONLY CAN GIVE YOU ACCESS TO NEW ROOMS");
+                        System.out.println("NEARBY DOORS CANT BE OPENNED WITH YOUR KEY");
                     }
                 }
                 else
                 {
-                    if(Objective == null)
-                    {
-                        if(this.getOwner().getRoom().isOnDoors(this.unlockableDoor))
-                        {
-                            this.unlockableDoor.unlock(this);
-                            this.setRemainingUses();
-                        }
-                        else
-                        {
-                            System.out.println("NEARBY DOORS CANT BE OPENNED WITH YOUR KEY");
-                        }
-                    }
-                    else
-                    {
-                        System.out.println("THIS IS NOT A WEAPON NOR CONSUMABLE. YOU CANT ATTACK SOMEONE WITH IT, IT ONLY CAN GIVE YOU ACCESS TO NEW ROOMS");
-                    }
+                    System.out.println("THIS IS NOT A WEAPON NOR CONSUMABLE. YOU CANT ATTACK SOMEONE WITH IT, IT ONLY CAN GIVE YOU ACCESS TO NEW ROOMS");
+                }
+                if(this.getRemainingUses() == 0)
+                {
+                    System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                    this.getOwner().removeObject(this);
                 }
             }     
         }

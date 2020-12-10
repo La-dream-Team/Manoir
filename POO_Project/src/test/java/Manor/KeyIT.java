@@ -48,7 +48,9 @@ public class KeyIT {
     public void testUse3() { //Cas ou l'object marche parfaitement
         testSubject1.addObject(key);
         assertTrue(key.hasOwner()); //On teste si le propietaire de l'objet est nul
+        assertTrue(door.getIsLocked());
         testSubject1.useObject(key.getName(), null);
+        assertFalse(door.getIsLocked());
         assertEquals(key.getRemainingUses(), 4);
         assertTrue(door.getIsOpen());
     }
