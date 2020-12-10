@@ -40,15 +40,15 @@ public class DoorWithLockIT {
     
     @Test
     public void testunlock(){
-        door1.unlock();
+        door1.unlock(-1);
         assertFalse(door1.getIsLocked());
-        door1.unlock();
+        door1.unlock(-1);
         assertFalse(door1.getIsLocked());
     }
     
     @Test
     public void testopen1(){
-        door1.unlock();
+        door1.unlock(-1);
         door1.open();
         assertTrue(door1.getIsOpen());
     }
@@ -62,7 +62,7 @@ public class DoorWithLockIT {
     
     @Test
     public void testclose1(){
-        door1.unlock();
+        door1.unlock(-1);
         door1.open();
         door1.close();
         assertFalse(door1.getIsOpen());
@@ -70,7 +70,7 @@ public class DoorWithLockIT {
     
     @Test
     public void testclose2(){
-        door1.unlock();
+        door1.unlock(-1);
         door1.open();
         door1.lock();
         door1.close();

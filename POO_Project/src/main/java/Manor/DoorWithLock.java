@@ -61,7 +61,10 @@ public class DoorWithLock extends Door {
     public void print()
     {
         super.print();
-        System.out.println( "IS LOCKED = " + this.isLocked);
+        if(this.isLocked)
+            System.out.print(" AND LOCKED");
+        else
+            System.out.print(" AND UNLOCKED");
     }
     
     

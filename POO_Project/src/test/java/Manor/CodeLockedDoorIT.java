@@ -28,7 +28,7 @@ public class CodeLockedDoorIT {
     @Test
     public void testunlock1(){
         door1.lock();
-        door1.unlock();
+        door1.unlock(-1);
         assertTrue(door1.getIsLocked());
     }
     

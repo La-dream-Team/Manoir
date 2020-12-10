@@ -179,8 +179,10 @@ public class Room{
         if(this.doors.size() != 0){
             System.out.println("THESE ARE THE ROOMS NEARBY THIS ROOM :");
             for(Door currentd : this.doors){
-               System.out.println("   -" + currentd.getNameOtherRoom(this) + "(" 
+               System.out.print("   -" + currentd.getNameOtherRoom(this) + "(" 
                        + currentd.getClass().getSimpleName().toUpperCase() + " NUMBER " + currentd.getID() + ")");
+               currentd.print();
+               System.out.println();
             }
         }
         else{

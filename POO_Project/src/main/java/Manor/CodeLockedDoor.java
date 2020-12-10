@@ -42,10 +42,5 @@ public class CodeLockedDoor extends AutoLockedDoor {
         return this.code;
     }
     
-    @Override
-    public void print()
-    {
-        super.print();
-        System.out.print("CODE = " + this.code);
-    }
+    
 }

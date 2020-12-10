@@ -85,9 +85,9 @@ public class Door implements Closeable {
     
     public void print(){
         if(this.isOpen)
-            System.out.print(getClass().getName()+ " "+ this.id + "IS OPENED");
+            System.out.print(" IT'S OPENED");
         else
-            System.out.print(getClass().getName()+ " "+ this.id + "IS CLOSED");
+            System.out.print(" IT'S CLOSED");
     }
     
     
