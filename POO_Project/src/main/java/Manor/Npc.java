@@ -43,6 +43,10 @@ public class Npc extends Person{
         
     }
     
+    public boolean getAggressive(){
+        return this.aggressive;
+    }
+    
     public void switchMode()
     {
         this.aggressive = true;

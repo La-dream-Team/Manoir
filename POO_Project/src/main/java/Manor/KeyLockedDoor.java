@@ -1,17 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Manor;
 
-//import Manor.Key;
-//import Manor.Room;
-
-/**
- *
- * @author thibault
- */
 public class KeyLockedDoor extends DoorWithLock{
     private Key currentKey;
     
@@ -32,6 +21,11 @@ public class KeyLockedDoor extends DoorWithLock{
 
     }
     
+    @Override
+    public int unlock(int arg){
+        System.out.println("YOU MUST USE YOUR KEY FOR OPEN ME !");
+        return 0;
+    }
     
     public void unlock(Key k){
         if(this.currentKey == k){

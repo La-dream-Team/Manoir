@@ -1,8 +1,6 @@
 
 package Manor;
 
-import Manor.Room;
-
 
 public class AutoLockedDoor extends DoorWithLock{
     

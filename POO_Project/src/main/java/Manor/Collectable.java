@@ -8,7 +8,8 @@ public class Collectable extends Object{
     String content;
 
     //Constructor
-    public Collectable(String CollectableName, int RemainingUses, String Description, String Content)
+    public Collectable(String CollectableName, int RemainingUses,
+            String Description, String Content)
     {
         super(CollectableName, RemainingUses, Description);
         this.content = Content;

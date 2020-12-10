@@ -1,7 +1,6 @@
 
 package Manor;
 
-import Manor.Room;
 import java.util.ArrayList;
 
 public class Door implements Closeable {
@@ -107,7 +106,7 @@ public class Door implements Closeable {
     public boolean isContact(Room r){
         if(this.getconnected() != null ){
             Door d2 = this.getconnected();
-            return d2.isOnRooms(r);
+            return (d2.isOnRooms(r) || this.isOnRooms(r));
         }
         else 
             return this.isOnRooms(r);

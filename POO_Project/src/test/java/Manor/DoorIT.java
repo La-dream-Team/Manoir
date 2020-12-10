@@ -20,9 +20,9 @@ public class DoorIT {
     
     @Before
     public void setUp() {
-        room1 = new Room("couloir");
-        room2 = new Room("cuisine");
-        room3 = new Room("salon");
+        room1 = new Room("CORRIDOR");
+        room2 = new Room("KITCHEN");
+        room3 = new Room("LIVING");
     }
     
     @After
@@ -31,10 +31,22 @@ public class DoorIT {
     
     @Test
     public void testgetIsOpen(){
-        assertSame(door1.getIsOpen(), false);
+        assertFalse(door1.getIsOpen());
         door2.open();
-        assertSame(door2.getIsOpen(), true);
+        assertTrue(door2.getIsOpen());
     }
+    
+    @Test
+    public void testgetConnected(){
+        room1.addDoor(door1);
+        room2.addDoor(door2);
+        assertNull(door1.getconnected());
+        assertNull(door2.getconnected());
+        door2.connectDoors(door1);
+        assertSame(door2.getconnected(), door1);
+        assertSame(door1.getconnected(), door2);
+    }
+   
     
     @Test
     public void testopen(){
@@ -78,7 +90,7 @@ public class DoorIT {
     
     @Test
     public void testaddRoom1(){
-        door1.addRoom(room1);
+        room1.addDoor(door1);
         
         assertTrue(room1.isOnDoors(door1));
         assertTrue(door1.isOnRooms(room1));
@@ -86,10 +98,35 @@ public class DoorIT {
     
     @Test
     public void testaddRoom2(){
-        door1.addRoom(room1);
-        door1.addRoom(room2);
+        room1.addDoor(door1);
+        room2.addDoor(door1);
         
         assertTrue(room2.isOnDoors(door1));
         assertTrue(door1.isOnRooms(room2));
+    }
+    
+    // avec deux portes differents dans chaque pièce 
+    @Test
+    public void testisContact1(){
+        room1.addDoor(door1);
+        room2.addDoor(door2);
+        door1.connectDoors(door2);
+        
+        assertTrue(door1.isContact(room1));
+        assertTrue(door1.isContact(room2));
+        assertTrue(door1.isContact(room1));
+        assertTrue(door1.isContact(room2));
+        assertFalse(door1.isContact(room3));
+        assertFalse(door2.isContact(room3));
+    }
+    
+    @Test
+    public void testisContact2(){
+        room1.addDoor(door1);
+        room2.addDoor(door1);
+        
+        assertTrue(door1.isContact(room1));
+        assertTrue(door1.isContact(room2));
+        assertFalse(door2.isContact(room3));
     }
 }

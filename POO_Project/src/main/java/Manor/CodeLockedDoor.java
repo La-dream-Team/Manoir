@@ -1,14 +1,11 @@
 
 package Manor;
 
-import Manor.Room;
-
 public class CodeLockedDoor extends AutoLockedDoor {
     // attributs
     private int code;
-    private int DEFAULT_CODE = 0000; 
     
-    private final int genaral_pass = 1686;
+    private final int MASTER_CODE = 1686;
     
     // constructeur(s)
     public CodeLockedDoor(int pass)
@@ -27,7 +24,7 @@ public class CodeLockedDoor extends AutoLockedDoor {
            System.out.println("UNUSABLE ARGUMENT !");
        }
        else{
-           if(((arg == this.code) || (arg == this.genaral_pass))){
+           if(((arg == this.code) || (arg == this.MASTER_CODE))){
                ret = super.unlock(-1);
            }
            else{
@@ -35,11 +32,6 @@ public class CodeLockedDoor extends AutoLockedDoor {
            }
        }
        return ret;
-    }
-    
-    public int getCode()
-    {
-        return this.code;
     }
     
     

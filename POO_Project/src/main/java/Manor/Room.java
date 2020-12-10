@@ -47,7 +47,7 @@ public class Room{
     public void addDoor(Door d){
         if(!this.isOnDoors(d)){
             this.doors.add(d);
-            if(!d.isOnRooms(this))
+            if(!(d.isOnRooms(this)))
                 d.addRoom(this);
         }
     }
@@ -190,6 +190,8 @@ public class Room{
         }
     }
     
+    
+    // renvoie une porte null si les deux salles ne sont pas a cotés 
     public Door isNextRoom(Room r){
         Door ret = null;
         for(Door currentd : this.doors){

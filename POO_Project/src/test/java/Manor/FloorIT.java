@@ -1,46 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Manor;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- *
- * @author thibault
- */
+
 public class FloorIT {
     
-    public FloorIT() {
-    }
+    private Floor floor1;
+    private Floor floor2;
+    private Room room1;
+    private Room room2;
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
+    @Before
     public void setUp() {
+        floor1= new Floor("BASEMENT");
+        floor2= new Floor("FIRST-FLOOR");
+        room1 = new Room("KITCHEN");
+        room2 = new Room("CORRIDOR");
+        
+       
+        floor1.addRoom(room1);
+        floor2.addRoom(room2);
     }
     
-    @AfterEach
-    public void tearDown() {
+    @After
+    public void tearDownClass() {
     }
-
+    
+    // verif du verou automatique lors de la fermeture de la porte 
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testisOnRooms(){
+        assertTrue(floor1.isOnRooms(room1));
+        assertFalse(floor1.isOnRooms(room2));
     }
     
+    // close ne dois pas affecter une porte fermé
+    @Test
+    public void testisgetRoom(){
+        assertSame(floor1.getRoom(room1.getName()).getName(), room1.getName());
+        assertSame(floor1.getRoom(room2.getName()), null);
+    }
 }
