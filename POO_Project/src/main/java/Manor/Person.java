@@ -147,6 +147,10 @@ public abstract class Person{
 
     public void removeObject(Object o)
     {
+        if((Object)this.equippedItem == o)
+        {
+            this.unequipObject();
+        }
         o.setOwner(null);
         this.bag.remove(o);
     }

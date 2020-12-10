@@ -12,9 +12,8 @@ import static org.junit.Assert.*;
 
 public class ConsumableIT {
     
-    private Npc testSubject1;
+    private Player testSubject1;
     private Npc testSubject2;
-    private Npc testSubject3;
     private Room room;
     private Consumable healingPotion = new Consumable("GRANDMA'S COOKIES", "THOSE COOKIES WERE MADE WITH LOVE BY ONE OF THE MANOR RESIDENTS GRANDMA", 20);
     private Consumable hurtingPotion = new Consumable("MOLOTOV COCKTAIL", "THIS IS NOT VERY SAFE TO DRINK, I RECOMMEND YOU TO USE IT AGAINST YOUR ENEMIES", -35);
@@ -23,8 +22,10 @@ public class ConsumableIT {
     @Before
     public void setUp() {
         room = new Room("couloir");
-        testSubject1 = new Npc("FREDY", 100, room, 35, 0f, 1);
-        testSubject2 = new Npc("REMY", 20, room, 47, 0f, 2);
+        testSubject1 = new Player("FREDY", 100, room);
+        testSubject2 = new Npc("REMY", 50, room, 47, 0f, 2);
+        room.addPerson(testSubject1);
+        room.addPerson(testSubject2);
     }
     
     @After
@@ -43,70 +44,56 @@ public class ConsumableIT {
         
     @Test
     public void testUse2() { //Cas pour faire des degats a une personne 
-        testSubject2.addObject(hurtingPotion);
+        testSubject1.addObject(hurtingPotion);
         assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        hurtingPotion.use(testSubject1);
+        testSubject1.useObject(hurtingPotion.getName(), testSubject2.getName());
         assertFalse(hurtingPotion.canUse()); //On teste si on ne peut pas la reutiliser
-        assertFalse(hurtingPotion.getOwner().hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
-        assertEquals(testSubject1.getCurrentHp(), 65); //On verifie le changement de vie de l'objectif
+        assertFalse(testSubject1.hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
+        assertEquals(testSubject2.getCurrentHp(), 15); //On verifie le changement de vie de l'objectif
     }
     
     @Test
-    public void testUse3() { //Cas pour donner de la vie a une personne avec toutes ses hp 
-        testSubject2.addObject(healingPotion);
-        assertTrue(healingPotion.hasOwner());  //On teste si le propietaire de l'objet n'est pas nul
-        healingPotion.use(testSubject1);
-        assertFalse(healingPotion.canUse()); //On teste si on ne peut pas la reutiliser
-        assertFalse(healingPotion.getOwner().hasObject(healingPotion.getName())); //On teste si le propietaire il n'a plus l'object
-        assertEquals(testSubject1.getCurrentHp(), 100); //On verifie qui n'a pas eu de changement de vie sur l'objectif  
-    }
-        
-    @Test 
-    public void testUse4() { //Cas pour faire des degats a une personne avec moins de hp que le degats qu'on le fait 
+    public void testUse3() { //Cas pour donner de la vie a une personne 
+        //On fait des degats a la personne avant de pouvoir le heal
         testSubject1.addObject(hurtingPotion);
         assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        hurtingPotion.use(testSubject2);
-        assertFalse(hurtingPotion.canUse()); //On teste si on ne peut pas le reutiliser
-        assertFalse(hurtingPotion.getOwner().hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
-        assertEquals(testSubject2.getCurrentHp(), 0); //On verifie le changement de vie de l'objectif
-    } 
-    
-    @Test 
-    public void testUse5() {  //Cas pour donner de la vie a une personne  
+        testSubject1.useObject(hurtingPotion.getName(), testSubject2.getName());
+        //------------------------------------------------------------
         testSubject1.addObject(healingPotion);
-        assertTrue(healingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        healingPotion.use(testSubject2);
-        assertFalse(healingPotion.canUse()); //On teste si on ne peut pas le reutiliser
-        assertFalse(healingPotion.getOwner().hasObject(healingPotion.getName())); //On teste si le propietaire il n'a plus l'object
-        assertEquals(testSubject2.getCurrentHp(), 40); //On verifie le changement de vie de l'objectif 
+        assertTrue(healingPotion.hasOwner());  //On teste si le propietaire de l'objet n'est pas nul
+        testSubject1.useObject(healingPotion.getName(), testSubject2.getName());
+        assertFalse(healingPotion.canUse()); //On teste si on ne peut pas la reutiliser
+        assertFalse(testSubject1.hasObject(healingPotion.getName())); //On teste si le propietaire il n'a plus l'object
+        assertEquals(testSubject2.getCurrentHp(), 35); //On verifie qui n'a pas eu de changement de vie sur l'objectif  
     }
-    
+ 
     @Test 
-    public void testUse8() { //Cas pour enlever de la vie au propietaire du consomable
+    public void testUse4() { //Cas pour enlever de la vie au propietaire du consomable
         testSubject1.addObject(hurtingPotion);
         assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        hurtingPotion.use(null);
-        assertFalse(hurtingPotion.canUse()); //On teste si on peut pas le reutiliser
-        assertFalse(hurtingPotion.getOwner().hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
+        testSubject1.useObject(hurtingPotion.getName(), null);
+        assertFalse(hurtingPotion.canUse()); //On teste si on ne peut pas la reutiliser
+        assertFalse(testSubject1.hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
         assertEquals(testSubject1.getCurrentHp(), 65); //On verifie le changement de vie de l'objectif
     }
     
     @Test 
-    public void testUse9() { //Cas pour donner de la vie au propietaire du consomable
-        testSubject2.addObject(healingPotion);
-        assertTrue(healingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        healingPotion.use(null);
-        assertFalse(healingPotion.canUse()); //On teste si on peut pas le reutiliser
-        assertFalse(healingPotion.getOwner().hasObject(healingPotion.getName())); //On teste si le propietaire il n'a plus l'object
-        assertEquals(testSubject2.getCurrentHp(), 40); //On verifie le changement de vie de l'objectif
+    public void testUse5() { //Cas pour donner de la vie au propietaire du consomable
+        testSubject1.addObject(healingPotion);
+        assertTrue(healingPotion.hasOwner());  //On teste si le propietaire de l'objet n'est pas nul
+        testSubject1.useObject(healingPotion.getName(), null);
+        assertFalse(healingPotion.canUse()); //On teste si on ne peut pas la reutiliser
+        assertFalse(testSubject1.hasObject(healingPotion.getName())); //On teste si le propietaire il n'a plus l'object
+        assertEquals(testSubject1.getCurrentHp(), 100); //On verifie qui n'a pas eu de changement de vie sur l'objectif 
     }
     
-    public void testUse10() { //Cas pour utiliser l'object en rentrant comme objective le propietaire
+    @Test 
+    public void testUse6() { //Cas pour utiliser l'object en rentrant comme objective le propietaire
         testSubject1.addObject(hurtingPotion);
         assertTrue(hurtingPotion.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        hurtingPotion.use(testSubject1);
-        assertTrue(hurtingPotion.canUse()); //On teste si on peut le reutiliser
-        assertFalse(hurtingPotion.getOwner().hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
+        testSubject1.useObject(hurtingPotion.getName(), testSubject1.getName());
+        assertTrue(hurtingPotion.canUse()); //On teste si on ne peut pas la reutiliser
+        assertTrue(testSubject1.hasObject(hurtingPotion.getName())); //On teste si le propietaire il n'a plus l'object
+        assertEquals(testSubject1.getCurrentHp(), 100); //On verifie le changement de vie de l'objectif
     }
-    
 }

@@ -12,14 +12,21 @@ import static org.junit.Assert.*;
 
 public class ChargerIT {
     private Room room;
-    private Npc testSubject1;
+    private Player testSubject1;
+    private Npc testSubject2;
+    private Gun AK47 = new Gun("AK-47", 10, "THIS GUN WILL ALLOW YOU TO KILL YOUR ENEMIES WITHIN A FEW SECONDS", 20, 50);
     private Charger chargerAK47 = new Charger("AK-47 Charger", "THIS CHARGER ALLOWS YOU TO RELOAD THE GUN NAMED AK-47");
     
     @Before
     public void setUp() {
         room = new Room("couloir");
-        testSubject1 = new Npc("FREDY", 100, room, 35, 0f, 1);
+        testSubject1 = new Player("FREDY", 100, room);
+        testSubject2 = new Npc("REMY", 20, room, 47, 0f, 2);
+        room.addPerson(testSubject1);
+        room.addPerson(testSubject2);
+        testSubject1.addObject(AK47);
         testSubject1.addObject(chargerAK47);
+        testSubject1.equipObject(AK47.getName());
     }
     
     @After
@@ -33,17 +40,21 @@ public class ChargerIT {
     }
     
     @Test
-    public void testUse2() { //Cas ou l'object n'est pas null
+    public void testUse2() { //Cas ou l'objectif n'est pas null
         assertTrue(chargerAK47.hasOwner()); //On teste si le propietaire de l'objet est nul
-        chargerAK47.use(testSubject1);
+        testSubject1.useObject(chargerAK47.getName(), testSubject2.getName());
         assertTrue(chargerAK47.canUse()); //On teste si on peut le reutiliser
     }
     
     @Test
     public void testUse3() { //Cas ou on utilise l'object
         assertTrue(chargerAK47.hasOwner()); //On teste si le propietaire de l'objet est nul
-        chargerAK47.use(null);
+        testSubject1.useObject(AK47.getName(), testSubject2.getName());
+        assertFalse(testSubject2.isAlive());
+        assertEquals(AK47.getCurrentBullets(), 49);
+        testSubject1.useObject(chargerAK47.getName(), null);
+        assertEquals(AK47.getCurrentBullets(), 50);
         assertFalse(chargerAK47.canUse()); //On teste si on ne peut pas le reutiliser
-        assertFalse(chargerAK47.getOwner().hasObject(chargerAK47.getName())); //On teste si le propietaire il n'a plus l'object
+        assertFalse(testSubject1.hasObject(chargerAK47.getName())); //On teste si le propietaire il n'a plus l'object
     }
 }

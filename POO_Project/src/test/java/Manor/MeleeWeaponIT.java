@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class MeleeWeaponIT {
     
     private Room room;
-    private Npc testSubject1;
+    private Player testSubject1;
     private Npc testSubject2;
     private MeleeWeapon excalibur = new MeleeWeapon("EXCALIBUR", 10, "THIS IS THE LEGENDARY SWORD OF THE KING ARTHUR", 50);
     private MeleeWeapon fork = new MeleeWeapon("FORK", 1, "THIS GUN WILL ALLOW YOU TO ONESHOT ONE ENEMY", 4); 
@@ -21,8 +21,10 @@ public class MeleeWeaponIT {
     @Before
     public void setUp() {
         room = new Room("couloir");
-        testSubject1 = new Npc("FREDY", 100, room, 35, 0f, 1);
+        testSubject1 = new Player("FREDY", 100, room);
         testSubject2 = new Npc("REMY", 20, room, 47, 0f, 2);
+        room.addPerson(testSubject1);
+        room.addPerson(testSubject2);
     }
     
     @After
@@ -62,11 +64,11 @@ public class MeleeWeaponIT {
     
     @Test
     public void testUse5() { //On utilise l'arme sur l'objectif et on teste si on peut la reutiliser
-        testSubject2.addObject(fork);
-        testSubject2.equipObject(fork.getName());
-        testSubject2.useObject(fork.getName(), testSubject1.getName());
-        assertTrue(testSubject1.isAlive());
+        testSubject1.addObject(fork);
+        testSubject1.equipObject(fork.getName());
+        testSubject1.useObject(fork.getName(), testSubject2.getName());
+        assertTrue(testSubject2.isAlive());
+        assertEquals(testSubject2.getCurrentHp(), 16); //On teste si on a efectue un changement de vie sur l'objectif
         assertFalse(fork.canUse());  
-        assertEquals(testSubject1.getCurrentHp(), 96); //On teste si on a efectue un changement de vie sur l'objectif
     }
 }

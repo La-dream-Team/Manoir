@@ -37,12 +37,9 @@ public class MeleeWeapon extends Weapon{
                             super.use(Objective);
                             this.setRemainingUses();
                         }
-                        
-                        
                         if(this.getRemainingUses() == 0){
                             System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
                             this.getOwner().removeObject(this);
-                            this.getOwner().unequipObject();
                         }
                     }
                 }

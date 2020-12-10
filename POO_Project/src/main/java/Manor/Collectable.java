@@ -22,45 +22,26 @@ public class Collectable extends Object{
         {
             if(this.canUse())
             {
-                if(this.getRemainingUses() == 1)
+                if(Objective == null)
                 {
-                    if(Objective == null)
-                    {
-                        if(this.content.equals("") || this.content == null)
-                        {   
-                            System.out.println("WHO ARE THOSE PROGRAMMERS THAT  HAVE FORGOTTEN TO PUT CONTENT ON THIS OBJECT ... OR COULD IT BE DELIBERATE ...");
-                        }
-                        else
-                        {
-                            System.out.println(this.content);
-                            this.setRemainingUses();
-                            System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
-                            this.getOwner().removeObject(this);
-                        }
+                    if(this.content.equals("") || this.content == null)
+                    {   
+                        System.out.println("WHO ARE THOSE PROGRAMMERS THAT  HAVE FORGOTTEN TO PUT CONTENT ON THIS OBJECT ... OR COULD IT BE DELIBERATE ...");
                     }
                     else
                     {
-                        System.out.println("THIS IS NOT A WEAPON NOR CONSUMABLE. YOU CANT ATTACK SOMEONE WITH IT, IT ONLY CAN GIVE YOU KNOWLEDGE SO BE GRATEFUL");
+                        System.out.println(this.content);
+                        this.setRemainingUses();
+                    }
+                    if(this.getRemainingUses() == 0)
+                    {
+                        System.out.println("YOU HAVE ALREADY USED ME TOO MANY TIMES, LET ME REST IN PEACE");
+                        this.getOwner().removeObject(this);
                     }
                 }
                 else
                 {
-                    if(Objective == null)
-                    {
-                        if(this.content.equals("") || this.content == null)
-                        {   
-                            System.out.println("WHO ARE THOSE PROGRAMMERS THAT  HAVE FORGOTTEN TO PUT CONTENT ON THIS OBJECT ... OR COULD IT BE DELIBERATE ...");
-                        }
-                        else
-                        {
-                            System.out.println(this.content);
-                            this.setRemainingUses();
-                        }
-                    }
-                    else
-                    {
-                        System.out.println("THIS IS NOT A WEAPON NOR CONSUMABLE. YOU CANT ATTACK SOMEONE WITH IT, IT ONLY CAN GIVE YOU KNOWLEDGE SO BE GRATEFUL");
-                    }
+                    System.out.println("THIS IS NOT A WEAPON NOR CONSUMABLE. YOU CANT ATTACK SOMEONE WITH IT, IT ONLY CAN GIVE YOU KNOWLEDGE SO BE GRATEFUL");
                 }
             }
         }
