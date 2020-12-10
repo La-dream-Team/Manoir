@@ -17,14 +17,19 @@ public class KeyLockedDoor extends DoorWithLock{
     
     
     // attributs 
-    public KeyLockedDoor(Room r, int uses){
-        super(r);
-        this.currentKey = new Key(("KEY NUMBER : " + this.getID()), uses, "THIS KEY CAN MAYBE OPEN A LOCKED DOOR NEARBY", this);
+    public KeyLockedDoor(){
+        super();
+        this.currentKey = null;
     }
     
     public Key getCurrentKey()
     {
         return this.currentKey;
+    }
+    
+    public void createKey(int uses){
+        this.currentKey = new Key(("KEY" + this.getID()), uses, "THIS KEY CAN MAYBE OPEN A LOCKED DOOR NEARBY", this);
+
     }
     
     

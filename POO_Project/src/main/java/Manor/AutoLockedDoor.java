@@ -8,11 +8,6 @@ public class AutoLockedDoor extends DoorWithLock{
     
     
     // Constructuers
-    public AutoLockedDoor(Room r)
-    {
-        super(r);
-    }
-    
     public AutoLockedDoor()
     {
         super();

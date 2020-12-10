@@ -37,9 +37,7 @@ public class Npc extends Person{
                 this.aggressive = true;
                 break;
             default: this.type = NpcType.SOLDIER;
-                break;
-            /*default: this.type = NpcType.CORPSE;
-                break;*/            
+                break;          
         }//fin sw
         
         
@@ -47,10 +45,7 @@ public class Npc extends Person{
     
     public void switchMode()
     {
-        if(this.aggressive)
-        {
-            this.aggressive = true;
-        }
+        this.aggressive = true;
     }
     
     public void talk(String Message)
@@ -69,7 +64,7 @@ public class Npc extends Person{
                 System.out.println("YOU KILLED ME !");
                 this.dropObjects();
                 Corpse corpse = new Corpse(this.getName(), "HE DIED BECAUSE OF YOU, MAYBE IT WAS FOR SELF DEFENSE OR MAYBE YOUR MURDEROUS INSTINCT SHOWED UP");
-                this.getRoom().addCorpse(corpse);
+                this.getRoom().addCorpse(corpse); 
                 this.getRoom().removePerson(this.getName());
  
             } 
@@ -83,13 +78,13 @@ public class Npc extends Person{
         }
         else
         {
-            if(this.shield - receivedDamage > 0)
+            if((this.shield - receivedDamage) > 0)
             {
                 this.shield -= receivedDamage;
             }
-            else if(this.shield - receivedDamage < 0)
+            else if((this.shield - receivedDamage) < 0)
             {
-                int restOfDamage = this.shield - receivedDamage;
+                int restOfDamage = (this.shield - receivedDamage);
                 this.shield = 0;
                 this.hurt(-restOfDamage);
             }
@@ -98,12 +93,14 @@ public class Npc extends Person{
     
     public void attak(Player p){
         if(this.aggressive){
-            if(this.coefficient >= 1f)
-            {
-                this.getEquippedItem().setWeaponDamage(this.coefficient);
+            if(this.getEquippedItem() != null){
+                if(this.coefficient >= 1f)
+                {
+                    this.getEquippedItem().setWeaponDamage(this.coefficient);
+                }
+                System.out.println(this.getName() + " ATTACK YOU !");
+                super.useObject(this.getEquippedItem().getName(), p.getName());
             }
-            System.out.println(this.getName() + " ATTACK YOU !");
-            super.useObject(this.getEquippedItem().getName(), p.getName());
         }
     }
 }

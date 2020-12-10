@@ -9,12 +9,6 @@ public class DoorWithLock extends Door {
     
     private final boolean DEFAULT_ISLOCKED = true;
     // constructeur(s) 
-    public DoorWithLock(Room r)
-    {
-        super(r); 
-        this.isLocked = DEFAULT_ISLOCKED;
-    }
-    
     public DoorWithLock()
     {
         super(); 
@@ -50,6 +44,8 @@ public class DoorWithLock extends Door {
     {
         if(!this.isLocked)
             super.open();
+        else
+            System.out.println("THIS DOOR IS LOCKED !");
     }
     
     @Override

@@ -86,7 +86,7 @@ public class Room{
     public void addPerson(Person p){
         this.persons.add(p);
         if(p.getRoom() != this){
-            p.setRoom(this);
+            p.changeRoom(this);
         }
     }
     
@@ -95,7 +95,7 @@ public class Room{
             Person current = this.getPerson(name);
             this.persons.remove(current);
             if(current.getRoom() != null){
-                current.setRoom(null);
+                current.changeRoom(null);
             } 
         }
         else{

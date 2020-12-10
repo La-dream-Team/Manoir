@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Trader extends Npc{
 
-    public Trader(String Name,int Health, Room CurrentRoom, int Money, float Difficulty, int Type){
+    public Trader(String Name,int Health, Room CurrentRoom, int Money, float Difficulty){
         super(Name, Health, CurrentRoom, Money, Difficulty, 2);   
     }
     
@@ -13,39 +13,45 @@ public class Trader extends Npc{
     public void exchange(Player buyer, int price)
     {
         Scanner ChosenObject = new Scanner(System.in); 
-        System.out.println("I HAVE ALL THOSE ITEMS :");
-        this.printInventory();
-        System.out.println("EACH ONE COSTS" + price + "PIECES");
-        System.out.println("REMEMBER YOU HAVE" + buyer.getMoney() + "PIECES AVAILABLES TO BUY");
-        System.out.println("CHOOSE THE OBJECT YOU WANT TO BUY ME AND ENTER ITS NUMBER (IF YOU WANT TO EXIT THE SHOP ENTER 0) :");
-        int CodeObject = ChosenObject.nextInt();
-        if(CodeObject > -1 || CodeObject <= this.getBag().size())
-        {
-            if(CodeObject != 0)
+        
+        int codeObject = -1;
+        do{
+            System.out.println("I HAVE ALL THOSE ITEMS :");
+            this.printInventory();
+            System.out.println("EACH ONE COSTS " + price + " PIECES");
+            System.out.println("REMEMBER YOU HAVE " + buyer.getMoney() + " PIECES AVAILABLES TO BUY");
+            System.out.println("CHOOSE THE OBJECT YOU WANT TO BUY ME AND ENTER ITS NUMBER (IF YOU WANT TO EXIT THE SHOP ENTER -1) :");
+            codeObject = ChosenObject.nextInt();
+            if((codeObject >= -1) || (codeObject < this.getBag().size()))
             {
-                if(buyer.getMoney() - price >= 0)
+                if(codeObject != -1)
                 {
-                    if(buyer.getBag().size() < buyer.getDefaultBagSize())
+                    if(buyer.getMoney() - price >= 0)
                     {
-                        buyer.addObject((Object)this.getBag().get(CodeObject-1));
-                        buyer.substractMoney(price);
-                        this.addMoney(price);
+                        if(buyer.getBag().size() < buyer.getDefaultBagSize())
+                        {
+                            Object current = this.getBag().get(codeObject);
+                            this.removeObject(current);
+                            buyer.addObject((Object)current);
+                            buyer.substractMoney(price);
+                            this.addMoney(price);
+                        }
+                        else
+                        {
+                            System.out.println("YOU DON'T HAVE ENOGH PLACE ON YOUR BAG TO STORE THIS NEW ITEM");
+                        }
                     }
                     else
                     {
-                        System.out.println("YOU DON'T HAVE ENOGH PLACE ON YOUR BAG TO STORE THIS NEW ITEM");
+                        Object Item = (Object)this.getBag().get(codeObject);
+                        System.out.println("IM SORRY MAN BUT YOU DON'T HAVE ENOUGH MONEY TO BUY MY" + Item.getName());
                     }
                 }
-                else
-                {
-                    Object Item = (Object)this.getBag().get(CodeObject-1);
-                    System.out.println("IM SORRY MAN BUT YOU DON'T HAVE ENOUGH MONEY TO BUY MY" + Item.getName());
-                }
             }
-        }
-        else
-        {
-            System.out.println("NUMBER OUT OF BOUNDS, THE NUMBER YOU ENTER HAS TO BE BETWEEN" + 0 + "AND" + this.getBag().size());
-        }
+            else
+            {
+                System.out.println("NUMBER OUT OF BOUNDS, THE NUMBER YOU ENTER HAS TO BE BETWEEN" + -1 + "AND" + (this.getBag().size()-1));
+            }
+        }while(codeObject != -1);
     }//fin exchange
 }//fin class

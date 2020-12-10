@@ -61,12 +61,19 @@ public abstract class Person{
         return this.currentRoom;
     }
     
+    public void changeRoom(Room r){
+        if(this.currentRoom.isOnPersons(this.getName()))
+            this.removeRoom();
+        this.currentRoom = r;
+    }
+    
     public int setRoom(Room r) 
     {
+        int ret = 0;
         if(this.currentRoom == null){
-            System.err.print("THIS ¨PERSON HAVEN'T CURRENT ROOM !");
+            System.err.print("THIS PERSON HAVEN'T CURRENT ROOM !");
             // erreur on arrete le jeu 
-            return -1; 
+            ret = -1;
         }
         else{
             Door dcurrent = this.currentRoom.isNextRoom(r);
@@ -80,26 +87,34 @@ public abstract class Person{
                     r.addPerson(this);
                     
                     // un changement a été fait dans le jeu 
-                    return 1;
+                    ret = 1;
                 }
                 else{
-                    System.out.println("THE " + dcurrent.getClass().getSimpleName().toUpperCase() + " ISN'T OPENED !");
+                    if(dcurrent instanceof DoorLockedOut){
+                        System.out.println("THIS DOOR'S FOR EVER CLOSED !");
+                    }
+                    else{
+                        System.out.println("THE " + dcurrent.getClass().getSimpleName().toUpperCase() + " ISN'T OPENED !");
+                        
+                    }
                     // le jeu n'a pas été mis a jour 
-                    return 0;
+                    ret = 0;
                 }
             }
             else{
                 System.out.println("THE TARGET DOOR'S TO FAR !");
                 // le jeu n'a pas été mis a jour 
-                return 0;
+                
+                ret = 0;
             }
         }
+        return ret;
     }
     
     public void removeRoom() 
     {
         if(this.currentRoom != null)
-        this.currentRoom.removePerson(this.getName());
+            this.currentRoom.removePerson(this.getName());
         
     }
     
@@ -331,6 +346,6 @@ public abstract class Person{
         }       
         
         if(this.equippedItem != null)
-            System.out.println("YOUR EQUIPPED WEAPON IS" + this.equippedItem.getName());
+            System.out.println("YOUR EQUIPPED WEAPON IS " + this.equippedItem.getName());
     }
 }

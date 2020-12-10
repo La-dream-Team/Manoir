@@ -36,7 +36,8 @@ public class Game{
         this.player = this.scanPlayer();
         this.finalboss = this.initBoss();
         
-        this.doGame();
+        if(this.doGame())
+            new Game();
     }
 
     
@@ -63,7 +64,7 @@ public class Game{
         starterRoom.addPerson(ret);
         
         // on lui donne un katana
-        MeleeWeapon katana = new MeleeWeapon("KATANA0", 5, "A BASIC KATANA", 25);
+        MeleeWeapon katana = new MeleeWeapon("KATANA0", 25, "A BASIC KATANA", 5);
         ret.addObject(katana);
         ret.equipObject("KATANA0");
         
@@ -91,11 +92,12 @@ public class Game{
         return ret;
     }
     
-    public void doGame(){
+    public boolean doGame(){
         int ret = 0 ;
         do{
             System.out.println("ENTER YOU ORDER :");
             ret = doRond();
+            
             if(ret == 0){
                 System.out.println("THE GAME HAS NOT CHANGED");
             }
@@ -107,8 +109,10 @@ public class Game{
             this.playnpc();
         }while(((this.player.isAlive()) && (this.finalboss.isAlive()) && (ret != -1)));
         
-        if(ret == -1)
+        if(ret == -1){
             System.out.println("THANK YOU FOR PLAYING !");
+            return false;
+        }
         else{
             if(!(this.player.isAlive()))
                 System.out.println("SORRY YOU ARE DEAD.");
@@ -127,17 +131,18 @@ public class Game{
                     if(cmd[0].equals("NO"))
                         break;
                     else
-                        System.out.println("PLEASE ENTER YES OR NO.");
+                        System.out.println("PLEASE JUST ENTER YES OR NO.");
                 }
             }while(true);
             
-            
+            return play;
         }
        
+        
     }
     
     public void playnpc(){
-        ArrayList<Person> personInRoom =this.player.getRoom().getPersons();
+        ArrayList<Person> personInRoom = this.player.getRoom().getPersons();
         for(Person currentp : personInRoom){
             if(currentp != this.player){
                 ((Npc) currentp).attak(this.player);
@@ -337,8 +342,14 @@ public class Game{
         int ret = 0; 
         if(com != null){
             Room r = this.findRoom(com);
+            
             if(r != null){
-                ret = this.player.setRoom(r);
+                // si il est deja dans la pièce 
+                if(r.getName().equals(this.player.getRoom().getName())){
+                    System.out.println("YOU ARE ALREADY IN THIS ROOM !");
+                }
+                else
+                    ret = this.player.setRoom(r);
             }
             else{
                 System.out.println("ROOM FAILLURE");
@@ -378,6 +389,7 @@ public class Game{
         int ret = 0;
         if(s1 != null){
             this.player.takeObject(s1);
+            ret = 1;
         }
         return ret;
     }
@@ -418,13 +430,17 @@ public class Game{
         
         // recupère la porte correspondent à l'entier 
         Door openned = this.player.getRoom().giveMeDoor(number);
-        openned.open();
+        if(openned != null){
+            openned.open();
         
-        // on verrifie si la porte est ouverte 
-        if(openned.getIsOpen()){
-            ret = 1;
+            // on verrifie si la porte est ouverte 
+            if(openned.getIsOpen()){
+                ret = 1;
+            }
         }
-        
+        else{
+            System.out.println("INVALID DOOR NUMBER !");
+        }
         return ret;
     }
     
@@ -433,18 +449,23 @@ public class Game{
         // convertion du string en entier 
         int number = Integer.valueOf(s1);
         
-        // recupère la porte correspondent à l'entier 
-        Door d = this.player.getRoom().giveMeDoor(number);
-        
-        if(!((d instanceof Door) || (d instanceof DoorLockedOut))){
-            DoorWithLock d2 = (DoorWithLock) d;
-            if(s2 == null)
-                ret = d2.unlock(-1);
-            else 
-                ret = d2.unlock(Integer.valueOf(s2));
+        if(this.player.getRoom().giveMeDoor(number) != null){
+            // dans le jeu in n'y auras que les CodeLockedDoor et DoorWitchLock qui peuvent etre ouverte par l'utilisateur
+            if(((this.player.getRoom().giveMeDoor(number) instanceof DoorWithLock) 
+                    || (this.player.getRoom().giveMeDoor(number) instanceof CodeLockedDoor))){
+            
+                DoorWithLock d2 = (DoorWithLock) this.player.getRoom().giveMeDoor(number);
+                if(s2 == null)
+                    ret = d2.unlock(-1);
+                else 
+                    ret =((CodeLockedDoor) d2).unlock(Integer.valueOf(s2));
+            }
+            else{
+                System.out.println("UNUSABLE ARGUMENT !");
+            }
         }
         else{
-            System.out.println("UNUSABLE ARGUMENT !");
+           System.out.println("INVALID DOOR NUMBER !");  
         }
         
         return ret;
@@ -452,7 +473,6 @@ public class Game{
     
     
     public static void main(String[] args){
-        
         Game currentGame = new Game();
     }
 }

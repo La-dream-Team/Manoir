@@ -11,12 +11,6 @@ public class CodeLockedDoor extends AutoLockedDoor {
     private final int genaral_pass = 1686;
     
     // constructeur(s)
-    public CodeLockedDoor(int pass, Room r)
-    {
-        super(r);
-        this.code = pass;
-    }
-    
     public CodeLockedDoor(int pass)
     {
         super();
@@ -33,7 +27,7 @@ public class CodeLockedDoor extends AutoLockedDoor {
            System.out.println("UNUSABLE ARGUMENT !");
        }
        else{
-           if(arg == this.code){
+           if(((arg == this.code) || (arg == this.genaral_pass))){
                ret = super.unlock(-1);
            }
            else{

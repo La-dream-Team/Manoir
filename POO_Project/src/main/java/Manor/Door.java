@@ -20,23 +20,11 @@ public class Door implements Closeable {
     private final boolean DEFAULT_ISOPEN = false ; 
     
     // constructeur(s)
-    public Door(Room r){
-        this.isOpen = this.DEFAULT_ISOPEN;
-        this.rooms.add(r);
-        this.id = currentid;
-        currentid += 1;
-    }
     
     public Door(){
         this.isOpen = this.DEFAULT_ISOPEN;
         this.id = currentid;
         currentid += 1;
-    }
-    
-    public Door(Room r, Door d){
-        this(r);
-        
-        this.connected = d; 
     }
     
     // methodes 
@@ -119,7 +107,7 @@ public class Door implements Closeable {
     public boolean isContact(Room r){
         if(this.getconnected() != null ){
             Door d2 = this.getconnected();
-            return (this.isOnRooms(r) || d2.isOnRooms(r));
+            return d2.isOnRooms(r);
         }
         else 
             return this.isOnRooms(r);

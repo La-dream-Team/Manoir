@@ -10,7 +10,8 @@ public class Consumable extends Object{
     private final int givenOrTakenHealth;
 
     //Constructors
-    public Consumable(String ConsumableName, String Description, int GivenOrTakenHealth) 
+    public Consumable(String ConsumableName, String Description, 
+            int GivenOrTakenHealth) 
     {
         super(ConsumableName, 1, Description);
         this.givenOrTakenHealth = GivenOrTakenHealth; 

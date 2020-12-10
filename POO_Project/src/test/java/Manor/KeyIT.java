@@ -19,7 +19,9 @@ public class KeyIT {
     @Before
     public void setUp() {
          room = new Room("couloir");
-         door = new KeyLockedDoor(room, 5);
+         door = new KeyLockedDoor();
+         room.addDoor(door);
+         door.createKey(5);
          key = door.getCurrentKey();
          testSubject1 = new Npc("FREDY", 100, room, 35, 0f, 1);
     }
@@ -34,6 +36,7 @@ public class KeyIT {
         assertFalse(key.hasOwner()); //On teste si le propietaire de l'objet est nul
     }
     
+    @Test
     public void testUse2() { //Cas où on utilise l'object en rentrant un objectif
         testSubject1.addObject(key);
         assertTrue(key.hasOwner()); //On teste si le propietaire de l'objet est nul
@@ -41,6 +44,7 @@ public class KeyIT {
         assertEquals(key.getRemainingUses(), 5);
     }
     
+    @Test
     public void testUse3() { //Cas ou l'object marche parfaitement
         testSubject1.addObject(key);
         assertTrue(key.hasOwner()); //On teste si le propietaire de l'objet est nul
