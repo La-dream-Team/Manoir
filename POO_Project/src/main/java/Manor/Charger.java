@@ -23,6 +23,7 @@ public class Charger extends Object{
                     {
                         Gun weaponWithBullets = (Gun)this.getOwner().getEquippedItem();
                         weaponWithBullets.reload();
+                        this.setRemainingUses();
                         System.out.println("YOU HAVE RELOADED BUT YOU HAVE ALREADY USED ME TOO MANY TIMES SO LET ME REST IN PEACE");
                         this.getOwner().removeObject(this);
                     }

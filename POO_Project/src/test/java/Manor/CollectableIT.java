@@ -19,6 +19,7 @@ public class CollectableIT {
     public void setUp(){
         room = new Room("couloir");
         testSubject1 = new Npc("FREDY", 100, room, 35, 0f, 1);
+        room.addPerson(testSubject1);
         testSubject1.addObject(readingBook);
         testSubject1.addObject(magazine);
     }
@@ -43,9 +44,9 @@ public class CollectableIT {
         
     @Test
     public void testUse3() { //Cas ou l'objet peut etre utilise
-        assertNotNull(note.content);
+        assertNotNull(readingBook.content);
         assertTrue(readingBook.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        readingBook.use(null);
+        testSubject1.useObject(readingBook.getName(), null);
         assertTrue(readingBook.canUse()); //On teste si on peut le reutiliser
         assertEquals(readingBook.getRemainingUses(), 862);
     }
@@ -53,7 +54,7 @@ public class CollectableIT {
     @Test
     public void testUse4() { //Cas ou l'objet ne peut pas etre utilise car on rentre un personne pas nulle
         assertTrue(readingBook.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        readingBook.use(testSubject1);
+        testSubject1.useObject(magazine.getName(), testSubject1.getName());
         assertTrue(readingBook.canUse()); //On teste si on peut le reutiliser
         assertEquals(readingBook.getRemainingUses(), 863); //On teste si les usages ont pas changé
     }
@@ -61,8 +62,8 @@ public class CollectableIT {
     @Test
     public void testUse5() { //Cas ou l'objet n'a pas d'usages disponibles 
         assertTrue(magazine.hasOwner()); //On teste si le propietaire de l'objet n'est pas nul
-        magazine.use(null);
+        testSubject1.useObject(magazine.getName(), null);
         assertFalse(magazine.canUse()); //On teste si on ne peut pas la reutiliser
-        assertFalse(magazine.getOwner().hasObject(magazine.getName())); //On teste si le propietaire il n'a plus l'object
+        assertFalse(testSubject1.hasObject(magazine.getName())); //On teste si le propietaire il n'a plus l'object
     }   
 }
