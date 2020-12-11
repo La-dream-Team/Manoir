@@ -21,7 +21,7 @@ public class Trader extends Npc{
             System.out.println("I HAVE ALL THOSE ITEMS :");
             this.printInventory();
             System.out.println("EACH ONE COSTS " + price + " PIECES");
-            System.out.println("REMEMBER YOU HAVE " + buyer.getMoney() + " PIECES AVAILABLES TO BUY");
+            System.out.println("REMEMBER YOU HAVE " + buyer.getMoney() + " PIECES AVAILABLES TO BUY. THANK GOD YOU HAVEN'T FORGOTTEN YOUR WALLET AT HOME");
             System.out.println("CHOOSE THE OBJECT YOU WANT TO BUY ME AND ENTER ITS NUMBER (IF YOU WANT TO EXIT THE SHOP ENTER -1) :");
             codeObject = ChosenObject.nextInt();
             if((codeObject >= -1) || (codeObject < this.getBag().size()))

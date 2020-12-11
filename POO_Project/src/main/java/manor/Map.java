@@ -196,18 +196,35 @@ public class Map{
         corridor.addDoor(shoCorri);
         
         // creation d'une salle        
-        Room room = new Room("ROOM2");
-        ret.addRoom(room);
-        CodeLockedDoor roCorri = new CodeLockedDoor(415231117);
-        room.addDoor(roCorri);
-        corridor.addDoor(roCorri);
+        Room museumRoom = new Room("MUSEUM-ROOM2");
+        ret.addRoom(museumRoom);
+        CodeLockedDoor muroCorri = new CodeLockedDoor(1978);
+        museumRoom.addDoor(muroCorri);
+        corridor.addDoor(muroCorri);
+        Gun goldenGun = new Gun("Golden Gun", 1, "THIS GUN WILL ALLOW YOU TO ONESHOT ONE ENEMY", 9999, 1);
+        museumRoom.addObject(goldenGun);
         
         // creation d'une salle
-        Room divingRoom = new Room("DIVING-ROOM2");
-        ret.addRoom(divingRoom);
+        Room dinningRoom = new Room("DINNING-ROOM2");
+        ret.addRoom(dinningRoom);
         KeyLockedDoor divCorri = new KeyLockedDoor();
-        divingRoom.addDoor(divCorri);
+        dinningRoom.addDoor(divCorri);
         corridor.addDoor(divCorri);
+        Collectable dish = new Collectable("BROKEN-DISH", 1, "WHAT LITTLE IS LEFT OF THIS DISH INDICATES THAT IT WAS HISTORICAL, MAYBE IF YOU TURN THE PLATE YOU FIND SOMETHING ...", "CREATED IN 1978");
+        MeleeWeapon fork = new MeleeWeapon("FORK", 1, "THIS FORK WAS USED RECENTLY", 4); 
+        MeleeWeapon spoon = new MeleeWeapon("SPOON", 1, "THERE'S STILL SOUP LEFT IN THIS SPOON IN CASE YOU WANT IT", 2); 
+        MeleeWeapon knife1 = new MeleeWeapon("KNIFE1", 1, "THERE ARE STILL REMAINS OF MEAT ON THE EDGE OF THE KNIFE", 6); 
+        dinningRoom.addObject(dish);
+        dinningRoom.addObject(fork);
+        dinningRoom.addObject(spoon);
+        dinningRoom.addObject(knife1);
+        // npc dans la salle
+        Npc recuit = new Npc("RECRUIT1", 800, dinningRoom, 0, coef, 1);
+        dinningRoom.addPerson(recuit);
+        //arme de la recrue
+        MeleeWeapon goldenKnife = new MeleeWeapon("GOLDEN-KNIFE", 5, "A BASIC KNIFE", 9999);
+        recuit.addObject(goldenKnife);
+        recuit.equipObject("GOLDEN-KNIFE");
         
         // initialisation de la clé et placement dans la douche
         divCorri.createKey(1);

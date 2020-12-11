@@ -79,7 +79,7 @@ public class Npc extends Person{
                 int CurrentHealth = this.getCurrentHp();
                 CurrentHealth -= receivedDamage;
                 this.setCurrentHp(CurrentHealth);
-                System.out.println("YOU ATTACKED ME, I'M GONNA KILLED YOU !");
+                System.out.println("YOU ATTACKED ME, I'M GONNA KILL YOU !");
             }
         }
         else
@@ -104,7 +104,7 @@ public class Npc extends Person{
                 {
                     this.getEquippedItem().setWeaponDamage(this.coefficient);
                 }
-                System.out.println(this.getName() + " ATTACK YOU !");
+                System.out.println(this.getName() + " ATTACKED YOU !");
                 super.useObject(this.getEquippedItem().getName(), p.getName());
             }
         }

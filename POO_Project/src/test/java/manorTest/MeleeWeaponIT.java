@@ -15,7 +15,7 @@ public class MeleeWeaponIT {
     private Player testSubject1;
     private Npc testSubject2;
     private MeleeWeapon excalibur = new MeleeWeapon("EXCALIBUR", 10, "THIS IS THE LEGENDARY SWORD OF THE KING ARTHUR", 50);
-    private MeleeWeapon fork = new MeleeWeapon("FORK", 1, "THIS GUN WILL ALLOW YOU TO ONESHOT ONE ENEMY", 4); 
+    private MeleeWeapon fork = new MeleeWeapon("FORK", 1, "THIS FORK WAS USED RECENTLY", 4); 
     
     @Before
     public void setUp() {

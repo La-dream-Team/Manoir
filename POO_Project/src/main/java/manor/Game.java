@@ -302,7 +302,7 @@ public class Game{
             System.out.println("   - EQUIP <OBJECT NAME> : TO EQUIP A WEAPON FROM YOUR INVENTORY.");
             System.out.println("   - TRADE <TRADER NAME> : TO EXCHANGE MONEY FOR ITEMS WITH A MERCHANT.");
             System.out.println("   - OPEN <DOOR NUMBER> : TO OPEN A DOOR IN YOUR ROOM.");
-            System.out.println("   - UNLOCK <DOOR NUMBER> : TO UNLOCK A LOCKED DOOR IN YOUR ROOM.");
+            System.out.println("   - UNLOCK <DOOR NUMBER> <UNLOCK CODE> : TO UNLOCK A LOCKED DOOR IN YOUR ROOM. IF THE DOOR IS CODE LOCKED, YOU ALSO NEED TO ENTER THE CODE");
         }
         else{
             switch (com){
@@ -339,7 +339,7 @@ public class Game{
                     System.out.println("THE DOOR YOU WANT TO OPEN HAS TO BE IN THE SAME ROOM AS YOU.");
                     break;
                 case "UNLOCK":
-                    System.out.println("YOU NEED TO ENTER UNLOCK + ONE ARGUMENT.");
+                    System.out.println("YOU NEED TO ENTER UNLOCK + ONE OR TWO ARGUMENTS.");
                     System.out.println("THE DOOR YOU WANT TO UNLOCK HAS TO BE IN THE SAME ROOM AS YOU.");
                     break;
                 default : 
@@ -488,8 +488,9 @@ public class Game{
         System.out.println("YOU ARE A FBI SPY THAT HAD INFILTRATED A MANOR TO KILL JEAN-MICHEL, A FRENCH EX MILITARY THAT KILLED YOUR WIFE IN THE 1997’S. ");
         System.out.println("NOW THE BIG QUESTION IS, HOW DID YOU GET INTO HIS MANOR? "
                 + "\nBAH… IT’S RIDICULOUS TO SAY IT BUT IT WAS THROUGH A LITTLE WINDOW THAT LED YOU INTO THE PRISON OF THE MANOR. NO WORRIES, YOU ARE NOT BLOCKED.");
-        System.out.println("THE PRISON IT'S ALSO USED AS STORE ROOM AND… WAIT WHAT ARE MY EYES SEEING… IT’S A BUNCH OF MILITARY CLOTHES. ");
-        System.out.println("NOW THAT YOU ARE DRESSED AS A MILITARY, I THINK YOU WILL BE COMPLETELY  UNNOTICED AMONG THE MANOR RESIDENTS.");
+        System.out.println("WAIT WHAT ARE MY EYES SEEING… IT’S THE WATCHMAN OF THE PRISON.");
+        System.out.println("YOU HAVE STRANGLED HIM TO PICK UP HIS CLOTHES.");
+        System.out.println("NOW THAT YOU ARE DRESSED AS A WATCHMAN, I THINK YOU WILL BE COMPLETELY  UNNOTICED AMONG THE MANOR RESIDENTS.");
         
         Game currentGame = new Game();
     }
