@@ -156,7 +156,7 @@ public class Map{
         corridor1.addDoor(kitCorri);
         
         // ajout d'une horloge
-        Collectable clock = new Collectable("CLOCK0", 1, "THIS IS A BROCKEN CLOCK", "THE CLOCK IS FREEZ ON 4AM15");
+        Collectable clock = new Collectable("CLOCK0", 1, "THIS IS A BROCKEN CLOCK", "THE CLOCK IS STOPPED AT 4AM15");
         kitchen1.addObject(clock);
         
         Room stairs1 = new Room("STAIRS1");
