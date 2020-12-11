@@ -62,7 +62,7 @@ public class Map{
         Corpse watchMan = new Corpse("WHATCHMAN","YOU KILLED THIS MAN BY STRANGULATION !");
         prison0.addCorpse(watchMan);
         
-        Room securityRoom0 = new Room("SECURTY-ROOM0");
+        Room securityRoom0 = new Room("SECURITY-ROOM0");
         ret.addRoom(securityRoom0);
         KeyLockedDoor secCorri = new KeyLockedDoor();
         securityRoom0.addDoor(secCorri);
@@ -144,10 +144,14 @@ public class Map{
         Gun ak = new Gun("AK-47", 200, "A STRONG WEAPON", 10, 31);
         Charger rifleCharger = new Charger("RIFLE-AMMO", "A CHARGER FOR RIFLE WEAPON");
         MeleeWeapon longknife = new MeleeWeapon("LONG-KNIFE", 25, "A LARGE KNIFE", 120);
+        Consumable healingPotion = new Consumable("GRANDMA'S COOKIES", "THOSE COOKIES WERE MADE WITH LOVE BY ONE OF THE MANOR RESIDENTS GRANDMA", 40);
+        Consumable hurtingPotion = new Consumable("MOLOTOV COCKTAIL", "THIS IS NOT VERY SAFE TO DRINK, I RECOMMEND YOU TO USE IT AGAINST YOUR ENEMIES", -35);
         
         trader.addObject(ak);
         trader.addObject(rifleCharger);
         trader.addObject(longknife);
+        trader.addObject(healingPotion);
+        trader.addObject(hurtingPotion);
         
         Room kitchen1 = new Room("KITCHEN1");
         ret.addRoom(kitchen1);
@@ -201,7 +205,7 @@ public class Map{
         CodeLockedDoor muroCorri = new CodeLockedDoor(1978);
         museumRoom.addDoor(muroCorri);
         corridor.addDoor(muroCorri);
-        Gun goldenGun = new Gun("Golden Gun", 1, "THIS GUN WILL ALLOW YOU TO ONESHOT ONE ENEMY", 9999, 1);
+        Gun goldenGun = new Gun("GOLDEN-GUN", 1, "AS EMINEM SAID, ONE SHOT ONE OPPORTUNITY", 9999, 1);
         museumRoom.addObject(goldenGun);
         
         // creation d'une salle
@@ -222,7 +226,7 @@ public class Map{
         Npc recuit = new Npc("RECRUIT1", 800, dinningRoom, 0, coef, 1);
         dinningRoom.addPerson(recuit);
         //arme de la recrue
-        MeleeWeapon goldenKnife = new MeleeWeapon("GOLDEN-KNIFE", 5, "A BASIC KNIFE", 9999);
+        MeleeWeapon goldenKnife = new MeleeWeapon("GOLDEN-KNIFE", 5, "THIS MELEE WEAPON WILL ALLOW YOU TO ONESHOT ONE ENEMY", 9999);
         recuit.addObject(goldenKnife);
         recuit.equipObject("GOLDEN-KNIFE");
         

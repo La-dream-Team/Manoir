@@ -44,6 +44,8 @@ public class Game{
         this.player = this.scanPlayer();
         this.finalboss = this.initBoss();
         
+        this.help(null);
+        
         if(this.doGame())
             new Game();
     }
